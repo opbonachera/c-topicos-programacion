@@ -17,55 +17,43 @@ typedef struct
     unsigned short profundidad;
 }t_metadata;
 
-void leerHeader();
-void printBmp(unsigned int, unsigned int);
-void printNumbers();
+void leerHeader(char[]);
+void escribirImagen(unsigned int, unsigned int);
+void escribirHeader(char[], char[]);
 
 int main()
 {
-    leerHeader();
-    printBmp(240,360);
-    printNumbers();
+    escribirHeader("unlam.bmp","nueva.bmp");
+    leerHeader("nueva.bmp");
+    escribirImagen(240,360);
 
     return 0;
 }
 
 
-void printBmp(unsigned int alto, unsigned int ancho) {
+void escribirImagen(unsigned int width, unsigned int height) {
     FILE *img, *nueva;
-    img = fopen("unlam.bmp", "rb");
+
+    img = fopen("unlam.bmp", "rb+");
     nueva = fopen("nueva.bmp","wb");
+
     t_pixel px;
     t_metadata header;
 
-    if (img == NULL) {
+    if (img == NULL || nueva == NULL) {
         perror("Error opening file");
         return;
     }
+
     fseek(img, 54, SEEK_SET);
+    fseek(nueva, 54, SEEK_SET);
 
-    fseek(img, 2, SEEK_SET);
-    fread(&header.tamArchivo, sizeof(unsigned int), 1, img);
-    fwrite(&header.tamArchivo, sizeof(unsigned int),1, nueva);
-
-    fseek(img, 14, SEEK_SET);
-    fread(&header.tamEncabezado, sizeof(unsigned int), 1, img);
-    fwrite(&header.tamEncabezado, sizeof(unsigned int),1, nueva);
-
-    fseek(img, 10, SEEK_SET);
-    fread(&header.comienzoImagen, sizeof(unsigned int), 1, img);
-    fwrite(&header.comienzoImagen, sizeof(unsigned int),1, nueva);
-
-    fseek(img, 18, SEEK_SET);
-    fread(&header.ancho, sizeof(unsigned int), 1, img);
-    fread(&header.alto, sizeof(unsigned int), 1, img);
-    fwrite(&header.ancho, sizeof(unsigned int),1, nueva);
-    fwrite(&header.alto, sizeof(unsigned int),1, nueva);
-
-    for (int i = 0; i < alto; i++) {
-        for (int j = 0; j < ancho; j++) {
-            fread(&px.pixel, sizeof(px.pixel), 1, img);
-            fwrite(&px.pixel, sizeof(px.pixel), 1, nueva);
+    for(int i=0; i < height; i++)
+    {
+        for(int j=0; j<width; j++)
+        {
+            fread(&px.pixel, sizeof(t_pixel), 1, img);
+            fwrite(&px.pixel, sizeof(t_pixel), 1, nueva);
         }
     }
 
@@ -73,30 +61,56 @@ void printBmp(unsigned int alto, unsigned int ancho) {
     fclose(nueva);
 }
 
-void printNumbers()
+void escribirHeader(char vieja[], char nuevaImg[])
 {
-    unsigned char arr[3] = {0xFF, 0x32, 0x99};
+    FILE *img;
+    FILE *nueva;
 
-    for(int i = 0; i < 1 ; i++)
-    {
-        printf("Positive: %x\n", arr[i]);// 1111 1111 for 0xff 0000 0000
-        printf("Negative: %x\n", (unsigned char)~arr[i]); // 0011 0010 for 0x32 1100 1101
+    t_metadata header;
 
-        printf("Moved by two: %x \n", arr[1] >> 2);
+    img = fopen(vieja, "rb");
+    nueva = fopen(nuevaImg,"wb");
+
+    if(img == NULL || nueva == NULL){
+        printf("Error al abrir el archivo. \n");
+        exit(1);
     }
+
+    fseek(img, 2, SEEK_SET);
+    fread(&header.tamArchivo, sizeof(unsigned int), 1, img);
+    fseek(img, 2, SEEK_SET);
+    fwrite(&header.tamArchivo,sizeof(unsigned int),1,nueva);
+
+    fseek(img, 14, SEEK_SET);
+    fread(&header.tamEncabezado, sizeof(unsigned int), 1, img);
+    fseek(nueva, 14, SEEK_SET);
+    fwrite(&header.tamEncabezado,sizeof(unsigned int),1,nueva);
+
+    fseek(img, 10, SEEK_SET);
+    fread(&header.comienzoImagen, sizeof(unsigned int), 1, img);
+    fseek(nueva, 10, SEEK_SET);
+    fwrite(&header.comienzoImagen,sizeof(unsigned int),1,nueva);
+
+    fseek(img, 18, SEEK_SET);
+    fread(&header.ancho, sizeof(unsigned int), 1, img);
+    fseek(nueva, 18, SEEK_SET);
+    fwrite(&header.ancho,sizeof(unsigned int),1,nueva);
+
+    fseek(img, 22, SEEK_SET);
+    fread(&header.alto, sizeof(unsigned int), 1, img);
+    fseek(nueva, 22, SEEK_SET);
+    fwrite(&header.alto,sizeof(unsigned int),1,nueva);
+
+    fclose(img);
+    fclose(nueva);
 }
 
-void leerHeader()
+void leerHeader(char file[])
 {
     FILE *img;
     t_metadata header;
 
-    img = fopen("unlam.bmp", "rb");
-
-    if(img == NULL){
-        printf("Error al abrir el archivo. \n");
-        exit(1);
-    }
+    img = fopen(file,"rb");
 
     fseek(img, 2, SEEK_SET);
     fread(&header.tamArchivo, sizeof(unsigned int), 1, img);
@@ -109,10 +123,15 @@ void leerHeader()
 
     fseek(img, 18, SEEK_SET);
     fread(&header.ancho, sizeof(unsigned int), 1, img);
+
+    fseek(img, 22, SEEK_SET);
     fread(&header.alto, sizeof(unsigned int), 1, img);
 
     printf("Tamaño de archivo: %u bytes\n", header.tamArchivo);
     printf("Tamaño de cabecera: %u bytes\n", header.tamEncabezado);
     printf("Alto: %u bytes\n", header.alto);
     printf("Ancho: %u bytes\n", header.ancho);
+    printf("Comienzo de imagen: byte %u\n", header.comienzoImagen);
+
+    fclose(img);
 }
