@@ -3,7 +3,7 @@
 
 typedef struct
 {
-    unsigned char pixel[3];
+    unsigned char pixel[3]; // ocupa 3 bytes
     unsigned int profundidad;  // Esta estructura admite formatos de distinta profundidad de color, a priori utilizaremos s�lo 24 bits.
 }t_pixel;
 
@@ -24,10 +24,14 @@ void escribirHeader(char[], char[]);
 int main()
 {
     escribirHeader("unlam.bmp","nueva.bmp");
-
     leerHeader("unlam.bmp");
     leerHeader("nueva.bmp");
     escribirImagen(240,360);
+
+    t_pixel px;
+    printf("tamaño de px.pixel: %zu bytes\n", sizeof(px.pixel)); // 3 bytes
+    printf("tamaño de px.profundidad: %zu bytes\n", sizeof(px.profundidad)); // 4 bytes
+    printf("tamaño de px: %zu bytes\n", sizeof(px)); // 8 bytes
 
     return 0;
 }
@@ -47,13 +51,17 @@ void escribirImagen(unsigned int width, unsigned int height) {
         return;
     }
 
-    // Copy pixel data with padding
+    fread(&header, sizeof(t_metadata), 1, img);
+    fwrite(&header, sizeof(t_metadata), 1, nueva);
+
     int rowSize = width * sizeof(t_pixel);
     int padding = (4 - (rowSize % 4)) % 4; // Calculate padding
     unsigned char paddingData[3] = {0}; // Padding data is always zero
     for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
+        for (int j = 0; j < width; j+) {
             fread(&px, sizeof(t_pixel), 1, img);
+            px.pixel[0] = ~px.pixel[0];
+
             fwrite(&px, sizeof(t_pixel), 1, nueva);
         }
         fwrite(paddingData, 1, padding, nueva); // Write padding
