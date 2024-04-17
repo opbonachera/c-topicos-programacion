@@ -24,7 +24,10 @@ void escribirHeader(char[], char[]);
 int main()
 {
     escribirHeader("unlam.bmp","nueva.bmp");
+
+    leerHeader("unlam.bmp");
     leerHeader("nueva.bmp");
+
     escribirImagen(240,360);
 
     return 0;
@@ -48,12 +51,12 @@ void escribirImagen(unsigned int width, unsigned int height) {
     fseek(img, 54, SEEK_SET);
     fseek(nueva, 54, SEEK_SET);
 
-    for(int i=0; i < height; i++)
-    {
-        for(int j=0; j<width; j++)
-        {
-            fread(&px.pixel, sizeof(t_pixel), 1, img);
-            fwrite(&px.pixel, sizeof(t_pixel), 1, nueva);
+    for (int i = 0; i < width; i++) {
+        for (int j = 0; j < height; j++) {
+
+            fread(&px.pixel, sizeof(unsigned char[3]), 1, img);
+            fwrite(&px.pixel, sizeof(unsigned char[3]), 1, nueva);
+
         }
     }
 
@@ -101,6 +104,11 @@ void escribirHeader(char vieja[], char nuevaImg[])
     fseek(nueva, 22, SEEK_SET);
     fwrite(&header.alto,sizeof(unsigned int),1,nueva);
 
+    fseek(img, 28, SEEK_SET);
+    fread(&header.profundidad, sizeof(unsigned int), 1, img);
+    fseek(nueva, 28, SEEK_SET);
+    fwrite(&header.profundidad,sizeof(unsigned int),1,nueva);
+
     fclose(img);
     fclose(nueva);
 }
@@ -111,6 +119,9 @@ void leerHeader(char file[])
     t_metadata header;
 
     img = fopen(file,"rb");
+
+    printf("\n\n--------");
+    printf("Filename: %s\n",file);
 
     fseek(img, 2, SEEK_SET);
     fread(&header.tamArchivo, sizeof(unsigned int), 1, img);
@@ -127,11 +138,17 @@ void leerHeader(char file[])
     fseek(img, 22, SEEK_SET);
     fread(&header.alto, sizeof(unsigned int), 1, img);
 
+    fseek(img, 28, SEEK_SET);
+    fread(&header.profundidad, sizeof(unsigned int), 1, img);
+
     printf("Tamaño de archivo: %u bytes\n", header.tamArchivo);
     printf("Tamaño de cabecera: %u bytes\n", header.tamEncabezado);
     printf("Alto: %u bytes\n", header.alto);
     printf("Ancho: %u bytes\n", header.ancho);
     printf("Comienzo de imagen: byte %u\n", header.comienzoImagen);
+    printf("Profundidad: %u bits\n", header.profundidad);
 
     fclose(img);
 }
+
+
