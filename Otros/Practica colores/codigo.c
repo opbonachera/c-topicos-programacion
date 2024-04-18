@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct
 {
     unsigned char pixel[3]; // ocupa 3 bytes
-    unsigned int profundidad;  // Esta estructura admite formatos de distinta profundidad de color, a priori utilizaremos s�lo 24 bits.
+
 }t_pixel;
 
 typedef struct
@@ -19,18 +20,20 @@ typedef struct
 
 void leerHeader(char[]);
 void escribirImagen(unsigned int, unsigned int);
-void escribirHeader(char[], char[]);
 
 int main()
 {
-    escribirHeader("unlam.bmp","nueva.bmp");
-    leerHeader("unlam.bmp");
-    leerHeader("nueva.bmp");
+    t_pixel px;
+
+
     escribirImagen(240,360);
 
-    t_pixel px;
+    leerHeader("unlam.bmp");
+    leerHeader("nueva.bmp");
+
+    printf("\n---------\n");
+
     printf("tamaño de px.pixel: %zu bytes\n", sizeof(px.pixel)); // 3 bytes
-    printf("tamaño de px.profundidad: %zu bytes\n", sizeof(px.profundidad)); // 4 bytes
     printf("tamaño de px: %zu bytes\n", sizeof(px)); // 8 bytes
 
     return 0;
@@ -39,6 +42,7 @@ int main()
 
 void escribirImagen(unsigned int width, unsigned int height) {
     FILE *img, *nueva;
+    unsigned char byte[3];
 
     img = fopen("unlam.bmp", "rb");
     nueva = fopen("nueva.bmp","wb");
@@ -46,70 +50,28 @@ void escribirImagen(unsigned int width, unsigned int height) {
     t_pixel px;
     t_metadata header;
 
+
     if (img == NULL || nueva == NULL) {
         perror("Error opening file");
         return;
     }
 
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-            fread(&px, sizeof(t_pixel), 1, img);
-
-            printf("pixel: %u\n",&px);
-
-            fwrite(&px, sizeof(t_pixel), 1, nueva);
-        }
-
+    for (int i=0; i<54;i++){
+        fread(&byte, sizeof(unsigned char), 1, img);
+        fwrite(&byte, sizeof(unsigned char), 1, nueva);
     }
 
-    fclose(img);
-    fclose(nueva);
-}
 
-void escribirHeader(char vieja[], char nuevaImg[])
-{
-    FILE *img;
-    FILE *nueva;
+    fseek(img, 54, SEEK_SET);
+    fseek(nueva, 54, SEEK_SET);
 
-    t_metadata header;
+     while (fread(&px.pixel, sizeof(unsigned char), 3, img)) {
+        px.pixel[0] = px.pixel[0]; // blue
+        px.pixel[1] = px.pixel[1];// green
+        px.pixel[2] = px.pixel[2];  // red
 
-    img = fopen(vieja, "rb");
-    nueva = fopen(nuevaImg,"wb");
-
-    if(img == NULL || nueva == NULL){
-        printf("Error al abrir el archivo. \n");
-        exit(1);
+        fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
     }
-
-    fseek(img, 2, SEEK_SET);
-    fread(&header.tamArchivo, sizeof(unsigned int), 1, img);
-    fseek(img, 2, SEEK_SET);
-    fwrite(&header.tamArchivo,sizeof(unsigned int),1,nueva);
-
-    fseek(img, 14, SEEK_SET);
-    fread(&header.tamEncabezado, sizeof(unsigned int), 1, img);
-    fseek(nueva, 14, SEEK_SET);
-    fwrite(&header.tamEncabezado,sizeof(unsigned int),1,nueva);
-
-    fseek(img, 10, SEEK_SET);
-    fread(&header.comienzoImagen, sizeof(unsigned int), 1, img);
-    fseek(nueva, 10, SEEK_SET);
-    fwrite(&header.comienzoImagen,sizeof(unsigned int),1,nueva);
-
-    fseek(img, 18, SEEK_SET);
-    fread(&header.ancho, sizeof(unsigned int), 1, img);
-    fseek(nueva, 18, SEEK_SET);
-    fwrite(&header.ancho,sizeof(unsigned int),1,nueva);
-
-    fseek(img, 22, SEEK_SET);
-    fread(&header.alto, sizeof(unsigned int), 1, img);
-    fseek(nueva, 22, SEEK_SET);
-    fwrite(&header.alto,sizeof(unsigned int),1,nueva);
-
-    fseek(img, 28, SEEK_SET);
-    fread(&header.profundidad, sizeof(unsigned short), 1, img);
-    fseek(nueva, 28, SEEK_SET);
-    fwrite(&header.profundidad,sizeof(unsigned int),1,nueva);
 
     fclose(img);
     fclose(nueva);
