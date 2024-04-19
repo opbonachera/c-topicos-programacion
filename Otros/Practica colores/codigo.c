@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
 typedef struct
 {
     unsigned char pixel[3]; // ocupa 3 bytes
@@ -21,6 +24,11 @@ typedef struct
 void leerHeader(char[]);
 void escribirImagen(unsigned int, unsigned int);
 
+void escalaDeGrises(t_pixel *);
+void aumentarContraste(t_pixel *);
+void invertirColores(t_pixel *);
+void disminuirContraste(t_pixel *);
+
 int main()
 {
     t_pixel px;
@@ -39,7 +47,7 @@ int main()
     return 0;
 }
 
-
+// Escritura de imagen
 void escribirImagen(unsigned int width, unsigned int height) {
     FILE *img, *nueva;
     unsigned char byte[3];
@@ -60,29 +68,32 @@ void escribirImagen(unsigned int width, unsigned int height) {
         fread(&byte, sizeof(unsigned char), 1, img);
         fwrite(&byte, sizeof(unsigned char), 1, nueva);
     }
-
+    int intensity ;
 
     fseek(img, 54, SEEK_SET);
     fseek(nueva, 54, SEEK_SET);
 
      while (fread(&px.pixel, sizeof(unsigned char), 3, img)) {
-        px.pixel[0] = px.pixel[0]; // blue
-        px.pixel[1] = px.pixel[1];// green
-        px.pixel[2] = px.pixel[2];  // red
+
+        intensity= MAX(px.pixel[1], px.pixel[0]);
 
         fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
     }
+
+    printf("Min value: %d", intensity);
 
     fclose(img);
     fclose(nueva);
 }
 
+//Lectura de cabecera
 void leerHeader(char file[])
 {
     FILE *img;
     t_metadata header;
 
     img = fopen(file,"rb");
+
 
     printf("\n\n--------");
     printf("Filename: %s\n",file);
@@ -115,4 +126,38 @@ void leerHeader(char file[])
     fclose(img);
 }
 
+// Cambiar colores
+
+void invertirColores(t_pixel *px)
+{
+    //printf("%d\n", px->pixel[0]);
+    // *px es la direccion de memoria donde se encuentra guardada la estructura px de tipo t_pixel que definimos en el main
+    px->pixel[0] = (unsigned char)(~px->pixel[0]);
+    px->pixel[1] = (unsigned char)(~px->pixel[1]);
+    px->pixel[2] = (unsigned char)(~px->pixel[2]);
+}
+
+void escalaDeGrises(t_pixel *px)
+{
+    float promedio = ((px->pixel[0] + px->pixel[1] + px->pixel[2]) / 3);
+
+    px->pixel[0] = (unsigned char)(promedio);
+    px->pixel[1] = (unsigned char)(promedio);
+    px->pixel[2] = (unsigned char)(promedio);
+}
+
+void aumentarContraste(t_pixel *px)
+{
+    px->pixel[0] = (unsigned char)(px->pixel[0] + (px->pixel[0] >> 2));
+    px->pixel[1] = (unsigned char)(px->pixel[1] + (px->pixel[1] >> 2));
+    px->pixel[2] = (unsigned char)(px->pixel[2] + (px->pixel[2] >> 2));
+}
+
+void disminuirContraste(t_pixel *px)
+{
+
+    px->pixel[0] = (unsigned char)(px->pixel[0] - (px->pixel[0] >> 2));
+    px->pixel[1] = (unsigned char)(px->pixel[1] - (px->pixel[1] >> 2));
+    px->pixel[2] = (unsigned char)(px->pixel[2] - (px->pixel[2] >> 2));
+}
 
