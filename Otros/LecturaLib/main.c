@@ -1,16 +1,41 @@
-// Program to illustrate pointers
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main (void)
+void escribirImagen(char,char);
+
+int main(int argc, char *argv[])
 {
-    int count = 10, x;
-    int *int_pointer;
+    int i;
+    char arg[100];
 
-    int_pointer = &count;
+    for(i=1; i<argc; i++)
+    {
+        if(strcmpi("₋₋invertir-colores", argv[i]))
+            printf("Invirtiendo colores de imagen...");
+            break;
 
-    x = *int_pointer;
+        if(strcmpi("₋₋aumentar-contraste", argv[i]))
+            printf("IAumentando contraste de imagen...");
+            break;
 
-    printf ("count = %i, x = %i\n", count, x);
+        if(strcmpi("₋₋reducir-contraste", argv[i]))
+            printf("Reduciendo contraste de la imagen...");
+            break;
+
+        if(strcmpi("--tonalidad-azul", argv[i]))
+            printf("Tonalizando de azul la imagen...");
+            break;
+    }
+
+
+
+
 
     return 0;
+}
+
+void escribirImagen(char filtro, char fileName)
+{
+    printf("Convirtendo la imagen %d a... %s", fileName, filtro);
 }

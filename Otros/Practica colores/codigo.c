@@ -4,6 +4,7 @@
 
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
+#define PI 3.14
 
 typedef struct
 {
@@ -51,7 +52,7 @@ int main()
 void escribirImagen(unsigned int width, unsigned int height) {
     FILE *img, *nueva;
     unsigned char byte[3];
-
+    int i;
     img = fopen("unlam.bmp", "rb");
     nueva = fopen("nueva.bmp","wb");
 
@@ -68,19 +69,34 @@ void escribirImagen(unsigned int width, unsigned int height) {
         fread(&byte, sizeof(unsigned char), 1, img);
         fwrite(&byte, sizeof(unsigned char), 1, nueva);
     }
-    int intensity ;
 
     fseek(img, 54, SEEK_SET);
     fseek(nueva, 54, SEEK_SET);
 
-     while (fread(&px.pixel, sizeof(unsigned char), 3, img)) {
+    unsigned char min_values[3] = {255,255,255};
+    unsigned char max_values[3] = {0,0,0};
 
-        intensity= MAX(px.pixel[1], px.pixel[0]);
-
+    while( (fread(&px.pixel, sizeof(unsigned char), 3, img)))
+    {
         fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
     }
 
-    printf("Min value: %d", intensity);
+    while( (fread(&px.pixel, sizeof(unsigned char), 3, img)))
+    {
+
+            for(int i=0; i<3; i++)
+            {
+                if(px.pixel[i]<min_values[i])
+                {
+                    min_values[i] = MIN(min_values[i], px.pixel[i]);
+                }
+            }
+    }
+
+    for(int j=0; j<3;j++)
+    {
+        printf("Color: %u\n",min_values[j]);
+    }
 
     fclose(img);
     fclose(nueva);
@@ -148,16 +164,19 @@ void escalaDeGrises(t_pixel *px)
 
 void aumentarContraste(t_pixel *px)
 {
-    px->pixel[0] = (unsigned char)(px->pixel[0] + (px->pixel[0] >> 2));
-    px->pixel[1] = (unsigned char)(px->pixel[1] + (px->pixel[1] >> 2));
-    px->pixel[2] = (unsigned char)(px->pixel[2] + (px->pixel[2] >> 2));
+    // https://construyendoachispas.blog/2021/05/24/de-que-va-esto/
+    // Contraste = (Luminosidad_maxima - Luminosidad_minima) / Luminosidad Minima
+
+    px->pixel[0] = (unsigned char)(px->pixel[0])+(px->pixel[0]>>2);
+    px->pixel[1] = (unsigned char)(px->pixel[1])+(px->pixel[1]>>2);
+    px->pixel[2] = (unsigned char)(px->pixel[2])+(px->pixel[2]>>2);
+
 }
 
 void disminuirContraste(t_pixel *px)
 {
-
-    px->pixel[0] = (unsigned char)(px->pixel[0] - (px->pixel[0] >> 2));
-    px->pixel[1] = (unsigned char)(px->pixel[1] - (px->pixel[1] >> 2));
-    px->pixel[2] = (unsigned char)(px->pixel[2] - (px->pixel[2] >> 2));
+    px->pixel[0] = (unsigned char)(px->pixel[0])+(px->pixel[0]*0.50);
+    px->pixel[1] = (unsigned char)(px->pixel[1])+(px->pixel[1]*0.50);
+    px->pixel[2] = (unsigned char)(px->pixel[2])+(px->pixel[2]*0.50);
 }
 
