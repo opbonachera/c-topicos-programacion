@@ -26,9 +26,9 @@ void leerHeader(char[]);
 void escribirImagen(unsigned int, unsigned int);
 
 void escalaDeGrises(t_pixel *);
-void aumentarContraste(t_pixel *);
+void aumentarContraste(t_pixel *, int, int);
 void invertirColores(t_pixel *);
-void disminuirContraste(t_pixel *);
+void aumentarContraste(t_pixel *, int, int);
 
 int main()
 {
@@ -73,29 +73,26 @@ void escribirImagen(unsigned int width, unsigned int height) {
     fseek(img, 54, SEEK_SET);
     fseek(nueva, 54, SEEK_SET);
 
-    unsigned char min_values[3] = {255,255,255};
-    unsigned char max_values[3] = {0,0,0};
+    unsigned char min_value = 255;
+    unsigned char max_value = 0;
 
-    while( (fread(&px.pixel, sizeof(unsigned char), 3, img)))
+    // while( (fread(&px.pixel, sizeof(unsigned char), 3, img)))
+    //{
+    //    fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
+    //}
+
+    while( (fread(&px.pixel, sizeof(unsigned char), 3, img)) )
     {
-        fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
-    }
-
-    while( (fread(&px.pixel, sizeof(unsigned char), 3, img)))
-    {
-
-            for(int i=0; i<3; i++)
+        for(int i=0; i<3; i++)
             {
-                if(px.pixel[i]<min_values[i])
+                if(px.pixel[i] < min_value)
                 {
-                    min_values[i] = MIN(min_values[i], px.pixel[i]);
+                    min_value = MIN(px.pixel[i],min_value);
                 }
+                if(px.pixel[i] > max_value){ max_value = MAX(px.pixel[i],min_value);}
             }
-    }
-
-    for(int j=0; j<3;j++)
-    {
-        printf("Color: %u\n",min_values[j]);
+            aumentarContraste(&px, min_value, max_value);
+            fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
     }
 
     fclose(img);
@@ -162,21 +159,25 @@ void escalaDeGrises(t_pixel *px)
     px->pixel[2] = (unsigned char)(promedio);
 }
 
-void aumentarContraste(t_pixel *px)
-{
-    // https://construyendoachispas.blog/2021/05/24/de-que-va-esto/
-    // Contraste = (Luminosidad_maxima - Luminosidad_minima) / Luminosidad Minima
+void aumentarContraste(t_pixel *px, int min, int max) {
+    float contraste_actual = (max - min) / (float)(max + min);
+    float nuevo_contraste = contraste_actual * 1.25; // Aumentar en un 25%
 
-    px->pixel[0] = (unsigned char)(px->pixel[0])+(px->pixel[0]>>2);
-    px->pixel[1] = (unsigned char)(px->pixel[1])+(px->pixel[1]>>2);
-    px->pixel[2] = (unsigned char)(px->pixel[2])+(px->pixel[2]>>2);
-
+    // Aplicar la transformación a cada canal de color
+    for(int i = 0; i < 3; i++) {
+        int nuevo_valor = ((px->pixel[i] - min) * nuevo_contraste) / contraste_actual + min;
+        px->pixel[i] = (unsigned char)MAX(0, MIN(255, nuevo_valor));
+    }
 }
 
-void disminuirContraste(t_pixel *px)
-{
-    px->pixel[0] = (unsigned char)(px->pixel[0])+(px->pixel[0]*0.50);
-    px->pixel[1] = (unsigned char)(px->pixel[1])+(px->pixel[1]*0.50);
-    px->pixel[2] = (unsigned char)(px->pixel[2])+(px->pixel[2]*0.50);
+void disminuirContraste(t_pixel *px, int min, int max) {
+    float contraste_actual = (max - min) / (float)(max + min);
+    float nuevo_contraste = contraste_actual * 0.75; // Disminuir en un 25%
+
+    // Aplicar la transformación a cada canal de color
+    for(int i = 0; i < 3; i++) {
+        int nuevo_valor = ((px->pixel[i] - min) * nuevo_contraste) / contraste_actual + min;
+        px->pixel[i] = (unsigned char)MAX(0, MIN(255, nuevo_valor));
+    }
 }
 
