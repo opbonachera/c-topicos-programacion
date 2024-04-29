@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 #define TODO_OK 0
 #define ARCHIVO_NO_ENCONTRADO 10
@@ -22,29 +23,47 @@ typedef struct {
     unsigned short profundidad;
 } t_metadata;
 
-int crearImagen(char[], char[]);
+int crearImagen(char[], int);
 int escribirCabecera(FILE *, FILE *, char[]);
 int escribirDatos(FILE *, FILE *, char[]);
+int validarDevolverFiltro(char[]);
+int leerCabecera(t_metadata *);
 
-void aplicarFiltro(t_pixel *, char[], int, int);
+int aplicarFiltro(t_pixel *, int, int, int);
 void aumentarContraste(t_pixel *, int, int);
+void disminuirContraste(t_pixel *, int, int);
+void escalaDeGrises(t_pixel *);
+void invertirColores(t_pixel *);
 
-int main() {
-    crearImagen("unlam.bmp", "nueva.bmp");
+int main(int argc, char *argv[]) {
+
+
+    int filtro = validarDevolverFiltro(argv[2]);
+
+    if(filtro) crearImagen(argv[1], filtro);
+
+    else printf("El filtro (%d) no es valido.\n", filtro);
+
+    printf("Codigo del filtro: %d\n",filtro);
+
     return 0;
 }
 
-int crearImagen(char nombreArchivo[], char nombreFiltro[]) {
+int crearImagen(char nombreArchivoOriginal[], int codFiltro) {
     FILE *original, *nueva;
-    original = fopen(nombreArchivo, "rb");
-    nueva = fopen(nombreFiltro, "wb");
+
+    original = fopen(nombreArchivoOriginal, "rb");
+    nueva = fopen("nueva.bmp", "wb");
+
+    printf("Nombre imagen original: (%s)\n", nombreArchivoOriginal);
+    printf("Codigo del filtro: (%d)\n", nombreFiltro);
 
     if (original == NULL || nueva == NULL) {
         return NO_SE_PUEDE_CREAR_ARCHIVO;
     }
 
-    escribirCabecera(original, nueva, nombreFiltro);
-    escribirDatos(original, nueva, nombreFiltro);
+    //escribirCabecera(original, nueva, codFiltro);
+    //escribirDatos(original, nueva, codFiltro);
 
     fclose(original);
     fclose(nueva);
@@ -53,7 +72,7 @@ int crearImagen(char nombreArchivo[], char nombreFiltro[]) {
 }
 
 int escribirCabecera(FILE *original, FILE *nueva, char nombreFiltro[]) {
-    unsigned char byte[54]; // Assuming BMP header size is 54 bytes
+    t_metadata header;
 
     if (original == NULL || nueva == NULL) {
         return NO_SE_PUEDE_CREAR_ARCHIVO;
@@ -61,11 +80,16 @@ int escribirCabecera(FILE *original, FILE *nueva, char nombreFiltro[]) {
 
     fseek(original, 0, SEEK_SET);
 
-    fread(byte, sizeof(unsigned char), 54, original);
+    fread(header, sizeof(unsigned char), 54, original);
 
-    fwrite(byte, sizeof(unsigned char), 54, nueva);
+    fwrite(header, sizeof(unsigned char), 54, nueva);
 
     return TODO_OK;
+}
+
+int leerCabecera(t_metadata *)
+{
+
 }
 
 int escribirDatos(FILE *original, FILE *nueva, char nombreFiltro[]) {
@@ -79,7 +103,7 @@ int escribirDatos(FILE *original, FILE *nueva, char nombreFiltro[]) {
 
     while (fread(&px.pixel, sizeof(unsigned char), 3, original)) {
 
-        if(! (strcmpi(nombreFiltro, "--aumentar-contraste") || (strcmpi(nombreFiltro, "--reducir-contraste") ){
+        if(! (strcmpi(nombreFiltro, "--aumentar-contraste") || (strcmpi(nombreFiltro, "--reducir-contraste")))){
             for (int i = 0; i < 3; i++)
             {
                 if (px.pixel[i] < min_value) { min_value = MIN(px.pixel[i], min_value); }
@@ -94,37 +118,29 @@ int escribirDatos(FILE *original, FILE *nueva, char nombreFiltro[]) {
     return TODO_OK;
 }
 
-int aplicarFiltro(t_pixel &px, char nombreFiltro[], int min_value, int max_value)
+int validarDevolverFiltro(char filtro[])
 {
-    if(!strcmpi(nombreFiltro, "--aumentar-contraste"))
-    {
-        aumentarContraste(px, min_value, max_value);
-        return TODO_OK;
-    }
+    if(!strcmpi(filtro, "--invertir-colores")) return 1;
+    if(!strcmpi(filtro, "--reducir-contraste")) return 2;
+    if(!strcmpi(filtro, "--aumentar-contraste")) return 3;
+    if(!strcmpi(filtro, "--escala-de-grises")) return 4;
+    if(!strcmpi(filtro, "--recortar-imagen")) return 5;
+    return -1;
+}
 
-    if(!strcmpi(nombreFiltro, "--reducir-contraste"))
+int aplicarFiltro(t_pixel* px, int codFiltro, int min_value, int max_value)
+{
+    switch(codFiltro)
     {
-        aumentarContraste(px, min_value, max_value);
-        return TODO_OK;
+    case 1:
+    case 2:
+    case 3:
     }
-
-    if(!strcmpi(nombreFiltro, "--invertir-colores"))
-    {
-        invertirColores(px, min_value, max_value);
-        return TODO_OK;
-    }
-
-    if(!strcmpi(nombreFiltro, "--escala-de-grises"))
-    {
-        escalaDeGrises(px, min_value, max_value);
-        return TODO_OK;
-    }
+    return 0;
 }
 
 void invertirColores(t_pixel *px)
 {
-    //printf("%d\n", px->pixel[0]);
-    // *px es la direccion de memoria donde se encuentra guardada la estructura px de tipo t_pixel que definimos en el main
     px->pixel[0] = (unsigned char)(~px->pixel[0]);
     px->pixel[1] = (unsigned char)(~px->pixel[1]);
     px->pixel[2] = (unsigned char)(~px->pixel[2]);
@@ -141,9 +157,8 @@ void escalaDeGrises(t_pixel *px)
 
 void aumentarContraste(t_pixel *px, int min, int max) {
     float contraste_actual = (max - min) / (float)(max + min);
-    float nuevo_contraste = contraste_actual * 1.25; // Aumentar en un 25%
+    float nuevo_contraste = contraste_actual * 1.25;
 
-    // Aplicar la transformación a cada canal de color
     for(int i = 0; i < 3; i++) {
         int nuevo_valor = ((px->pixel[i] - min) * nuevo_contraste) / contraste_actual + min;
         px->pixel[i] = (unsigned char)MAX(0, MIN(255, nuevo_valor));
@@ -152,9 +167,8 @@ void aumentarContraste(t_pixel *px, int min, int max) {
 
 void disminuirContraste(t_pixel *px, int min, int max) {
     float contraste_actual = (max - min) / (float)(max + min);
-    float nuevo_contraste = contraste_actual * 0.75; // Disminuir en un 25%
+    float nuevo_contraste = contraste_actual * 0.75;
 
-    // Aplicar la transformación a cada canal de color
     for(int i = 0; i < 3; i++) {
         int nuevo_valor = ((px->pixel[i] - min) * nuevo_contraste) / contraste_actual + min;
         px->pixel[i] = (unsigned char)MAX(0, MIN(255, nuevo_valor));

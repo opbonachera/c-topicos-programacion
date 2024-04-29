@@ -99,6 +99,7 @@ void escribirImagen(unsigned int width, unsigned int height) {
     fclose(nueva);
 }
 
+
 //Lectura de cabecera
 void leerHeader(char file[])
 {
