@@ -39,11 +39,11 @@ int crearImagen()
         return 1;
     }
 
-    leerCabecera("unlam.bmp", &cabeceraOriginal);
+    leerCabecera("kitty.bmp", &cabeceraOriginal);
 
     escribirCabecera(archivoNuevo);
 
-    modificarDimensiones(archivoNuevo, cabeceraOriginal.alto, cabeceraOriginal.ancho);
+    //modificarDimensiones(archivoNuevo, cabeceraOriginal.alto, cabeceraOriginal.ancho);
 
     escribirDatos(archivoNuevo);
 
@@ -60,7 +60,7 @@ int escribirCabecera(FILE *archivoNuevo)
     // Copia TODOS los datos de la cabecera del archivo original al nuevo
     FILE *archivoOriginal;
 
-    archivoOriginal = fopen("unlam.bmp","rb");
+    archivoOriginal = fopen("kitty.bmp","rb");
 
     if (archivoOriginal == NULL || archivoNuevo == NULL) {
         perror("Error opening file");
@@ -86,7 +86,7 @@ int escribirDatos(FILE *archivoNuevo)
 
     FILE *archivoOriginal;
 
-    archivoOriginal = fopen("unlam.bmp","rb");
+    archivoOriginal = fopen("kitty.bmp","rb");
 
     if (archivoOriginal == NULL || archivoNuevo == NULL) {
         perror("Error opening file");
@@ -96,12 +96,29 @@ int escribirDatos(FILE *archivoNuevo)
     fseek(archivoOriginal, 54, SEEK_SET);
     fseek(archivoNuevo, 54, SEEK_SET);
 
-     while( (fread(&px.pixel, sizeof(unsigned char), 3, archivoOriginal)) )
-    {
-        fwrite(&px.pixel, sizeof(unsigned char), 3, archivoNuevo);
+    t_pixel imagen[300][270];
+    t_pixel copia[270][300];
+
+    for(int i = 0; i < 300; i++) {
+        for(int j = 0; j < 270; j++) {
+            fread(&imagen[i][j], sizeof(unsigned char), 3, archivoOriginal);
+        }
+    }
+
+    for(int i = 0; i < 300; i++) {
+        for(int j = 0; j < 270; j++) {
+            copia[i][j] = imagen[300-1-j][i];
+        }
+    }
+
+    for(int i = 0; i < 300; i++) {
+        for(int j = 0; j < 270; j++) {
+            fwrite(&copia[i][j], sizeof(unsigned char), 3, archivoNuevo);
+        }
     }
 
     fclose(archivoOriginal);
+    return 0;
 }
 
 int modificarDimensiones(FILE *file, unsigned int w, unsigned int h)
