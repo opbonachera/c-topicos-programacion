@@ -42,9 +42,10 @@ int crearImagen()
     leerCabecera("unlam.bmp", &cabeceraOriginal);
 
     escribirCabecera(archivoNuevo);
-    escribirDatos(archivoNuevo);
 
-    // modificarDimensiones(archivoNuevo, cabeceraOriginal.alto, cabeceraOriginal.alto);
+    modificarDimensiones(archivoNuevo, cabeceraOriginal.alto, cabeceraOriginal.ancho);
+
+    escribirDatos(archivoNuevo);
 
     leerCabecera("nueva.bmp", &cabeceraNuevo);
 
