@@ -43,7 +43,7 @@ int crearImagen()
 
     escribirCabecera(archivoNuevo);
 
-    //modificarDimensiones(archivoNuevo, cabeceraOriginal.alto, cabeceraOriginal.ancho);
+    modificarDimensiones(archivoNuevo, cabeceraOriginal.alto, cabeceraOriginal.ancho);
 
     escribirDatos(archivoNuevo);
 
@@ -96,25 +96,28 @@ int escribirDatos(FILE *archivoNuevo)
     fseek(archivoOriginal, 54, SEEK_SET);
     fseek(archivoNuevo, 54, SEEK_SET);
 
-    t_pixel imagen[300][270];
-    t_pixel copia[270][300];
+    unsigned int alto = 300;
+    unsigned int ancho = 270;
 
-    for(int i = 0; i < 300; i++) {
-        for(int j = 0; j < 270; j++) {
-            fread(&imagen[i][j], sizeof(unsigned char), 3, archivoOriginal);
+    t_pixel imagen[300 * 270];
+    t_pixel copia[270 * 300];
+
+    for(int i=0; i<300*270; i++)
+    {
+        fread(&imagen[i], sizeof(unsigned char), 3, archivoOriginal);
+    }
+
+    for(int y=0; y = alto; y++)
+    {
+        for(int x=0; x<ancho; x++)
+        {
+            copia[y * ancho + x] = imagen[x * alto + (alto - y - 1)];
         }
     }
 
-    for(int i = 0; i < 300; i++) {
-        for(int j = 0; j < 270; j++) {
-            copia[i][j] = imagen[300-1-j][i];
-        }
-    }
-
-    for(int i = 0; i < 300; i++) {
-        for(int j = 0; j < 270; j++) {
-            fwrite(&copia[i][j], sizeof(unsigned char), 3, archivoNuevo);
-        }
+    for(int i=0; i<300*270; i++)
+    {
+        fwrite(&copia[i], sizeof(unsigned char), 3, archivoNuevo);
     }
 
     fclose(archivoOriginal);
@@ -169,9 +172,3 @@ int leerCabecera(char file[], t_metadata *cabecera)
     fclose(img);
     return 0;
 }
-
-
-
-
-
-

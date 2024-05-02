@@ -24,3 +24,22 @@
 
 1712541473 /home/ezequiel/Progra/BMP/bmpmanipuleitor/constantes.h
 
+1713008534 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\tp\main.c
+	<stdio.h>
+	"funciones_estudiante.h"
+	"constantes.h"
+
+1714498403 c:\users\obonachera\documents\universidad\topicos-programacion\otros\tp\funciones_estudiante.h
+	"constantes.h"
+	"estructuras.h"
+
+1712559474 c:\users\obonachera\documents\universidad\topicos-programacion\otros\tp\constantes.h
+
+1714498583 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\tp\funciones_estudiante.c
+	"constantes.h"
+	"estructuras.h"
+	<stdlib.h>
+	<stdio.h>
+
+1712690694 c:\users\obonachera\documents\universidad\topicos-programacion\otros\tp\estructuras.h
+

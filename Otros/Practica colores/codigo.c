@@ -76,21 +76,9 @@ void escribirImagen(unsigned int width, unsigned int height) {
     unsigned char min_value = 255;
     unsigned char max_value = 0;
 
-    // while( (fread(&px.pixel, sizeof(unsigned char), 3, img)))
-    //{
-    //    fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
-    //}
-
     while( (fread(&px.pixel, sizeof(unsigned char), 3, img)) )
     {
-        for(int i=0; i<3; i++)
-            {
-                if(px.pixel[i] < min_value)
-                {
-                    min_value = MIN(px.pixel[i],min_value);
-                }
-                if(px.pixel[i] > max_value){ max_value = MAX(px.pixel[i],min_value);}
-            }
+
             aumentarContraste(&px, min_value, max_value);
             fwrite(&px.pixel, sizeof(unsigned char), 3, nueva);
     }
@@ -158,6 +146,8 @@ void escalaDeGrises(t_pixel *px)
     px->pixel[0] = (unsigned char)(promedio);
     px->pixel[1] = (unsigned char)(promedio);
     px->pixel[2] = (unsigned char)(promedio);
+
+    //Si es mayor q1ue 255 poner en 255 y si es menor poner en 0
 }
 
 void aumentarContraste(t_pixel *px, int min, int max) {

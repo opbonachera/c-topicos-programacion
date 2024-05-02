@@ -1,0 +1,45 @@
+for( y = 0; y < tamY; y++) {
+	for( x = 0; x < tamX; x++) {
+		// Para rotarlo... no me acuerdo jaja
+		escritura[y * tamX + x] = lectura[x * tamY + (tamY - y - 1)];
+		// El otro xDDDDDD
+		escritura[y * tamX + x] = lectura[(tamX - x - 1) * tamY + y];
+}}
+
+NOTAS: 
+escritura y lectura son 2 enormes arrays (como mi poronga) de t_pixel.
+t_pixel tiene 3 unsigned chars en BGR.
+en el header hay que invertir la anchura y altura.
+tamX es el tamaño en ancho DE LA NUEVA IMAGEN. tamY es el alto.
+Por lo tanto, si tu imagen tiene 320x240, tamX = 240 y tamY = 320.
+Así que tamY es el alto de la nueva imagen y el ancho de la vieja.
+
+Para recorrer un array como matriz hay que usar una transformación lineal.
+
+V = 0 [0][1][2][3][4][5][6][7][8][9]
+      0  1  2  3  4
+M = 0 [0][1][2][3][4]
+    1 [5][6][7][8][9]
+
+
+Para posicionarme en el x=2 y=1 de M ([7]) debo ponerme en el:
+	V[ y * tamX + x ] = V[ 1 * 5 + 2 ] = V[7]
+siendo tamX = 5.
+
+Para recorrer un vector a inversa es:
+
+V = [0][1][2][3][4][5][6][7][8][9]
+
+Me paro al final, itero al revés y le resto uno para no irme a la bosta.
+
+for(i = 0; i < tamX; i++) {
+	Console.WriteLine(V[tamX - x - 1]);
+
+Por eso puse [x * tamY + (tamY - y - 1)], lo que está entre paréntesis es
+el paso inverso, entonces voy de arriba a abajo. El orden es:
+
+M = [4][3][2][1][0]
+    [9][8][7][6][5]
+
+voy de 0 a 9, el orden es de arriba abajo y de derecha a izquierda.
+Ahora entienden manga de vírgenes?

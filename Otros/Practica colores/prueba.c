@@ -165,7 +165,7 @@ void aumentarContraste(t_pixel *px, int min, int max) {
     }
 }
 
-void disminuirContraste(t_pixel *px, int min, int max) {
+void reducirContraste(t_pixel *px, int min, int max) {
     float contraste_actual = (max - min) / (float)(max + min);
     float nuevo_contraste = contraste_actual * 0.75;
 
