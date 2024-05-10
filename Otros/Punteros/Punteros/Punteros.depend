@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1715358573 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\punteros\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pointers.h"
+
+1715360586 c:\users\obonachera\documents\universidad\topicos-programacion\otros\punteros\pointers.h
+
+1715363655 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\punteros\pointers.c
+	<stdlib.h>
+	"pointers.h"
+
