@@ -1,0 +1,9 @@
+1. Inicializar un array
+2. Mostrar un array
+3. Multiplicar todos los elementos de un array
+4. Agregar un elemento al principi
+5. Agregar un elemento al final
+6. Agregar un elemento en una posicion dada
+7. Eliminar un elemento al principio
+8. Eliminar un elemento al final
+9. Eliminar un elemento en una posicion dada

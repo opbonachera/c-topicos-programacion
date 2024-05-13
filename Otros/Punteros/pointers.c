@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "pointers.h"
 
@@ -69,9 +70,135 @@ int arrays()
 
 void printArray(int *p)
 {
+    int i;
     for(int i=0;i<5;i++)
     {
         printf("%d\n",*p);
         p++;
     }
+}
+
+int strings()
+{
+//    char name[8];
+//    int numbers[5];
+//
+//    name[0] = 'O';
+//    name[1] = 'r';
+//    name[2] = 'n';
+//    name[3] = 'e';
+//    name[4] = '\0';
+//
+//    printf("String length: (%s)\n", name);
+//    printf("String content: (%d)\n", strlen(name));
+//    printf("String size: (%d)\n", sizeof(name)); // 1 byte * 8
+//
+//    printString(&name);
+//
+//    printf("Result: %d\n", compareStrings("Ornela", "Ornella"));
+//    printf("Result: %d\n", compareStrings("Ornella", "Ornella"));
+    //compareStrings("Ornella", "Ornella");
+
+    return 0;
+}
+
+int printString(char *p)
+{
+    printf("\n");
+    printf("String content: \n");
+    while(*p != '\0')
+    {
+        printf("%c", *p);
+        p++;
+    }
+    return 0;
+}
+
+int matrix()
+{
+    int matrix[3][3] = {{1,2,3},
+                        {4,5,6},
+                        {7,8,9}};
+    int C[3][2][2] = { { {1,2},{3,4} },
+                       { {5,6},{7,8} },
+                       { {9,10},{11,12} }};
+
+    printf("%d\n", C); // All of them point to the first element
+    printf("%d\n", *C);
+    printf("%d\n", C[0]);
+    printf("%d\n", &C[0][0]+1);
+
+    return 0;
+}
+
+int printMatrix(const int *m)
+{
+    printf("Printing matrix...\n");
+    for(int i=0; i<3;i++)
+    {
+
+        for(int j=0; j<3; j++)
+        {
+            printf("%d", *m);
+            m++;
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+int memory()
+{
+    // (void *) malloc(size_t size)
+//    void  *m = (int *)malloc(sizeof(int) * 5);
+//    int   *c = (int *)calloc(3, sizeof(int));
+//    int   *r = (int *)realloc(m, sizeof(int *5));
+
+    //initArrayNumbers();
+    initEmptyArray();
+}
+
+int initArrayNumbers()
+{
+    int n;
+
+    printf("Enter size of array\n");
+    scanf("%d", &n);
+
+    int *A = (int*)malloc(n * sizeof(int));
+
+    if(*A == NULL)
+    {
+        printf("Error allocating memory for new array. \n");
+        return 1;
+    }
+
+    for(int i=0; i<n; i++)
+        A[i] = i;
+
+    for(int i=0; i<n; i++)
+        printf("%d ", A[i]);
+
+    printf("\nArray initialized correctly.\n");
+    return 0;
+}
+
+int initEmptyArray()
+{
+    int n;
+
+    printf("Enter size of new array\n");
+    scanf("%d", &n);
+
+    int *c = (int *)calloc(n, sizeof(int));
+
+    if(*c == NULL)
+    {
+        printf("Error allocating memory for new array. \n");
+        return 1;
+    }
+
+    for(int i=0; i<n; i++)
+        printf("%d", c[i]);
+    return 0;
 }
