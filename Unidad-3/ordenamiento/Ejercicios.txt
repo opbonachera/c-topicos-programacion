@@ -1,0 +1,116 @@
+Ejercicio 3.1
+Escriba una función que permita desplegar un menú de opciones, devolviendo una opción válida.
+Escriba una función que reciba por argumento la dirección de comienzo de un array de float y la
+cantidad máxima de elementos a ingresar (no utilice subíndices). La función permitirá terminar el
+ingreso con una condición fijada por el alumno y devolverá la cantidad de elementos ingresados
+(puede ser cero).
+Escriba una función que permita buscar el mínimo elemento de un array de float.
+Escriba una función que determine el promedio de los elementos que se encuentran en las
+posiciones pares de un array de float.
+Escriba una función que muestre los elementos de un array de float en orden inverso.
+Escriba una función que almacene en un archivo de texto los elementos de un array de float, a razón
+de un flotante por línea de texto.
+Haciendo uso de las funciones anteriores, escriba un programa que al comenzar su ejecución permita
+el ingreso para un array de float, luego de lo cual muestre un menú de opciones para:
+1- Buscar el mínimo elemento,
+2- Calcular el promedio de los valores de las posiciones pares,
+3- Mostrarlo en orden inverso,
+4- Salir.
+Consulte de qué modo puede hacer que el programa trabaje con otros tipos de datos (double, long
+double, int, unsigned, etc.), con mínimas modificaciones.
+Ejercicio 3.2
+Escriba una función que devuelva en qué dirección de memoria se encuentra un elemento dentro de
+un array. Si el elemento no se encuentra, debe devolver NULL.
+Ejercicio 3.3
+Escriba una función que permita el ingreso de una cantidad variable de elementos en un array de
+enteros int.
+Escriba una función que calcule la suma de todos los elementos almacenados en un array de enteros,
+y su promedio. El promedio (float) debe ser devuelto por la función, y la suma debe ser también
+devuelta mediante un argumento extra (puntero a long) que recibe la función.
+Escriba otra versión de la función anterior, pero devolviendo ambos valores calculados en una
+variable que responda a una estructura compuesta de un miembro long y un miembro float.
+a- escriba un main que utilice la primera y segunda función, y
+b- otro main que utilice la primera y la tercera
+En ambos casos, la suma y el promedio deben ser mostrados en la función main.
+¿Tiene claro que la primera alternativa es mejor que la segunda porque no es necesario el uso de una
+estructura? En ciertos casos puede ser mejor la segunda alternativa.
+Ejercicio 3.4
+Existen funciones de conversión (atoi, itoa, atol, etc., declaradas en la biblioteca stdlib.h), que usted
+debería conocer y recordar. Escriba, compile y ejecute un programa en que haga uso de tales
+funciones de conversión.
+17
+Ejercicio 3.5
+En la biblioteca stdio.h hay dos funciones que permiten obtener idénticos (o similares) resultados, se
+trata de sscanf y sprintf. Escriba, compile y ejecute un programa en que utilice estas funciones.
+Ejercicio 3.6
+Escriba una macro que:
+○ redondee un número real al entero más cercano.
+○ calcule el valor absoluto de un argumento
+○ retorne la parte entera de un número
+○ retorne la parte decimal
+○ verifique si el número es par
+○ reciba dos argumentos (x,y) verifique si el número “x” es potencia del número “y”
+○ diga si el argumento es letra
+○ es dígito
+○ es mayúscula
+○ es minúscula
+○ es blanco
+○ convierta un caracter a mayúscula
+○ convierta un caracter a minúscula
+Escriba una función que devuelva el menor entre dos enteros que recibe por argumento.
+Escriba una macro que cumpla con el mismo cometido.
+Ejercicio 3.7
+Investigue y utilice las macros max y min de la biblioteca stdlib.h.
+Ejercicio 3.8
+Escriba una función que intercambie dos enteros que recibe por puntero.
+Escriba una macro multilínea que cumpla con el mismo cometido.
+Ejercicio 3.9
+Dado un arreglo enteros, utilice la función qsort (biblioteca <stdlib>) para ordenarlos de menor a
+mayor. Repita el ejercicio ordenándolos de mayor a menor.
+Para los siguientes ejercicios de ordenamiento o búsqueda, asuma la existencia de:
+typedef struct
+{
+int dni;
+char apellido[20];
+char nombres[30];
+float peso;
+} tPersona;
+18
+Ejercicio 3.10
+Dado un arreglo de elementos de tipo tPersona, utilice la función qsort (biblioteca <stdlib>) para
+ordenarlos por DNI.
+Ejercicio 3.11
+Dado el arreglo de elementos de tipo tPersona del ejercicio 3.10, utilice la función qsort (biblioteca
+<stdlib>) para ordenarlos por APELLIDO y NOMBRE.
+Ejercicio 3.12
+Dado el arreglo de elementos de tipo tPersona del ejercicio 3.10, diseñe e implemente la función:
+int buscarXdni(const tPersona *p, tPersona *d);
+El propósito de la función es realizar una búsqueda por DNI de una persona dentro de un arreglo de
+elementos del tipo persona. En caso de encontrarse el DNI contenido en el campo dni del segundo
+argumento, se deben completar los demás campos con los valores correspondientes al elemento
+localizado en el arreglo y además la función debe retornar 1. En el caso de que la búsqueda no haya
+sido exitosa se debe retornar 0.
+Ejercicio 3.13
+Idem ejercicio 3.12 buscando por APELLIDO y NOMBRE. Adecúe el nombre de la función respetando
+la firma y el tipo de valor devuelto.
+Ejercicio 3.14
+Diseñe e implemente un programa que reciba tres valores desde la línea de comando. Los primeros
+dos valores deberán ser números enteros. El tercer valor será el tipo de operación (+: sumar, -: restar,
+*: multiplicar, /: dividir). El programa deberá imprimir el resultado de la operación. Establezca las
+condiciones de borde. En caso de que se produzcan errores deben informarse por pantalla.
+Ejercicio 3.15
+Desarrolle una función de intercambio genérica tal que pueda intercambiar 2 bloques de información
+de manera independiente al tipo de dato. No utilice memoria dinámica.
+Ejercicio 3.16
+Desarrolle una función genérica que encuentre el menor elemento dentro de un vector. Verifique su
+funcionamiento encontrando el menor entero, el menor flotante, y el menor alumno (Por DNI,
+nombre y apellido o promedio). La función retornará la dirección del elemento menor
+Ejercicio 3.17
+Desarrolle una función genérica que permita insertar de forma ordenada un elemento en un vector.
+Puede ayudarse, usando como patrón, la versión no genérica desarrollada y probada de la práctica 1
+y con las funciones de biblioteca memcpy y memmove.
+19
+Ejercicio 3.18
+Ordenamiento genérico - Desarrolle una función genérica que ordene un vector. Puede ayudarse con
+las funciones intercambio y buscar menor desarrolladas en ejercicios anteriores e implementar un
+algoritmo de selección.

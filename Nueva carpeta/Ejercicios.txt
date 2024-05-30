@@ -1,0 +1,31 @@
+Para los siguientes ejercicios con fechas, asuma la existencia de:
+typedef struct
+{
+int dia;
+int mes;
+int anio;
+} tFecha;
+Ejercicio 4.1
+Desarrollar una función que determine si una fecha es formalmente correcta.
+Ejercicio 4.2
+Desarrollar una función que a partir de una fecha obtenga la correspondiente al día siguiente.
+Ejercicio 4.3
+Desarrollar una función que a partir de una fecha obtenga la que resulte de sumarle N días.
+Ejercicio 4.4
+Desarrollar una función que a partir de una fecha obtenga la que resulte de restarle N días.
+Ejercicio 4.5
+Desarrollar una función que a partir de dos fechas obtenga la cantidad de días que hay entre ellas.
+Ejercicio 4.6
+Desarrollar una función que a partir de una fecha devuelva un entero que representa el día de la
+semana que le corresponde (0: Domingo; 1: lunes; 2:Martes;…etc.)
+Ejercicio 4.7
+Implemente un TDA Vector. Debe desarrollar una versión con memoria estática y otra con memoria
+dinámica. Debe implementar las primitivas:
+- crear vector
+- vector lleno
+- vector vacío
+- insertar elemento en orden
+- eliminar elemento
+- destruir vector
+Tenga en cuenta que la primitiva ‘destruir’ debe, según sea el caso, liberar la memoria reservada, o
+poner la cantidad de elementos en cero.

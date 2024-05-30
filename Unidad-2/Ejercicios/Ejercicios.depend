@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1716936288 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\ejercicios\untitled1.c
+
+1716947674 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\ejercicios\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vectores.h"
+	"matrices.h"
+
+1716945984 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\ejercicios\vectores.h
+
+1716946894 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\ejercicios\vectores.c
+
+1716947584 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\ejercicios\matrices.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"matrices.h"
+
+1716946473 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\ejercicios\matrices.h
+
