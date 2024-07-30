@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1722362777 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\punteros\strings\strings.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"strings.h"
+
+1722362454 c:\users\obonachera\documents\universidad\topicos-programacion\otros\punteros\strings\strings.h
+
+1722362544 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\punteros\strings\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"strings.h"
+
