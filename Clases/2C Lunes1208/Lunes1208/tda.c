@@ -4,51 +4,79 @@
 
 #include "tda.h"
 
-Fecha ingresarFecha()
+void ingresarFecha(Fecha* fecha)
 {
-    Fecha fecha;
+    printf("Ingrese una fecha (DD/MM/AAAA)");
+    scanf("%d/%d/%d", &fecha->dia, &fecha->mes, &fecha->anio);
 
-    printf("Ingrese una fecha (DD/MM/AAAA): ");
-    scanf("%d/%d/%d", &fecha.dia, &fecha.mes, &fecha.anio);
+    while(!esFechaValida(fecha))
+    {
+        printf("Fecha invalida. Ingrese nuevamente: ");
+        scanf("%d/%d/%d", &fecha->dia, &fecha->mes, &fecha->anio);
+    }
+}
 
-    while (!esFechaValida(fecha)) {
-        printf("La fecha es inválida. Ingrese nuevamente (DD/MM/AA):\n");
-        scanf("%d/%d/%d", &fecha.dia, &fecha.mes, &fecha.anio);
+Fecha sumarDiasAFecha(const Fecha* fecha, int dias)
+{
+    Fecha fsuma = *fecha;
+    fsuma.dia += dias;
+    int cdm;
+
+    while(fsuma.dia> (cdm = cantDiasMes(fsuma.mes, fsuma.anio)))
+    {
+        fsuma.dia -= cdm;
+        fsuma.mes++;
+
+        if(fsuma.mes>12)
+        {
+            fsuma.mes = 1;
+            fsuma.anio++;
+        }
     }
 
-    return fecha;
+    return fsuma;
 }
 
-Fecha crearFecha()
+Fecha restarDiasAFecha(const Fecha* fecha, int dias)
 {
+    // Si se le restan dias de mas, el dia va a quedar negativo
+    // en ese caso deberiamos restarle 1 al mes y la cantidad de dias ??
 
-    Fecha fecha;
-    return fecha;
+    Fecha fresta = *fecha;
+    fresta.dia -= dias;
+
+
+    return fresta;
 }
-
-Fecha sumarDias(Fecha fecha, int dias)
-{
-    return fecha;
-}
-
 // Valida teniendo en cuenta las fechas del calendario gregoriano
 // Devuelve true si es valida o false si es invalida
-bool esFechaValida(Fecha fecha)
+bool esFechaValida(const Fecha* fecha)
 {
-    return ((fecha.dia > 1 && fecha.dia <30) && (fecha.mes>1 && fecha.mes<12) && fecha.anio>1600);
+    return ((fecha->dia > 1 && fecha->dia <30) && (fecha->mes>1 && fecha->mes<12) && fecha->anio>1600);
 }
 
 
-int mostrarFecha(Fecha fecha)
+int mostrarFecha(const Fecha* fecha)
 {
+    printf("--- Muestra de fecha ---\n");
+    printf("%02d/%02d/%d\n", fecha->dia, fecha->mes,fecha->anio);
+
     return 0;
 }
 
 int ingresarEnteroPositivo()
 {
     int entero;
+
     printf("Ingrese un entero positivo: \n");
     scanf("%d", &entero);
+
+    while(entero<0)
+    {
+        printf("Error: valor negativo. Ingrese nuevamente: ");
+        scanf("%d",&entero);
+    }
+
     return entero;
 }
 
@@ -67,39 +95,5 @@ bool esAnioBisiesto(int anio)
 {
     return anio % 4 == 0 && (anio % 100 != 0 && anio % 400 == 0);
 }
-/*
-int validarPositivo() {
-    int entero;
-    int result;
-
-    do {
-        printf("Ingrese un entero positivo: ");
-        result = scanf("%d", &entero);
-
-        while(getchar() != '\n');
 
 
-        if (result != 1) {
-            printf("Entrada no válida. Por favor, ingrese un número entero.\n");
-        } else if (entero < 0) {
-            printf("El número debe ser positivo.\n");
-        }
-
-    } while (result != 1 || entero < 0);
-
-    return entero;
-}
-
-
-int validarRango(int limite_inferior, int limite_superior, int entero)
-{
-    int resultado = 0;
-
-    if(resultado>limite_inferior && resultado<limite_superior)
-    {
-        resultado = 1;
-    }
-    return resultado;
-}
-
-*/

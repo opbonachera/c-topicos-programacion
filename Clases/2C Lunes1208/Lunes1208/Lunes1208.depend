@@ -13,3 +13,17 @@
 	<stdbool.h>
 	"tda.h"
 
+1723553060 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1208\lunes1208\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tda.h"
+
+1723554182 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1208\lunes1208\tda.h
+	<stdbool.h>
+
+1723553140 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1208\lunes1208\tda.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"tda.h"
+

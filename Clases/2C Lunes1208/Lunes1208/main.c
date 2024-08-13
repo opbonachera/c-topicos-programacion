@@ -5,13 +5,14 @@
 
 int main()
 {
-    Fecha fecha = ingresarFecha();
+    Fecha fecha;
+    ingresarFecha(&fecha);
 
     int dias = ingresarEnteroPositivo();
 
-    Fecha fsuma = sumarDias(fecha, dias);
+    Fecha fsuma = sumarDiasAFecha(&fecha, dias);
 
-    mostrarFecha(fsuma);
+    mostrarFecha(&fsuma);
 
     return 0;
 }
