@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1724291307 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes1208\lunes1208\tdavector\main.c
+	<stdio.h>
+	<stdlib.h>
+	"vector.h"
+
+1724291287 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes1208\lunes1208\tdavector\vector.c
+	"vector.h"
+
+1724291147 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes1208\lunes1208\tdavector\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
