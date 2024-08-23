@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1724426874 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\tppractica\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1724416959 c:\users\obonachera\documents\universidad\topicos-programacion\otros\tppractica\funciones.h
+
+1724416914 c:\users\obonachera\documents\universidad\topicos-programacion\otros\tppractica\funciones.c
+	"funciones.h"
+	<stdlib.h>
+	<stdio.h>
+
+1724427703 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\tppractica\funciones.c
+	"funciones.h"
+	<stdlib.h>
+	<stdio.h>
+
