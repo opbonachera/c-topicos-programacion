@@ -1,5 +1,7 @@
 #ifndef FUNCIONES_H_INCLUDED
 #define FUNCIONES_H_INCLUDED
 
+#define ANCHO 360
+#define ALTO 240
 
 #endif // FUNCIONES_H_INCLUDED

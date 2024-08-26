@@ -9,7 +9,11 @@ int main()
     // recortarImagen();
     // rotarImagenDerecha();
     // rotarImagenIzquierda();
-    transposeMatrix();
+    //transposeMatrix();
+    //espejarVertical();
+    //espejarHorizontal();
+    espejarImagenHorizontal();
+    espejarImagenVertical();
 
     return 0;
 }

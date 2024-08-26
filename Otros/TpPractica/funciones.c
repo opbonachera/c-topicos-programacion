@@ -296,6 +296,113 @@ int rotarImagenIzquierda()
     return OK;
 }
 
+int espejarImagenHorizontal() {
+    FILE* imagenOriginal;
+    FILE* nuevaImagen;
+
+    t_metadata cabeceraOriginal;
+
+    imagenOriginal = fopen("unlam.bmp", "rb");
+    nuevaImagen    = fopen("horizontal.bmp", "wb");
+
+    if (!imagenOriginal)
+        return -1; // ERROR_APERTURA_ARCHIVO
+
+    if (!nuevaImagen) {
+        fclose(imagenOriginal);
+        return -2; // ERROR_CREACION_ARCHIVO
+    }
+
+
+    leerCabecera("unlam.bmp", &cabeceraOriginal);
+
+    unsigned char byte;
+    for (int i = 0; i < cabeceraOriginal.comienzoImagen; i++) {
+        fread(&byte, sizeof(unsigned char), 1, imagenOriginal);
+        fwrite(&byte, sizeof(unsigned char), 1, nuevaImagen);
+    }
+
+    t_pixel matrizOriginal[ANCHO][ALTO];
+    t_pixel matrizEspejada[ANCHO][ALTO];
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            fread(matrizOriginal[x][y].pixel, sizeof(unsigned char), 3, imagenOriginal);
+        }
+    }
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            matrizEspejada[x][y] = matrizOriginal[cabeceraOriginal.ancho - 1 - x][y];
+        }
+    }
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            fwrite(matrizEspejada[x][y].pixel, sizeof(unsigned char), 3, nuevaImagen);
+        }
+    }
+
+    fclose(imagenOriginal);
+    fclose(nuevaImagen);
+
+    return 0; // OK
+}
+
+int espejarImagenVertical() {
+    FILE* imagenOriginal;
+    FILE* nuevaImagen;
+
+    t_metadata cabeceraOriginal;
+
+    imagenOriginal = fopen("unlam.bmp", "rb");
+    nuevaImagen    = fopen("vertical.bmp", "wb");
+
+    if (!imagenOriginal)
+        return -1; // ERROR_APERTURA_ARCHIVO
+
+    if (!nuevaImagen) {
+        fclose(imagenOriginal);
+        return -2; // ERROR_CREACION_ARCHIVO
+    }
+
+    leerCabecera("unlam.bmp", &cabeceraOriginal);
+
+    unsigned char byte;
+    for (int i = 0; i < cabeceraOriginal.comienzoImagen; i++) {
+        fread(&byte, sizeof(unsigned char), 1, imagenOriginal);
+        fwrite(&byte, sizeof(unsigned char), 1, nuevaImagen);
+    }
+
+    t_pixel matrizOriginal[ANCHO][ALTO];
+    t_pixel matrizEspejada[ANCHO][ALTO];
+
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            fread(matrizOriginal[x][y].pixel, sizeof(unsigned char), 3, imagenOriginal);
+        }
+    }
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            matrizEspejada[x][y] = matrizOriginal[x][cabeceraOriginal.alto - y -1];
+        }
+    }
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            fwrite(matrizEspejada[x][y].pixel, sizeof(unsigned char), 3, nuevaImagen);
+        }
+    }
+
+    fclose(imagenOriginal);
+    fclose(nuevaImagen);
+
+    return 0; // OK
+}
+
+// Prototipos con matrices estáticas
 int transposeMatrix()
 {
     int ancho = 4;
@@ -309,6 +416,62 @@ int transposeMatrix()
         for(int y = 0; y < alto; y++)
         {
             printf(" %d ", matrix[ancho - 1 - x][alto - 1 - y]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+int espejarHorizontal() {
+    int n = 5, m = 4;
+
+    int matriz[5][4] = {{1, 2, 3, 4},
+                        {5, 6, 7, 8},
+                        {9, 10, 11, 12},
+                        {13, 14, 15, 16},
+                        {18, 19, 20, 21}};
+
+    int matrizEspejada[5][4] = {0};
+
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            matrizEspejada[i][j] = matriz[i][m - j - 1];
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d ", matrizEspejada[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+int espejarVertical() {
+    int n = 5, m = 4;
+
+    int matriz[5][4] = {{1, 2, 3, 4},
+                        {5, 6, 7, 8},
+                        {9, 10, 11, 12},
+                        {13, 14, 15, 16},
+                        {17, 18, 19, 20}};
+
+    int matrizEspejada[5][4] = {0};
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            matrizEspejada[i][j] = matriz[n - 1 - i][j];
+        }
+    }
+
+    printf("Vertically Mirrored Matrix:\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d ", matrizEspejada[i][j]);
         }
         printf("\n");
     }
