@@ -12,8 +12,11 @@ int main()
     //transposeMatrix();
     //espejarVertical();
     //espejarHorizontal();
-    espejarImagenHorizontal();
-    espejarImagenVertical();
+    //espejarImagenHorizontal();
+    //espejarImagenVertical();
+    //concatenarMatrizHorizontal();
+    concatenarMatrizVertical();
 
+    //concatenarImagenHorizontal();
     return 0;
 }

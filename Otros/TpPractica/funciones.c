@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
 #define OK 0
 #define ERROR_APERTURA_ARCHIVO 1
@@ -468,7 +470,6 @@ int espejarVertical() {
         }
     }
 
-    printf("Vertically Mirrored Matrix:\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             printf("%d ", matrizEspejada[i][j]);
@@ -478,5 +479,186 @@ int espejarVertical() {
 
     return 0;
 }
+
+bool validarRango(int limiteInferior, int limiteSuperior, int valor)
+{
+    return (valor>=limiteInferior && valor<=limiteSuperior);
+}
+
+int obtenerParametro(char* argumento)
+{
+    char* pos = strrchr(argumento, '=') + 1;
+    int num;
+
+    if(pos)
+    {
+        sscanf(pos, "%d", &num);
+
+        if(!validarRango(1,100,num))
+        {
+            printf("El parametro no esta dentro del rango aceptado.\n");
+            return -2;
+        }
+
+        return num;
+    }else
+    {
+        printf("No se encontro ningun parametro.\n");
+        return -1;
+    }
+}
+
+
+void concatenarMatrizVertical()
+{
+    int matrizA[4][5] = { {1,2,3,4,5},{1,2,3,4,5},{1,2,3,4,5},{1,2,3,4,5}};
+    int matrizB[5][4] = { {10,11,12,13}, {10,11,12,13}, {10,11,12,13}, {10,11,12,13}, {10,11,12,13} };
+    int matrizNueva[9][5];
+
+    // Initialize matrizNueva with a default color value
+    int filling = 0xffb3ff;
+    for(int i=0; i<9; i++)
+    {
+        for(int j=0; j<5; j++)
+        {
+            matrizNueva[i][j] = filling;
+        }
+    }
+
+    /
+    for(int i=0; i<4; i++)
+    {
+        for(int j=0; j<5; j++)
+        {
+            matrizNueva[i][j] = matrizA[i][j];
+        }
+    }
+
+    for(int i=0; i<5; i++)
+    {
+        for(int j=0; j<4; j++)
+        {
+            matrizNueva[i+4][j] = matrizB[i][j];
+        }
+    }
+
+    // Print the resulting matrizNueva
+    printf("Resultado de la matriz nueva (Vertical): \n");
+    for (int i = 0; i < 9; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            printf("%d ", matrizNueva[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int concatenarMatrizHorizontal() {
+    int matrizA[4][4] = { {1,2,3,4},{1,2,3,4},{1,2,3,4},{1,2,3,4} };
+    int matrizB[4][5] = { {10,11,12,13,14}, {10,11,12,13,14}, {10,11,12,13,14}, {10,11,12,13,14} };
+    int matrizNueva[4][9] = {0};
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            matrizNueva[i][j] = matrizA[i][j];
+        }
+    }
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 5; j++) {
+            matrizNueva[i][4 + j] = matrizB[i][j];
+        }
+    }
+
+    printf("Resultado de la matriz nueva (horizontal): \n");
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 9; j++) {
+            printf("%d ", matrizNueva[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+int concatenarImagenHorizontal()
+{
+    /*
+        1-. Leer la cabecera de la primera imagen
+        2-. Leer la cabecera de la segunda imagen
+        3-. Calcular las dimensiones de la imagen nueva, ancho=suma de los anchos de ambas imagenes, alto = alto de la imagen mas alta
+        4-. Escribir los datos de la cabecera de la imagen nueva.
+        5-. Inicializar la matriz de la imagen nueva con datos por defecto
+        6-. Escribir los pixeles de la primera imagen
+        7-. Escribir los pixeles de la segunda imagen
+    */
+
+    FILE* nuevaImagen;
+    FILE* imagenUno;
+    FILE* imagenDos;
+
+    t_metadata cabeceraImagenUno, cabeceraImagenDos, cabeceraNueva;
+
+    imagenUno = fopen("unlam.bmp", "rb");
+    imagenDos = fopen("copia.bmp", "rb");
+
+    nuevaImagen    = fopen("nueva.bmp", "wb");
+
+    if (!imagenUno|| !imagenDos)
+        return ERROR_APERTURA_ARCHIVO;
+
+    if (!nuevaImagen)
+        return ERROR_CREACION_ARCHIVO;
+
+    leerCabecera("unlam.bmp", &cabeceraImagenUno);
+    leerCabecera("copia.bmp", &cabeceraImagenDos);
+
+    unsigned char byte[3];
+    for(int i = 0; i < cabeceraImagenUno.comienzoImagen; i++){
+        fread(&byte, sizeof(unsigned char), 1, imagenUno);
+        fwrite(&byte, sizeof(unsigned char), 1, nuevaImagen);
+    }
+
+    int nuevoAncho = cabeceraImagenUno.ancho + cabeceraImagenDos.ancho;
+    int nuevoAlto = cabeceraImagenUno.alto > cabeceraImagenDos.alto ? cabeceraImagenUno.alto : cabeceraImagenDos.alto;
+
+    unsigned char defaultColor[3] = {255,204,255};
+
+    t_pixel matrizNueva[nuevoAncho][nuevoAlto];
+    t_pixel matrizImagenUno[nuevoAncho][nuevoAlto];
+    t_pixel matrizImagenDos[nuevoAncho][nuevoAlto];
+
+    // Guardamos la imagen en una matriz
+    for(int i=0; i<cabeceraImagenUno.alto; i++)
+    {
+        for(int j=0; j<cabeceraImagenUno.ancho; j++)
+        {
+            fread(&matrizImagenUno[i][j].pixel, sizeof(unsigned char), 3, imagenUno);
+        }
+    }
+
+    for(int i=0; i<cabeceraImagenDos.alto; i++)
+    {
+        for(int j=0; j<cabeceraImagenDos.ancho; j++)
+        {
+            fread(&matrizImagenDos[i][j].pixel, sizeof(unsigned char), 3, imagenDos);
+        }
+    }
+
+
+    fseek(nuevaImagen, 18, SEEK_SET);
+    fwrite(&nuevoAncho, sizeof(unsigned int), 1, nuevaImagen);
+    fwrite(&nuevoAlto, sizeof(unsigned int), 1, nuevaImagen);
+
+    fclose(imagenUno);
+    fclose(imagenDos);
+    fclose(nuevaImagen);
+
+    leerCabecera("nueva.bmp", &cabeceraNueva);
+
+    return OK;
+}
+
 
 
