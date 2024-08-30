@@ -525,7 +525,7 @@ void concatenarMatrizVertical()
         }
     }
 
-    /
+
     for(int i=0; i<4; i++)
     {
         for(int j=0; j<5; j++)
@@ -602,6 +602,8 @@ int concatenarImagenHorizontal()
 
     imagenUno = fopen("unlam.bmp", "rb");
     imagenDos = fopen("copia.bmp", "rb");
+    FILE* copiaImagenUno = fopen("copia_unlam.bmp", "wb");
+    FILE* copiaImagenDos= fopen("copia_copia.bmp", "wb");
 
     nuevaImagen    = fopen("nueva.bmp", "wb");
 
@@ -617,6 +619,7 @@ int concatenarImagenHorizontal()
     unsigned char byte[3];
     for(int i = 0; i < cabeceraImagenUno.comienzoImagen; i++){
         fread(&byte, sizeof(unsigned char), 1, imagenUno);
+        fwrite(&byte, sizeof(unsigned char), 1, copiaImagenUno);
         fwrite(&byte, sizeof(unsigned char), 1, nuevaImagen);
     }
 
@@ -629,23 +632,70 @@ int concatenarImagenHorizontal()
     t_pixel matrizImagenUno[nuevoAncho][nuevoAlto];
     t_pixel matrizImagenDos[nuevoAncho][nuevoAlto];
 
-    // Guardamos la imagen en una matriz
-    for(int i=0; i<cabeceraImagenUno.alto; i++)
+    for(int i=0; i<nuevoAncho; i++)
     {
-        for(int j=0; j<cabeceraImagenUno.ancho; j++)
+        for(int j=0; j<nuevoAlto; j++)
         {
-            fread(&matrizImagenUno[i][j].pixel, sizeof(unsigned char), 3, imagenUno);
+            matrizNueva[i][j].pixel[0] = defaultColor[0];
+            matrizNueva[i][j].pixel[1] = defaultColor[1];
+            matrizNueva[i][j].pixel[2] = defaultColor[2];
         }
     }
 
-    for(int i=0; i<cabeceraImagenDos.alto; i++)
+    for(int x=0; x<cabeceraImagenUno.ancho; x++)
     {
-        for(int j=0; j<cabeceraImagenDos.ancho; j++)
+        for(int y=0; y<cabeceraImagenUno.alto; y++)
         {
-            fread(&matrizImagenDos[i][j].pixel, sizeof(unsigned char), 3, imagenDos);
+            fread(&matrizImagenUno[x][y], sizeof(unsigned char), 3, imagenUno);
+            fwrite(&matrizImagenUno[x][y], sizeof(unsigned char), 3, copiaImagenUno);
+            fwrite(&matrizImagenUno[x][y], sizeof(unsigned char), 3, nuevaImagen);
         }
     }
 
+    for(int x=cabeceraImagenUno.ancho; x<(cabeceraImagenUno.ancho + cabeceraImagenDos.ancho); x++)
+    {
+        for(int y=0; y<cabeceraImagenDos.alto; y++)
+        {
+            fread(&matrizImagenDos[x][y], sizeof(unsigned char), 3, imagenDos);
+            fwrite(&matrizImagenDos[x][y], sizeof(unsigned char), 3, copiaImagenDos);
+
+            fwrite(&matrizImagenDos[x][y], sizeof(unsigned char), 3, nuevaImagen);
+        }
+    }
+    // Guardo imagen 2 en matriz
+
+    for(int i = 0; i < cabeceraImagenDos.comienzoImagen; i++){
+        fread(&byte, sizeof(unsigned char), 1, imagenDos);
+        fwrite(&byte, sizeof(unsigned char), 1, copiaImagenDos);
+    }
+
+    for(int i=0; i<cabeceraImagenDos.ancho; i++)
+    {
+        for(int j=0; j<cabeceraImagenDos.alto; j++)
+        {
+            fread(&matrizImagenDos[i][j].pixel[0], sizeof(unsigned char), 1, imagenDos);
+            fread(&matrizImagenDos[i][j].pixel[1], sizeof(unsigned char), 1, imagenDos);
+            fread(&matrizImagenDos[i][j].pixel[2], sizeof(unsigned char), 1, imagenDos);
+
+            fwrite(&matrizImagenDos[i][j].pixel[0], sizeof(unsigned char), 1, copiaImagenDos);
+            fwrite(&matrizImagenDos[i][j].pixel[1], sizeof(unsigned char), 1, copiaImagenDos);
+            fwrite(&matrizImagenDos[i][j].pixel[2], sizeof(unsigned char), 1, copiaImagenDos);
+        }
+    }
+    // Escribimos la primera imagen a la izquierda de la imagen nueva
+    for(int i=0; i<cabeceraImagenUno.ancho; i++)
+    {
+        for(int j=cabeceraImagenUno.alto; j<nuevoAlto; j++)
+        {
+            fread(&matrizImagenDos[i][j].pixel[0], sizeof(unsigned char), 1, imagenDos);
+            fread(&matrizImagenDos[i][j].pixel[1], sizeof(unsigned char), 1, imagenDos);
+            fread(&matrizImagenDos[i][j].pixel[2], sizeof(unsigned char), 1, imagenDos);
+
+            fwrite(&matrizImagenDos[i][j].pixel[0], sizeof(unsigned char), 1, nuevaImagen);
+            fwrite(&matrizImagenDos[i][j].pixel[1], sizeof(unsigned char), 1, nuevaImagen);
+            fwrite(&matrizImagenDos[i][j].pixel[2], sizeof(unsigned char), 1, nuevaImagen);
+        }
+    }
 
     fseek(nuevaImagen, 18, SEEK_SET);
     fwrite(&nuevoAncho, sizeof(unsigned int), 1, nuevaImagen);
@@ -654,11 +704,10 @@ int concatenarImagenHorizontal()
     fclose(imagenUno);
     fclose(imagenDos);
     fclose(nuevaImagen);
+    fclose(copiaImagenUno);
+    fclose(copiaImagenDos);
 
     leerCabecera("nueva.bmp", &cabeceraNueva);
 
     return OK;
 }
-
-
-

@@ -15,8 +15,8 @@ int main()
     //espejarImagenHorizontal();
     //espejarImagenVertical();
     //concatenarMatrizHorizontal();
-    concatenarMatrizVertical();
-
-    //concatenarImagenHorizontal();
+    //concatenarMatrizVertical();
+    concatenarImagenHorizontal();
+    //rellenarImagen();
     return 0;
 }
