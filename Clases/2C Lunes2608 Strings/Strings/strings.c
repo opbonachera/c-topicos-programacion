@@ -1,5 +1,6 @@
+#include "strings.h"
 
-char* normalizar(const char* cadenaANormalizar, const char* cadenaNormalizada){
+/*char* normalizar(const char* cadenaANormalizar, const char* cadenaNormalizada){
     SecuenciaPalabra secLect, sectEscr;
 
     secPalCrear(&secLect, cadenaANormalizar);
@@ -81,4 +82,33 @@ void palabraATitulo(Palabra *pal)
         *actPal = aMinuscula(&actPal);
         actPal++;
     }
+}
+*/
+
+int obtenerParametro(char* argumento)
+{
+    char* pos = strrchr(argumento, '=') + 1;
+    int num;
+
+    if(pos)
+    {
+        sscanf(pos, "%d", &num);
+
+        if(!validarRango(1,100,num))
+        {
+            printf("El parametro no esta dentro del rango aceptado.\n");
+            return -2;
+        }
+
+        return num;
+    }else
+    {
+        printf("No se encontro ningun parametro.\n");
+        return -1;
+    }
+}
+
+bool validarRango(int limiteInferior, int limiteSuperior, int valor)
+{
+    return (valor>=limiteInferior && valor<=limiteSuperior);
 }

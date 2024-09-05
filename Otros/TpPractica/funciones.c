@@ -711,3 +711,164 @@ int concatenarImagenHorizontal()
 
     return OK;
 }
+
+int concatenarImagenVertical()
+{
+    FILE* imagen1;
+    FILE* imagen2;
+    FILE* nueva;
+
+    t_metadata cabeceraImagen1, cabeceraImagen2, cabeceraNueva;
+
+    leerCabecera("unlam.bmp",&cabeceraImagen1);
+    leerCabecera("dos.bmp",&cabeceraImagen2);
+
+    imagen1 = fopen("unlam.bmp", "rb");
+    imagen2 = fopen("dos.bmp", "rb");
+    nueva = fopen("nueva.bmp", "wb");
+
+    if(!imagen1 || !imagen2 || !nueva){
+        return 324;
+    }
+
+    unsigned char byte[3];
+    for(int i=0; i<cabeceraImagen1.comienzoImagen;i++){
+        fread(&byte, sizeof(unsigned char), 1, imagen1);
+        fwrite(&byte, sizeof(unsigned char), 1, nueva);
+    }
+
+    pixel matrizImagen1[240][360];
+    pixel matrizImagen2[240][360];
+    pixel matrizImagenNueva[480][720];
+
+    int mergedHeight = cabeceraImagen1.alto + cabeceraImagen2.alto;
+    int mergedWidth = cabeceraImagen1.ancho > cabeceraImagen2.ancho ? cabeceraImagen1.ancho : cabeceraImagen2.ancho;
+
+    for(int i = 0; i < mergedHeight; i++)
+    {
+        for(int j = 0; j < mergedWidth; j++)
+        {
+            matrizImagenNueva[i][j].px[0] = 0xFF;
+            matrizImagenNueva[i][j].px[1] = 0xC0;
+            matrizImagenNueva[i][j].px[2] = 0xCB;
+        }
+    }
+
+    for(int i=0; i<cabeceraImagen1.alto; i++)
+    {
+        for(int j=0; j<cabeceraImagen1.ancho; j++)
+        {
+            fread(&matrizImagen1[i][j].px, sizeof(unsigned char), 3, imagen1);
+            matrizImagenNueva[i][j] = matrizImagen1[i][j];
+        }
+    }
+
+    for(int i=0; i<cabeceraImagen2.alto; i++)
+    {
+        for(int j=0; j<cabeceraImagen2.ancho; j++)
+        {
+            fread(&matrizImagen2[i][j].px, sizeof(unsigned char), 3, imagen2);
+            matrizImagenNueva[i + cabeceraImagen1.alto][j] = matrizImagen2[i][j];
+        }
+    }
+
+    for(int i = 0; i < mergedHeight; i++)
+    {
+        for(int j = 0; j < mergedWidth; j++)
+        {
+            fwrite(&matrizImagenNueva[i][j].px, sizeof(unsigned char),3, nueva);
+        }
+    }
+
+    fseek(nueva, 18, SEEK_SET);
+    fwrite(&mergedWidth, sizeof(unsigned int), 1, nueva);
+    fwrite(&mergedHeight, sizeof(unsigned int), 1, nueva);
+
+    fclose(imagen1);
+    fclose(imagen2);
+    fclose(nueva);
+
+    leerCabecera("nueva.bmp",&cabeceraNueva);
+    return 0;
+}
+
+int concatenarImagenHorizontal()
+{
+
+    FILE* imagen1;
+    FILE* imagen2;
+    FILE* nueva;
+
+    t_metadata cabeceraImagen1, cabeceraImagen2, cabeceraNueva;
+
+    leerCabecera("unlam.bmp",&cabeceraImagen1);
+    leerCabecera("dos.bmp",&cabeceraImagen2);
+
+    imagen1 = fopen("unlam.bmp", "rb");
+    imagen2 = fopen("dos.bmp", "rb");
+    nueva = fopen("nueva.bmp", "wb");
+
+    if(!imagen1 || !imagen2 || !nueva){
+        return 324;
+    }
+
+    unsigned char byte[3];
+    for(int i=0; i<cabeceraImagen1.comienzoImagen;i++){
+        fread(&byte, sizeof(unsigned char), 1, imagen1);
+        fwrite(&byte, sizeof(unsigned char), 1, nueva);
+    }
+
+    pixel matrizImagen1[240][360];
+    pixel matrizImagen2[240][360];
+    pixel matrizImagenNueva[480][720];
+
+    int mergedHeight = cabeceraImagen1.alto > cabeceraImagen2.alto ? cabeceraImagen1.alto : cabeceraImagen2.alto;
+    int mergedWidth = cabeceraImagen1.ancho + cabeceraImagen2.ancho;
+
+    for(int i = 0; i < mergedHeight; i++)
+    {
+        for(int j = 0; j < mergedWidth; j++)
+        {
+            matrizImagenNueva[i][j].px[0] = 0xFF;
+            matrizImagenNueva[i][j].px[1] = 0xC0;
+            matrizImagenNueva[i][j].px[2] = 0xCB;
+        }
+    }
+
+    for(int i=0; i<cabeceraImagen1.alto; i++)
+    {
+        for(int j=0; j<cabeceraImagen1.ancho; j++)
+        {
+            fread(&matrizImagen1[i][j].px, sizeof(unsigned char), 3, imagen1);
+            matrizImagenNueva[i][j] = matrizImagen1[i][j];
+        }
+    }
+
+    for(int i=0; i<cabeceraImagen2.alto; i++)
+    {
+        for(int j=0; j<cabeceraImagen2.ancho; j++)
+        {
+            fread(&matrizImagen2[i][j].px, sizeof(unsigned char), 3, imagen2);
+            matrizImagenNueva[i][j + cabeceraImagen1.ancho] = matrizImagen2[i][j];
+        }
+    }
+
+    for(int i = 0; i < mergedHeight; i++)
+    {
+        for(int j = 0; j < mergedWidth; j++)
+        {
+            fwrite(&matrizImagenNueva[i][j].px, sizeof(unsigned char),3, nueva);
+        }
+    }
+
+    fseek(nueva, 18, SEEK_SET);
+    fwrite(&mergedWidth, sizeof(unsigned int), 1, nueva);
+    fwrite(&mergedHeight, sizeof(unsigned int), 1, nueva);
+
+    fclose(imagen1);
+    fclose(imagen2);
+    fclose(nueva);
+
+    leerCabecera("nueva.bmp",&cabeceraNueva);
+    return 0;
+}

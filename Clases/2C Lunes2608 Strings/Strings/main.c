@@ -32,13 +32,18 @@ int main()
 
     // Hacer las funciones más basicas de la biblioteca ctype
     // Hacer las funciones más basicas de la biblioteca strchar
-    char cadANormalizar[] = "$#%#$&Hola%$#%$#esTa$##eS$#Una cadena.";
-    char cadNormalizada[];
+    /*char cadANormalizar[100] = "$#%#$&Hola%$#%$#esTa$##eS$#Una cadena.";
+    char cadNormalizada[100];
 
     normalizar(cadANormalizar, cadNormalizada);
 
     printf("Cadena original: (%s)");
-    printf("Cadena normalizada: (%s)");
+    printf("Cadena normalizada: (%s)");*/
+
+    obtenerParametro("Achicar=12");
+    obtenerParametro("Achicar=100");
+    obtenerParametro("Achicar=540");
+    obtenerParametro("Achicar02");
 
     return 0;
 }

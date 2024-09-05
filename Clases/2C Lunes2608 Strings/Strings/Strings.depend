@@ -8,7 +8,7 @@
 
 1724713265 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes2608 strings\strings\strings.c
 
-1724759371 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\main.c
+1724937338 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -17,8 +17,18 @@
 	<stdlib.h>
 	<string.h>
 
-1724767782 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\strings.h
+1724936076 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\strings.h
 	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 
 1724766992 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\utilities.c
+
+1724933023 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\strings.c
+
+1724759371 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\strings.h.c
+
+1724937323 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes2608 strings\strings\strings.c
+	"strings.h"
 

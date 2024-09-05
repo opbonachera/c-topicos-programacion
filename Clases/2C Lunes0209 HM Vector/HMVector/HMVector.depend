@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1725369510 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.c
+	"hmvector.h"
+
+1725368765 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\main.c
+	<stdio.h>
+	<stdlib.h>
+	"hmvector.h"
+
+1725368232 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.h
+	<stdlib.h>
+	<stdio.h>
+
+1725365744 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.c
+
