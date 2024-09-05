@@ -6,9 +6,9 @@
 int main()
 {
     // copiarImagen();
-    // recortarImagen();
+    //recortarImagen();
     // rotarImagenDerecha();
-    // rotarImagenIzquierda();
+     rotarImagenIzquierda();
     //transposeMatrix();
     //espejarVertical();
     //espejarHorizontal();
@@ -16,7 +16,8 @@ int main()
     //espejarImagenVertical();
     //concatenarMatrizHorizontal();
     //concatenarMatrizVertical();
-    concatenarImagenHorizontal();
+    //concatenarImagenHorizontal();
     //rellenarImagen();
+    //pixelearImagen();
     return 0;
 }

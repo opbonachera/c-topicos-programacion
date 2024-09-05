@@ -18,7 +18,7 @@ typedef struct
 
 int main()
 {
-    concatenarImagenVertical();
+    concatenarImagenHorizontal();
     return 0;
 }
 
