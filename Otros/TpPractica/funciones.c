@@ -200,17 +200,19 @@ int rotarImagenDerecha()
 
     for(int y = 0; y < altoOriginal; y++) {
         for(int x = 0; x < anchoOriginal; x++) {
-            fread(&imagen[y][x].pixel[0], sizeof(unsigned char), 1, imagenOriginal);
+            fread(&imagen[y][x], sizeof(unsigned char), 3, imagenOriginal);
+            /*fread(&imagen[y][x].pixel[0], sizeof(unsigned char), 1, imagenOriginal);
             fread(&imagen[y][x].pixel[1], sizeof(unsigned char), 1, imagenOriginal);
-            fread(&imagen[y][x].pixel[2], sizeof(unsigned char), 1, imagenOriginal);
+            fread(&imagen[y][x].pixel[2], sizeof(unsigned char), 1, imagenOriginal);*/
         }
     }
 
     for(int y = 0; y < anchoOriginal; y++) {
         for(int x = 0; x < altoOriginal; x++) {
-            fwrite(&imagen[x][y].pixel[0], sizeof(unsigned char), 1, nuevaImagen);
+            fwrite(&imagen[x][y], sizeof(unsigned char), 3, nuevaImagen);
+            /*fwrite(&imagen[x][y].pixel[0], sizeof(unsigned char), 1, nuevaImagen);
             fwrite(&imagen[x][y].pixel[1], sizeof(unsigned char), 1, nuevaImagen);
-            fwrite(&imagen[x][y].pixel[2], sizeof(unsigned char), 1, nuevaImagen);
+            fwrite(&imagen[x][y].pixel[2], sizeof(unsigned char), 1, nuevaImagen);*/
         }
     }
 
@@ -229,12 +231,43 @@ int rotarImagenDerecha()
     return OK;
 }
 
+int rotarMatrizIzquierda() {
+    int alto = 5, ancho = 4;
+
+    int matriz[5][4] = {{1, 2, 3, 4},
+                        {5, 6, 7, 8},
+                        {9, 10, 11, 12},
+                        {13, 14, 15, 16},
+                        {17, 18, 19, 20}};
+
+    int matrizRotada[4][5];
+
+    for(int i=0; i<alto; i++)
+    {
+        for(int j=0; j<ancho; j++)
+        {
+            matrizRotada[j][i] = matriz[i][j];
+        }
+    }
+
+    for (int i = 0; i < ancho; i++) {
+        for (int j = 0; j < alto; j++) {
+            printf("%d ", matrizRotada[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
 int rotarImagenIzquierda()
 {
     FILE* nuevaImagen;
     FILE* imagenOriginal;
 
     t_metadata cabeceraNueva, cabeceraOriginal;
+
+    leerCabecera("unlam.bmp", &cabeceraOriginal);
 
     imagenOriginal = fopen("unlam.bmp", "rb");
     nuevaImagen    = fopen("nueva.bmp", "wb");
@@ -245,7 +278,6 @@ int rotarImagenIzquierda()
     if (!nuevaImagen)
         return ERROR_CREACION_ARCHIVO;
 
-    leerCabecera("unlam.bmp", &cabeceraOriginal);
 
     unsigned char byte[3];
     for(int i = 0; i < cabeceraOriginal.comienzoImagen; i++){
@@ -257,21 +289,20 @@ int rotarImagenIzquierda()
     int altoOriginal = cabeceraOriginal.alto;
 
     t_pixel imagen[240][360];
+    t_pixel imagenNueva[360][240];
 
     for(int y = 0; y < altoOriginal; y++) {
         for(int x = 0; x < anchoOriginal; x++) {
-            fread(&imagen[y][x], sizeof(unsigned char), 1, imagenOriginal);
-            fwrite(&imagen[x][altoOriginal - 1 - y], sizeof(unsigned char), 1, nuevaImagen);
+            fread(&imagen[y][x], sizeof(unsigned char), 3, imagenOriginal);
+            imagenNueva[x][altoOriginal - 1 - y] = imagen[y][x];
         }
     }
 
-    /*for(int y = 0; y < anchoOriginal; y++) {
-        for(int x = 0; x < altoOriginal; x++) {
-
-            fwrite(&imagen[x][altoOriginal - 1 - y].pixel[1], sizeof(unsigned char), 1, nuevaImagen);
-            fwrite(&imagen[x][altoOriginal - 1 - y].pixel[2], sizeof(unsigned char), 1, nuevaImagen);
+    for(int x = 0; x < anchoOriginal; x++) {
+        for(int y = 0; y < altoOriginal; y++) {
+            fwrite(&imagenNueva[x][y], sizeof(unsigned char), 3, nuevaImagen);
         }
-    }*/
+    }
 
     int nuevoX = altoOriginal;
     int nuevoY = anchoOriginal;
@@ -442,6 +473,7 @@ int espejarHorizontal() {
 
     return 0;
 }
+
 
 int espejarVertical() {
     int n = 5, m = 4;

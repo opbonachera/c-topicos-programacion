@@ -7,8 +7,9 @@ int main()
 {
     // copiarImagen();
     //recortarImagen();
-    // rotarImagenDerecha();
+    //rotarImagenDerecha();
      rotarImagenIzquierda();
+    //rotarMatrizIzquierda();
     //transposeMatrix();
     //espejarVertical();
     //espejarHorizontal();
