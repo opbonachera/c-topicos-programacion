@@ -792,49 +792,62 @@ int pixelearImagen()
     }
 
     t_pixel imagen[360][240];
+    t_pixel matrizNuevaImagen[360][240];
     t_pixel px;
     int n=8;
 
-    for(int x=0; x<cabeceraOriginal.ancho; x++)
-    {
-        for(int y=0; y<cabeceraOriginal.alto; y++)
-        {
-            fread(&imagen[x][y], sizeof(unsigned char), 3, imagenOriginal);
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            fread(&imagen[y][x], sizeof(unsigned char), 3, imagenOriginal);
         }
     }
 
-    for(int i=0; i<cabeceraOriginal.alto; i+=n)
-    {
-        for(int j=0; j<cabeceraOriginal.ancho; j+=n)
-        {
-            unsigned char sumaR, sumaG, sumaB=0;
 
-            for(int k=0; k<n;k++)
-            {
-                for(int l=0; l<n; l++)
-                {
-                    sumaR += imagen[i][j].pixel[0];
-                    sumaG += imagen[i][j].pixel[1];
-                    sumaB += imagen[i][j].pixel[2];
+    for (int i = 0; i < cabeceraOriginal.alto; i += n) {
+        for (int j = 0; j < cabeceraOriginal.ancho; j += n) {
+            unsigned long sumaR = 0, sumaG = 0, sumaB = 0;
+            int count = 0;
+
+            for (int k = 0; k < n; k++) {
+                for (int l = 0; l < n; l++) {
+                    int x = j + l;
+                    int y = i + k;
+
+                    if (x < cabeceraOriginal.ancho && y < cabeceraOriginal.alto) {
+                        sumaR += imagen[k][l].pixel[0];
+                        sumaG += imagen[k][l].pixel[1];
+                        sumaB += imagen[k][l].pixel[2];
+                        count++;
+                    }
                 }
             }
 
-            sumaR = MIN(sumaR / n*n,255);
-            sumaG = MIN(sumaG / n*n,255);
-            sumaB = MIN(sumaB / n*n,255);
+            unsigned char avgR = MIN(sumaR / count, 255);
+            unsigned char avgG = MIN(sumaG / count, 255);
+            unsigned char avgB = MIN(sumaB / count, 255);
 
-            for(int k=0; k<n;k++)
-            {
-                for(int l=0; l<n; l++)
-                {
-                    fwrite(&sumaR, sizeof(unsigned char),1, nuevaImagen);
-                    fwrite(&sumaG, sizeof(unsigned char),1, nuevaImagen);
-                    fwrite(&sumaB, sizeof(unsigned char),1, nuevaImagen);
+            for (int k = 0; k < n; k++) {
+                for (int l = 0; l < n; l++) {
+                    int x = j + l;
+                    int y = i + k;
+
+                    if (x < cabeceraOriginal.ancho && y < cabeceraOriginal.alto) {
+                        matrizNuevaImagen[y][x].pixel[0] = avgR;
+                        matrizNuevaImagen[y][x].pixel[1] = avgG;
+                        matrizNuevaImagen[y][x].pixel[2] = avgB;
+                    }
                 }
             }
-
         }
     }
+
+    for (int y = 0; y < cabeceraOriginal.alto; y++) {
+        for (int x = 0; x < cabeceraOriginal.ancho; x++) {
+            fwrite(&matrizNuevaImagen[y][x], sizeof(unsigned char), 3, nuevaImagen);
+        }
+    }
+
+
 
 
     fclose(imagenOriginal);
@@ -845,3 +858,5 @@ int pixelearImagen()
 
     return OK;
 }
+
+
