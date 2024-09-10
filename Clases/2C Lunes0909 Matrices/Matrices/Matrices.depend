@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1725930507 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes0909 matrices\matrices\main.c
+	<stdio.h>
+	<stdlib.h>
+	"matrices.h"
+
+1725930968 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes0909 matrices\matrices\matrices.h
+	<stdio.h>
+	<stdlib.h>
+
+1725922424 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes0909 matrices\matrices\matrices.c
+	"matrices.h"
+
+1725930810 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\clases\2c lunes0909 matrices\matrices\matrices.c
+	"matrices.h"
+
