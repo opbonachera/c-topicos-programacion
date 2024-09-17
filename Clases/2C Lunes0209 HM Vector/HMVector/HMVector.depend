@@ -1,15 +1,31 @@
 # depslib dependency file v1.0
-1725369510 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.c
+1726580262 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.c
 	"hmvector.h"
 
-1725368765 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\main.c
+1726580941 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\main.c
 	<stdio.h>
 	<stdlib.h>
 	"hmvector.h"
 
-1725368232 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.h
+1726579195 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.h
 	<stdlib.h>
 	<stdio.h>
 
 1725365744 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\hmvector.c
+
+1726580270 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\burbujeo.c
+	"hmvector.h"
+	"ordenamiento.h"
+
+1726581041 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\ordenamiento.h
+	<stdio.h>
+	<string.h>
+
+1726581025 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\seleccion.c
+	"hmvector.h"
+	"ordenamiento.h"
+
+1726581718 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0209 hm vector\hmvector\qsort.c
+	"hmvector.h"
+	"ordenamiento.h"
 

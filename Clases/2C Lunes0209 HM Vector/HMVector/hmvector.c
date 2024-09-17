@@ -106,3 +106,14 @@ int eliminarElementoOrdenado(Vector* v, int elemento)
 
     return OK;
 }
+
+void intercambiarElemento(void *a, void* b, size_t tamElemento)
+{
+    void* temp =  malloc(tamElemento);
+
+    memcpy(temp, a, tamElemento);
+    memcpy(a, b, tamElemento);
+    memcpy(b, temp, tamElemento);
+
+    free(temp);
+}

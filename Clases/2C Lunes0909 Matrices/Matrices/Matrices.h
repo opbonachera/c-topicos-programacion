@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void    cargarMatriz(int mat[][ORDEN], size_t filas);
+void    cargarMatriz(int** matriz, size_t filas, size_t columnas);
 void    imprimirMatriz(int filas, int columnas, void** matriz);
 int     sumaDiagonalPrincipal(int mat[][ORDEN], size_t filas);
 int     sumaTrianguloInferor(int mat[][ORDEN], size_t filas);

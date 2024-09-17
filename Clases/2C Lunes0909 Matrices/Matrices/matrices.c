@@ -1,30 +1,12 @@
 #include "matrices.h"
 
-int inicializarMatriz()
+void cargarMatriz(int** matriz, size_t filas, size_t columnas)
 {
-    /*int matriz[ORDEN][ORDEN];
-
-    cargarMatriz(matriz, ORDEN);
-    imprimirMatriz(matriz, ORDEN);
-
-    int sumaDiagPrincipal = sumaDiagonalPrincipal(matriz, ORDEN);
-    printf("La suma entre los elementos de a diagonal principal es igual a %d\n", sumaDiagPrincipal);
-
-    int sumaDiagSecundaria= sumaDiagonalPrincipal(matriz, ORDEN);
-    printf("La suma entre los elementos de a diagonal secundaria es igual a %d\n", sumaDiagSecundaria);
-    */
-
-    return OK;
-}
-
-void cargarMatriz(int mat[][ORDEN], size_t filas)
-{
-    int elem=1;
-    for(int i=0; i<filas; i++)
+    for(int i = 0; i < filas; i++)
     {
-        for(int j=0; j<ORDEN; j++)
+        for(int j = 0; j < columnas; j++)
         {
-            mat[i][j] = elem++;
+            matriz[i][j] = i * columnas + j + 1;
         }
     }
 }
@@ -35,7 +17,6 @@ void imprimirMatriz(int filas, int columnas, void** matriz)
     {
         for(int j = 0; j < columnas; j++)
         {
-            // Cast the void** matrix elements to the appropriate type (e.g., int*)
             printf("  %d  ", ((int*)matriz[i])[j]);
         }
         printf("\n");
@@ -88,7 +69,7 @@ int sumaTrianguloSuperior(int mat[][ORDEN], size_t filas)
 
 void** crearMatrizDinamica(size_t filas, size_t columnas, size_t tamElemento)
 {
-    void** matriz = malloc(filas * sizeof(void*));  // Correct size allocation
+    void** matriz = malloc(filas * sizeof(void*));
 
     if(!matriz)
         return NULL;
@@ -99,20 +80,14 @@ void** crearMatrizDinamica(size_t filas, size_t columnas, size_t tamElemento)
     {
         *i = malloc(columnas * tamElemento);
 
-        if(!(*i))  // Correct check of the allocated memory
+        if(!(*i))
         {
             eliminarMatriz(matriz, i - matriz);
             return NULL;
         }
     }
 
-     for(int i = 0; i < filas; i++)
-    {
-        for(int j = 0; j < columnas; j++)
-        {
-            ((int*)matriz[i])[j] = i * columnas + j + 1;
-        }
-    }
+    cargarMatriz(matriz,filas, columnas);
 
     return matriz;
 }
@@ -124,5 +99,5 @@ void eliminarMatriz(void** matriz, size_t filas)
     {
         free(*i);
     }
-    free(matriz);  // Don't forget to free the top-level pointer
+    free(matriz);
 }

@@ -16,6 +16,7 @@ int main()
     eliminarElementoOrdenado(&unVector, 2);
     imprimirVector(&unVector);
     destruirVector(&unVector);
+    vectorOrdenarSeleccion(&unVector);
 
     return 0;
 }

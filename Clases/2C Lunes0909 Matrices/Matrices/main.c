@@ -12,7 +12,7 @@ int main()
         return SIN_MEMORIA;
     }
 
-    imprimirMatriz(ORDEN, ORDEN, matriz);
+    imprimirMatriz(3, 3, (void**)matriz);
 
     return 0;
 }
