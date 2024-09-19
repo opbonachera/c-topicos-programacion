@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1726771383 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"VectorGenerico.h"
+
+1726770254 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\vectorgenerico.h
+	<stdio.h>
+	<stdlib.h>
+
