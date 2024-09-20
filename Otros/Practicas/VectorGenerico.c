@@ -63,29 +63,21 @@ int destruirVector(VectorGenerico* vector)
     return OK;
 }
 
-int insertarElementoOrdenado(VectorGenerico* vector, void* elemento)
+int insertarEnteroOrdenado(VectorGenerico* vector, int* elemento)
 {
-    int posIns = 0;
-    int* elem = (int*)elemento; // Cast the void* to the appropriate type (int in this case)
+    /*size_t posIns = 0;
 
-    if(vector->ce == vector->cap)
+    if(vector->cap == vector->ce)
         redimensionarVector(vector);
 
-    // Assuming vector->vec contains integers, cast the elements for comparison
-    while(posIns < vector->ce && *elem > *((int*)vector->vec + posIns))
-    {
+    while(posIns <= vector->ce && *(vector->vec[posIns]))
         posIns++;
-    }
 
-    // Shift elements to the right
-    for(int i = vector->ce - 1; i >= posIns; i--)
-    {
-        ((int*)vector->vec)[i + 1] = ((int*)vector->vec)[i];
-    }
+    for(size_t i = posIns; i < vector->ce; i++)
+        vector->vec[i + 1] = vector->vec[i];
 
-    // Insert the element
-    ((int*)vector->vec)[posIns] = *elem;
+    *(vector->vec[posIns]) = *(elemento);
     vector->ce++;
-
-    return 0; // Assuming 0 means success
+    */
+    return OK;
 }

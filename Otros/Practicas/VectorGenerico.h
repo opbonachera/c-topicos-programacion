@@ -16,7 +16,7 @@ typedef struct
     size_t ce;
     size_t cap;
     size_t tamElemento;
-    void**  vec;
+    void*  vec;
 }VectorGenerico;
 
 int inicializarVector(VectorGenerico* Vector);

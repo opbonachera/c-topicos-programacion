@@ -1,10 +1,20 @@
 # depslib dependency file v1.0
-1726771383 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\main.c
+1726840641 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\main.c
 	<stdio.h>
 	<stdlib.h>
+	"Matrices.h"
+
+1726834498 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\vectorgenerico.h
+	<stdio.h>
+	<stdlib.h>
+
+1726836836 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\vectorgenerico.c
 	"VectorGenerico.h"
 
-1726770254 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\vectorgenerico.h
+1726840504 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\matrices.c
+	"Matrices.h"
+
+1726841066 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\matrices.h
 	<stdio.h>
 	<stdlib.h>
 
