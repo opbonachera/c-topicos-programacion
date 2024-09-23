@@ -9,7 +9,6 @@ char* normalizar(const char* cadNormalizar, char* cadNormalizada)
     secPalCrear(&secEscritura, cadNormalizada);
 
     secPalLeer(&secLectura, &palabra);
-
     while(!secPalLeer(&secLectura, &palabra))
     {
         palabraATitulo(&palabra);
