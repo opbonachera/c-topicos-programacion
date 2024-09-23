@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1727113385 source:c:\users\obonachera\documents\universidad\topicos-programacion\temas\practicastrings\strngs.c
+	"strings.h"
+
+1727116998 c:\users\obonachera\documents\universidad\topicos-programacion\temas\practicastrings\strings.h
+	<strings.h>
+	<stdio.h>
+	<stdbool.h>
+
+1727116427 source:c:\users\obonachera\documents\universidad\topicos-programacion\temas\practicastrings\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"strings.h"
+
+1727116537 source:c:\users\obonachera\documents\universidad\topicos-programacion\temas\practicastrings\strings.c
+	"strings.h"
+
