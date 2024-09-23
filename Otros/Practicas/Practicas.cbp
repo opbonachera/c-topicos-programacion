@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Matrices.h" />
+		<Unit filename="Ordenamiento.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Ordenamiento.h" />
 		<Unit filename="VectorGenerico.c">
 			<Option compilerVar="CC" />
 		</Unit>

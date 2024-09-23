@@ -104,6 +104,7 @@ int insertarEnteroOrdenado(VectorGenerico* vector, int* elemento)
     vector->vec[posIns] = *elemento;
     vector->ce++;
 
+    printf("Se aniadio el elemento %d \n", *elemento);
     return OK;
 }
 

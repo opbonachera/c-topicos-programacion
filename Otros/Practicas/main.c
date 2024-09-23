@@ -16,6 +16,6 @@ int main()
 
     imprimirVectorEnteros(&vector);
     insertarEnteroOrdenado(&vector, &elemento);
-    ordenarVectorEnterosBurbujeo(&vector);
+    ordenarVectorEnterosInsercion(&vector);
     imprimirVectorEnteros(&vector);
 }
