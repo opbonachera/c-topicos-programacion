@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1724724916 source:d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\palabra\cadena.c
+	"Palabra.h"
+
+1724722353 d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\palabra\palabra.h
+	<stdbool.h>
+
+1724724977 source:d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\palabra\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	"Cadena.h"
+
+1724724716 d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\palabra\cadena.h
+
+1724722467 source:d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\palabra\palabra.c
+	"Palabra.h"
+

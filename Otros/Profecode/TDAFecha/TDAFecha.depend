@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1723504525 source:d:\unlam\2024\2\proyectos\tdafecha\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1723509178 source:d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\tdafecha\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
