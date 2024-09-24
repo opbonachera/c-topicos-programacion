@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1727200852 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ejercicios.h"
+
+1727200956 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.c
+	"ejercicios.h"
+
+1727200724 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.h
+	<stddef.h>
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
