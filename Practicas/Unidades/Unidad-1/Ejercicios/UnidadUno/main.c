@@ -1,25 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ejercicios.h"
+#include "vector.h"
+#include "string.h"
 
 int main()
 {
+    char* palabrita = "Hola";
 
-    VectorGenerico vInt;
+
+    contarApariciones("Hola soy so ornella soy soy soy", "Soy");
+    return 0;
+}
+
+void bibliotecaVector()
+{
+    /*VectorGenerico vInt;
     size_t tamElem = sizeof(int);
-
+    int e = 6;
 
     vectorCrear(&vInt, tamElem);
-    vectorCargar(&vInt, 5);
+    vectorCargarRandom(&vInt, 5);
+
+    vectorMostrar(&vInt, printInt);
+    vectorInsertarElementoEnPos(&vInt, &e, 2);
+
+    ordenarInsercion(&vInt, compararInt);
+    printf("\n");
 
     vectorMostrar(&vInt, printInt);
     printf("\n");
-    ordenarBurbujeo(&vInt, compararInt);
-
+    vectorEliminarTodasApariciones(&vInt, compararInt, &e);
     vectorMostrar(&vInt, printInt);
 
-    vectorDestruir(&vInt);
-
-    return 0;
+    vectorDestruir(&vInt);*/
 }

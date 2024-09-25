@@ -1,17 +1,33 @@
 # depslib dependency file v1.0
-1727200852 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\main.c
+1727289309 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\main.c
 	<stdio.h>
 	<stdlib.h>
+	"vector.h"
+	"string.h"
+
+1727281776 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.c
 	"ejercicios.h"
 
-1727200956 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.c
-	"ejercicios.h"
-
-1727200724 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.h
+1727282055 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.h
 	<stddef.h>
 	<stdbool.h>
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	<string.h>
+
+1727282055 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\vector.h
+	<stddef.h>
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
+1727289391 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\string.h
+	<string.h>
+	<stdbool.h>
+
+1727289292 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\string.c
+	"string.h"
 

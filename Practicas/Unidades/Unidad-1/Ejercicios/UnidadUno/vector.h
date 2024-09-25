@@ -19,6 +19,8 @@
 #define ERROR_RESERVA_MEMORIA 1
 #define ERROR_ELEMENTO_DUPLICADO 2
 #define ERROR_POSICION_INVALIDA 3
+#define ERROR_ELEMENTO_INEXISTENTE 4
+#define ERROR_VECTOR_VACIO 4
 
 // Estructuras
 typedef struct
@@ -30,7 +32,7 @@ typedef struct
 }VectorGenerico;
 // Funciones
 typedef void(*ImprimirElemento)(int pos, const void* elemento);
-typedef int(*CompararElemento)(int pos, const void* elemento);
+typedef int(*CompararElemento)(const void* e1, const void* e2);
 
 /*
     Para trabajar con cualquier tipo de dato es necesario contar con:
@@ -43,20 +45,27 @@ typedef int(*CompararElemento)(int pos, const void* elemento);
 int vectorCrear    (VectorGenerico* v, size_t tamElem);
 void vectorDestruir (VectorGenerico* v);
 void vectorVaciar   (VectorGenerico* v);
-void vectorCargar   (VectorGenerico* v, size_t ce);
+void vectorCargarRandom(VectorGenerico* v, size_t ce);
+void vectorCargarEnteros(VectorGenerico* v, size_t ce);
 void vectorMostrar  (VectorGenerico* v, ImprimirElemento printFunc);
 void vectorRedimensionar(VectorGenerico* v, size_t nuevaCap);
 void vectorImprimirDetalles(VectorGenerico* v);
 
 // _Insercion y eliminacion de elementos
 void vectorInsertarElementoFinal (VectorGenerico* v, const void* elemento);
-void vectorInsertarElementoEnPos(VectorGenerico* v, const void* elemento, int pos);
-void vectorEliminarElementoEnPos(VectorGenerico* v, int pos);
+int vectorInsertarElementoEnPos(VectorGenerico* v, const void* elemento, int pos);
+int  vectorInsertarElementoOrdenado(VectorGenerico* v, CompararElemento cmp, const void* elemento);
 int  vectorEliminarElementoFinal(VectorGenerico* v);
+void vectorEliminarElementoEnPos(VectorGenerico* v, int pos);
+int  vectorEliminarTodasApariciones(VectorGenerico* v, CompararElemento cmp, const void* elemento);
+int   vectorEliminarPrimeraAparicion(VectorGenerico* v, CompararElemento cmp, const void* elemento);
 
 // Ordenamiento
 void ordenarBurbujeo(VectorGenerico* v, CompararElemento cmp);
 void* buscarMenor(void* ini, void* fin, size_t tamElem, CompararElemento cmp);
+void ordenarSeleccion(VectorGenerico* v, CompararElemento cmp);
+void ordenarInsercion(VectorGenerico* v, CompararElemento cmp);
+
 //Utilidades genericas
 void intercambiar(void* a, void* b, size_t tamElem);
 
