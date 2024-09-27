@@ -1,14 +1,11 @@
 # depslib dependency file v1.0
-1727289309 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\main.c
+1727442488 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\vector\unidaduno\main.c
 	<stdio.h>
 	<stdlib.h>
 	"vector.h"
 	"string.h"
 
-1727281776 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.c
-	"ejercicios.h"
-
-1727282055 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\ejercicios.h
+1727282055 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\vector\unidaduno\vector.h
 	<stddef.h>
 	<stdbool.h>
 	<stdio.h>
@@ -16,7 +13,27 @@
 	<time.h>
 	<string.h>
 
-1727282055 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\vector.h
+1727442417 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\vector\unidaduno\string.h
+	<string.h>
+	<stdbool.h>
+
+1727442971 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\vector\unidaduno\string.c
+	"string.h"
+
+1727285806 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\vector\unidaduno\vector.c
+	"vector.h"
+
+1727442971 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\string.c
+	"string.h"
+
+1727442417 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\string.h
+	<string.h>
+	<stdbool.h>
+
+1727285806 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\vector.c
+	"vector.h"
+
+1727443276 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\vector.h
 	<stddef.h>
 	<stdbool.h>
 	<stdio.h>
@@ -24,10 +41,9 @@
 	<time.h>
 	<string.h>
 
-1727289391 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\string.h
-	<string.h>
-	<stdbool.h>
-
-1727289292 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\string.c
+1727443281 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidaduno\main.c
+	<stdio.h>
+	<stdlib.h>
+	"vector.h"
 	"string.h"
 

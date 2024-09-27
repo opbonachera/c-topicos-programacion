@@ -1,5 +1,8 @@
-#ifndef VECTOR_H_INCLUDED
-#define VECTOR_H_INCLUDED
+
+
+#ifndef EJERCICIOS_VECTOR_INCLUDED
+#define EJERCICIOS_VECTOR_INCLUDED
+
 
 
 #include <stddef.h>
@@ -79,4 +82,5 @@ int compararChar(const void* e1, const void* e2);
 int compararFloat(const void* e1, const void* e2);
 int compararInt(const void* e1, const void* e2);
 
-#endif // VECTOR_H_INCLUDED
+
+#endif // EJERCICIOS_VECTOR_INCLUDED

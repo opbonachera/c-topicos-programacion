@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="UnidadUno" />
+		<Option title="Unidad1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/UnidadUno" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/Unidad1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +16,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/UnidadUno" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/Unidad1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -31,25 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="UnidadUno.cbp" />
-		<Unit filename="UnidadUno.depend" />
-		<Unit filename="UnidadUno.layout" />
-		<Unit filename="ejercicios.c">
+		<Unit filename="ejercicios-strings.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="ejercicios.h" />
-		<Unit filename="genericos.h" />
+		<Unit filename="ejercicios-strings.h" />
+		<Unit filename="ejercicios-vector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ejercicois-vector.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="string.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="string.h" />
-		<Unit filename="vector.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="vector.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "vector.h"
-#include "string.h"
+#include "ejercicios-strings.h"
+#include "ejercicios-vector.h"
 
 int main()
 {
@@ -33,3 +33,4 @@ void bibliotecaVector()
 
     vectorDestruir(&vInt);*/
 }
+

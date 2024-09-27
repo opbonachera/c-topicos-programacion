@@ -1,4 +1,4 @@
-#include "string.h"
+#include "ejercicios-strings.h"
 
 // Ejercicio 1.6
 bool esPalindromo(char* s1, char* s2)
@@ -107,33 +107,27 @@ void normalizarCadena()
     secPalCerrar(&secEscr);
 
     printf("Cadena normalizada: %s\n", cadNormalizada);
-    return cadNormalizada;
 
 }
-
-void palabraATitulo(Palabra* pal)
-{
-    const char* palabra = pal->pal;
-
-    aMayuscula(*palabra);
-    palabra++;
-
-    while(*palabra!='\0')
-    {
-        aMinuscula(*palabra);
-        palabra++;
-    }
-}
-
+/*
+void secPalCrear(SecPal* sec, const char* cad);
+bool secPalLeer(SecPal* sec, Palabra* pal);
+void secPalEscribir(SecPal* sec, const Palabra* pal);
+void secPalEscribirCar(SecPal* sec, const char c);
+bool secPalFin(SecPal* sec);
+void secPalCerrar(SecPal* sec);
+void palabraATitulo(Palabra* pal);
+void normalizarCadena();
+*/
 void secPalCrear(SecPal* sec, const char* cad)
 {
-    sec->cursor = (char*)cad;
+    sec->cursor = (char*)cad; // No olvidar parsear el puntero
     sec->finSec = false;
 }
 
 void secPalCerrar(SecPal* sec)
 {
-    sec->cursor = '\0';
+    *sec->cursor = '\0';
 }
 
 bool secPalFin(SecPal* sec)
@@ -143,46 +137,62 @@ bool secPalFin(SecPal* sec)
 
 bool secPalLeer(SecPal* sec, Palabra* pal)
 {
-    if(!*sec->cursor && !esLetra(*sec->cursor))
+    // Salteamos los caracteres que no son de tipo alfanumerico
+    if( *sec->cursor && !esLetra(*sec->cursor))
     {
         sec->cursor++;
     }
 
-    if(!(*sec->cursor))
+    // Devolvemos falso si no se encuentran mas caracteres
+    if(!*sec->cursor)
     {
-        sec->finSec = true;
+        sec->finSec=true;
         return false;
     }
 
-    char* palEncontrada = pal->pal;
-    if(*sec->cursor != '\0' && esLetra(*sec->cursor))
+    // Leemos en la secuencia de palabras los caracteres que no son retorno de carro y son alfanumericos
+    char* palabraEncontrada = pal->vPal;
+    while(*sec->cursor && esLetra(*sec->cursor))
     {
-        *palEncontrada = *sec->cursor;
-
-        palEncontrada++;
+        *palabraEncontrada = *sec->cursor;
+        palabraEncontrada++;
         sec->cursor++;
     }
+    // Terminamos la palabra encontrada
+    *palabraEncontrada = '\0';
 
-    *palEncontrada = '\0';
+    // Devolvemos true cuando terminamos de leer una palabra
     return true;
 }
 
-void secPalEscribir(SecPal* sec, Palabra* pal)
+void palabraATitulo(Palabra* pal)
 {
-    // Colocar el cursor de la secuencia con el puntero de la palabra a la misma altura
-    // Copiar los caracteres de la estructura palabra a la secuencia
-    // Caso borde: la palabra llego a su fin '\0'
-    const char* palEncontrada = pal->pal;
-    while(*pal->pal != '\0')
+    char* palabraEncontrada = pal->vPal;
+
+    *palabraEncontrada = aMayuscula(*palabraEncontrada);
+    palabraEncontrada ++;
+
+    while(*palabraEncontrada !='\0')
     {
-        *sec->cursor = *palEncontrada;
-        sec->cursor++;
-        palEncontrada++;
+        *palabraEncontrada = aMinuscula(*palabraEncontrada);
+        palabraEncontrada ++;
     }
 }
 
-void secPalEscribirCar(SecPal* sec, const char* c)
+void secPalEscribirCar(SecPal* sec, char c)
 {
     *sec->cursor = c;
     sec->cursor++;
 }
+
+void secPalEscribir(SecPal* sec, const Palabra* pal)
+{
+    const char* actPal = pal->vPal;
+    while(*actPal)
+    {
+        *sec->cursor = *actPal;
+        sec->cursor++;
+        actPal++;
+    }
+}
+

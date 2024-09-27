@@ -1,8 +1,9 @@
-#ifndef STRING_H_INCLUDED
-#define STRING_H_INCLUDED
+#ifndef EJERCICIOS_STRINGS_INCLUDED
+#define EJERCICIOS_STRINGS_INCLUDED
 
 #include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #define TAM_PAL 30
 
@@ -16,7 +17,7 @@ SecPal;
 
 typedef struct
 {
-    char pal[TAM_PAL];
+    char vPal[TAM_PAL];
 }
 Palabra;
 
@@ -30,11 +31,10 @@ int  contarApariciones(char* texto, char* palabra);
 
 void secPalCrear(SecPal* sec, const char* cad);
 bool secPalLeer(SecPal* sec, Palabra* pal);
-void secPalEscribir(SecPal* sec, Palabra* pal);
-void secPalEscribirCar(SecPal* sec, const char* c);
+void secPalEscribir(SecPal* sec, const Palabra* pal);
+void secPalEscribirCar(SecPal* sec, char c);
 bool secPalFin(SecPal* sec);
 void secPalCerrar(SecPal* sec);
 void palabraATitulo(Palabra* pal);
-void normalizarCadena();
 
-#endif // STRING_H_INCLUDED
+#endif // EJERCICIOS_STRINGS_INCLUDED
