@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1728347863 source:d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\archivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"../Vector/Vector.h"
+
+1727821848 d:\unlam\programacion\cursadas\2024\2\01-1900\proyectos\vector\vector.h
+	<stddef.h>
+	<stdbool.h>
+

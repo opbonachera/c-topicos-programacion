@@ -142,7 +142,7 @@ int vectorOrdBuscar(const Vector* v, void* elem, Cmp cmp)
         return -1;
     }
 
-    
+    memcpy(elem, posAct, v)
 }
 
 
