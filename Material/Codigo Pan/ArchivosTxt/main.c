@@ -2,10 +2,17 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "../Vector/Vector.h"
+#include "../TDAFecha/Fecha.h"
 
 #define CANT_PRODS 5
 #define CANT_MOVS 8
 #define TAM_DESCR 15
+#define TAM_APYN 30
+#define TAM_LINEA 500
+
+#define ERR_ARCHIVO 1
+#define ERR_MEMORIA 2
+#define ERR_LINEA_LARGA 3
 
 
 typedef struct
@@ -34,6 +41,21 @@ typedef struct
 Movimiento;
 
 
+typedef struct
+{
+    int dni;
+    char apyn[TAM_APYN + 1];
+    char sexo;
+    Fecha fIngr;
+    float sueldo;
+}
+Empleado;
+
+
+typedef void (*BinATxt)(const void* reg, FILE* archTxt);
+typedef void (*TxtABin)(char* linea, void* reg);
+
+
 bool generarArchivoProductos(const char* nomArch);
 bool generarArchivoMovimientos(const char* nomArch);
 bool generarIndice(const char* nomArch, const char* nomIdx);
@@ -43,19 +65,26 @@ int cmpIndProd(const void* e1, const void* e2);
 bool actualizarPrecio1Producto(const char* nomArch, const char* nomIdx, int codigo, float porc);
 bool actualizarStockProductos(const char* nomArchProds, const char* nomArchMovs);
 void procesarProductoNuevo();
+bool generarArchivoEmpleadosBin(const char* nomArch);
+void mostrarArchivoEmpleadosBin(const char* nomArch);
+int archivoBinATxt(const char* nomArchBin, const char* nomArchTxt, size_t tamReg, BinATxt BinATxt);
+void empleadoBinATxtVar(const void* reg, FILE* archTxt);
+void empleadoBinATxtFijo(const void* reg, FILE* archTxt);
+void empleadoTxtVarABin(char* linea, void* reg);
+void empleadoTxtFijoABin(char* linea, void* reg);
 
 
 int main()
 {
-    if(!generarArchivoProductos("Productos.dat"))
-    {
-        puts("Error generando el archivo");
-        return 1;
-    }
+    // if(!generarArchivoProductos("Productos.dat"))
+    // {
+    //     puts("Error generando el archivo");
+    //     return 1;
+    // }
 
-    // generarIndice("Productos.dat", "Productos.idx");
+    // // generarIndice("Productos.dat", "Productos.idx");
 
-    mostrarArchivo("Productos.dat");
+    // mostrarArchivo("Productos.dat");
 
     // bool actualizo = actualizarPrecioProductos("Productos.dat", 10);
 
@@ -73,12 +102,28 @@ int main()
     // puts("Despues de actualizar 1 prod:");
     // mostrarArchivo("Productos.dat");
 
-    generarArchivoMovimientos("Movimientos.dat");
+    // generarArchivoMovimientos("Movimientos.dat");
 
-    actualizarStockProductos("Productos.dat", "Movimientos.dat");
+    // actualizarStockProductos("Productos.dat", "Movimientos.dat");
 
-    puts("Despues de actualizar stock:");
-    mostrarArchivo("Productos.dat");
+    // puts("Despues de actualizar stock:");
+    // mostrarArchivo("Productos.dat");
+
+
+    // generarArchivoEmpleadosBin("Empleados.dat");
+    // mostrarArchivoEmpleadosBin("Empleados.dat");
+
+    archivoBinATxt("Empleados.dat", "EmpleadosVar.txt", sizeof(Empleado), empleadoBinATxtVar);
+    archivoBinATxt("Empleados.dat", "EmpleadosFijo.txt", sizeof(Empleado), empleadoBinATxtFijo);
+
+    archivoTxtABin("EmpleadosVar.txt", "Empleados.dat", empleadoTxtVarABin);
+    puts("Bin desde Txt Var:")
+    mostrarArchivoEmpleadosBin("Empleados.dat");
+
+    archivoTxtABin("EmpleadosFijo.txt", "Empleados.dat", empleadoTxtFijoABin);
+    puts("Bin desde Txt Fijo:")
+    mostrarArchivoEmpleadosBin("Empleados.dat");
+
 
     return 0;
 }
@@ -304,7 +349,7 @@ bool actualizarStockProductos(const char* nomArchProds, const char* nomArchMovs)
 
     fread(&prod, sizeof(Producto), 1, archProd);
     fread(&mov, sizeof(Movimiento), 1, archMov);
-    
+
     while(!feof(archProd) && !feof(archMov))
     {
         comp = prod.codigo - mov.codigo;
@@ -357,7 +402,7 @@ bool actualizarStockProductos(const char* nomArchProds, const char* nomArchMovs)
 void procesarProductoNuevo(Movimiento* mov, FILE* archMov, FILE* archProdTmp)
 {
     Producto prodNuevo;
-    
+
     prodNuevo.descripcion[0] = '\0';
     prodNuevo.preUni = 0;
     prodNuevo.codigo = mov->codigo;
@@ -372,3 +417,173 @@ void procesarProductoNuevo(Movimiento* mov, FILE* archMov, FILE* archProdTmp)
 
     fwrite(&prodNuevo, sizeof(Producto), 1, archProdTmp);
 }
+
+
+bool generarArchivoEmpleadosBin(const char* nomArch)
+{
+    Empleado vEmps[] =
+    {
+        {12345678, "Juan Perez", 'M', {1, 1, 2000}, 300000},
+        {23456789, "Ana Lopez", 'F', {2, 2, 2001}, 350000},
+        {34567890, "Pedro Gomez", 'M', {3, 3, 2002}, 400000},
+        {45678901, "Maria Rodriguez", 'F', {4, 4, 2003}, 450000},
+        {56789012, "Carlos Sanchez", 'M', {5, 5, 2004}, 500000}
+    };
+
+    FILE* archEmps = fopen(nomArch, "wb");
+
+    if(!archEmps)
+    {
+        return false;
+    }
+
+    fwrite(vEmps, sizeof(Empleado), 5, archEmps);
+
+    fclose(archEmps);
+
+    return true;
+}
+
+
+void mostrarArchivoEmpleadosBin(const char* nomArch)
+{
+    FILE* archEmps = fopen(nomArch, "rb");
+
+    if(!archEmps)
+    {
+        return;
+    }
+
+    Empleado emp;
+
+    fread(&emp, sizeof(Empleado), 1, archEmps);
+    while(!feof(archEmps))
+    {
+        printf("%8d, %-*s, %c, %02d/%02d/%04d, %09.2f\n", emp.dni, TAM_APYN, emp.apyn, emp.sexo, emp.fIngr.dia, emp.fIngr.mes, emp.fIngr.anio, emp.sueldo);
+        fread(&emp, sizeof(Empleado), 1, archEmps);
+    }
+
+    fclose(archEmps);
+}
+
+
+int archivoBinATxt(const char* nomArchBin, const char* nomArchTxt, size_t tamReg, BinATxt binATxt)
+{
+    FILE* archBin = fopen(nomArchBin, "rb");
+
+    if(!archBin)
+    {
+        return ERR_ARCHIVO;
+    }
+
+    FILE* archTxt = fopen(nomArchTxt, "wt");
+
+    if(!archTxt)
+    {
+        fclose(archBin);
+        return ERR_ARCHIVO;
+    }
+
+    void* reg = malloc(tamReg);
+
+    if(!reg)
+    {
+        fclose(archBin);
+        fclose(archTxt);
+        return ERR_MEMORIA;
+    }
+
+    fread(reg, tamReg, 1, archBin);
+    while(!feof(archBin))
+    {
+        binATxt(reg, archTxt);
+        fread(reg, tamReg, 1, archBin);
+    }
+
+    free(reg);
+
+    fclose(archBin);
+    fclose(archTxt);
+
+    return TODO_OK;
+}
+
+
+void empleadoBinATxtVar(const void* reg, FILE* archTxt)
+{
+    const Empleado* empl = reg;
+    fprintf(archTxt, "%d|%s|%c|%d/%d/%d|%.2f\n", empl->dni, empl->apyn, empl->sexo, empl->fIngr.dia, empl->fIngr.mes, empl->fIngr.anio, empl->sueldo);
+}
+
+
+void empleadoBinATxtFijo(const void* reg, FILE* archTxt)
+{
+    const Empleado* empl = reg;
+    fprintf(archTxt, "%08d%-*s%c%02d%02d%4d%09.2f\n", empl->dni, TAM_APYN, empl->apyn, empl->sexo, empl->fIngr.dia, empl->fIngr.mes, empl->fIngr.anio, empl->sueldo);
+}
+
+
+int archivoTxtABin(const char* nomArchTxt, const char* nomArchBin, size_t tamReg, TxtABin txtABin)
+{
+    FILE* archTxt = fopen(nomArchTxt, "rt");
+
+    if(!archTxt)
+    {
+        return ERR_ARCHIVO;
+    }
+
+    FILE* archBin = fopen(nomArchBin, "wb");
+
+    if(!archBin)
+    {
+        fclose(archTxt);
+        return ERR_ARCHIVO;
+    }
+
+    void* reg = malloc(tamReg);
+
+    if(!reg)
+    {
+        fclose(archBin);
+        fclose(archTxt);
+        return ERR_MEMORIA;
+    }
+
+    char linea[TAM_LINEA];
+
+    fgets(linea, TAM_LINEA, archTxt);
+    while(!feof(archTxt))
+    {
+        txtABin(linea, reg);
+        fwrite(reg, tamReg, 1, archBin);
+        fgets(linea, TAM_LINEA, archTxt);
+    }
+
+    fclose(archBin);
+    fclose(archTxt);
+    free(reg);
+
+    return TODO_OK;
+}
+
+
+int empleadoTxtVarABin(char* linea, void* reg)
+{
+    Empleado* empl = reg;
+
+    char* act = strchr(linea, '\n');
+
+    if(!act)
+    {
+        return ERR_LINEA_LARGA;
+    }
+
+    *act = '\0';
+    act = strrchr(linea, '|');
+    sscanf(act + 1, "%f", &empl->sueldo);
+
+    
+}
+
+
+void empleadoTxtFijoABin(char* linea, void* reg);

@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.embeddedhtml": "html",
-        "palabra.h": "c"
+        "palabra.h": "c",
+        "vector.h": "c"
     }
 }
