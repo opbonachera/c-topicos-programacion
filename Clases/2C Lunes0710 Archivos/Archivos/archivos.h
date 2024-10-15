@@ -8,6 +8,7 @@
 #define OK true
 #define ERROR_GENERACION_ARCHIVO 1
 #define ERROR_LECTURA_ARCHIVO 2
+#define ERROR_APERTURA_ARCHIVO 3
 
 #define CANT_MOVIMIENTOS 8
 #define CANT_PRODUCTOS   5
@@ -46,6 +47,7 @@ bool generarArchivoProductos(char* nombreArchivo);
 bool generarIndice(char* nombreArchivo, char* nombreArchivoIndice, GenerarIndice generarIndice);
 bool leerArchivo(char* nombreArchivo, Imprimir imprimir);
 bool actualizarArchivoProductos(char* nombreArchivoProductos, char* nombreArchivoMovimientos);
+
 
 void procesarProductoNuevo(Movimiento* movimiento, FILE* archivoMovimientos, FILE* archivoTemporal);
 void imprimirProducto(FILE* archivo);

@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Vector.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Vector.h" />
 		<Unit filename="archivos.c">
 			<Option compilerVar="CC" />
 		</Unit>
