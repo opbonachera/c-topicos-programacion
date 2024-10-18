@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1729260992 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\matriz\matriz\main.c
+	"matriz.h"
+
+1729260977 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\matriz\matriz\matriz.h
+
+1729260993 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\matriz\matriz\matriz.c
+	"matriz.h"
+
+1729275363 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\matriz\main.c
+	"matriz.h"
+	<stdlib.h>
+	<stdio.h>
+
+1729275504 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\matriz\matriz.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+
+1729275293 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\matriz\matriz.c
+	"matriz.h"
+

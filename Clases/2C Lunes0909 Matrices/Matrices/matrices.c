@@ -31,7 +31,7 @@ int  sumaDiagonalPrincipal(int mat[][ORDEN], size_t filas)
     return suma;
 }
 
-int sumaDiagonalSecundaria(int mat[][ORDEN], size_t filas)
+int sumaDiagonal(int mat[][ORDEN], size_t filas)
 {
     int suma=0;
     for(int i=0, j=ORDEN-1; i++ ; j--)

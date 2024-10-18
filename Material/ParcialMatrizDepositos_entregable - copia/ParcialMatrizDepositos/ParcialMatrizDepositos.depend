@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1720485545 source:c:\users\laboratorios\desktop\parcial_panasiuk\parcialmatrizdepositos_entregable\parcialmatrizdepositos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../Matriz/Matriz.h"
+	"../Vector/Vector.h"
+	"../SolucionMatrizDepositos/SolucionMatrizDepositos.h"
+
+1720459290 c:\users\laboratorios\desktop\parcial_panasiuk\parcialmatrizdepositos_entregable\matriz\matriz.h
+	<stddef.h>
+
+1720459290 c:\users\laboratorios\desktop\parcial_panasiuk\parcialmatrizdepositos_entregable\vector\vector.h
+	<stddef.h>
+	<stdbool.h>
+	"../Comun/Comun.h"
+
+1720459290 c:\users\laboratorios\desktop\parcial_panasiuk\parcialmatrizdepositos_entregable\comun\comun.h
+
+1720459290 c:\users\laboratorios\desktop\parcial_panasiuk\parcialmatrizdepositos_entregable\solucionmatrizdepositos\solucionmatrizdepositos.h
+
