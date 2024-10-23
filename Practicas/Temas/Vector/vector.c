@@ -157,3 +157,78 @@ int insertarElementoEnPosicion(Vector* vector, Comparar cmp, void* elemento, int
     return OK;
 }
 
+void ordenarVectorBurbujeo(Vector* vector, Cmp cmp)
+{
+    void* ult = vector->v + (vector->ce - 1) * vector->tamElem;
+    void* limJ = ult - vector->tamElem;
+
+    for(int i=0; i<vector->ce; i++, limJ -= vector->tamElem)
+    {
+        for(void* j = vector->v; j <= limJ; j+= vector->tamElem)
+        {
+            if(cmp(j, j + vector->tamElem) > 0)
+            {
+                intercambiar(j, j + vector->tamElem, vector->tamElem);
+            }
+        }
+    }
+}
+
+void ordenarVectorInsercion(Vector* vector, Cmp cmp)
+{
+    void* ult = vector->v + (vector->ce - 1) * vector->tamElem;
+    void* elemAIns = malloc(vector->tamElem);
+    void* j;
+
+    for(void* i=vector->v; i <= ult; i+=vector->tamElem)
+    {
+        memcpy(i, elemAIns, vector->tamElem);
+        j = i - vector->tamElem;
+    }
+
+    while(j >= vector->v && cmp(elemAIns, j) < 0)
+    {
+        memcpy(j + vector->tamElem, j, vector->tamElem);
+        j -= vector->tamElem;
+    }
+
+    memcpy(j+ vector->tamElem, elemAIns, vector->tamElem);
+}
+
+void ordenarVectorSeleccion(Vector* vector, Cmp cmp)
+{
+    void* ult = vector->v + (vector->ce - 1) * vector->tamElem;
+    void* m;
+
+    for(void* i = vector->v; i<= ult; i+=vector->tamElem)
+    {
+        m = buscarMenor(i, ult, vector->tamElem, cmp);
+        intercambiar(vector->v, m, vector->tamElem);    
+    }
+}
+
+void* buscarMenor(void* ini, void* fin, size_t tamElem, Cmp cmp)
+{
+    void* m = ini;
+
+    for(void* j = ini + tamElem; j <= fin; j += tamElem)
+    {
+        if(cmp(j, m) < 0)
+        {
+            m = j;
+        }
+    }
+
+    return m;
+}
+
+void intercambiar(void* a, void* b, size_t tamElem)
+{
+    void* temp = malloc(tamElem);
+
+    memcpy(temp, a, tamElem); // temp = *a;
+    memcpy(a, b, tamElem); // *a = *b;
+    memcpy(b, temp, tamElem); // *b = temp;
+    
+    free(temp);
+}
