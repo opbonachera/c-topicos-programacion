@@ -427,6 +427,87 @@ void comodin(char* nombreImgEntrada, char* nombreImgSalida)
     return OK;
 }
 
+void modificarContraste(char* nombreImgEntrada, char* nombreImgSalida)
+{
+    FILE* imgEntrada = fopen(nombreImgEntrada, "rb");
+    FILE* imgSalida = fopen(nombreImgSalida, "wb");
+
+    float factor = 0.25;
+
+    if(!imgEntrada)
+    {
+        printf("Ocurrio un error al abrir la imagen de entrada.\n");
+        fclose(imgSalida);
+    }
+
+    if(!imgSalida)
+    {
+        printf("Ocurrio un error al abrir la imagen de salida.\n");
+        fclose(imgSalida);
+    }
+
+    Metadata cabeceraEntrada;
+
+    leerCabecera(imgEntrada, &cabeceraEntrada);
+    escribirCabecera(imgEntrada, imgSalida, &cabeceraEntrada);
+
+    Pixel** matrizEntrada = (Pixel**)crearMatriz(cabeceraEntrada.alto, cabeceraEntrada.ancho, sizeof(Pixel));
+    Pixel** matrizSalida = (Pixel**)crearMatriz(cabeceraEntrada.alto, cabeceraEntrada.ancho, sizeof(Pixel));
+
+    fseek(imgEntrada, cabeceraEntrada.comienzoImagen, SEEK_SET);
+    cargarImagen(imgEntrada, matrizEntrada, cabeceraEntrada.alto, cabeceraEntrada.ancho);
+
+    unsigned char min, max;
+    calcularMinMax(matrizEntrada, &min, &max, cabeceraEntrada.alto, cabeceraEntrada.ancho);
+
+    float contraste_actual = (max - min) / (float)(255);
+    float nuevo_contraste = contraste_actual * .9;
+
+    fseek(imgSalida, cabeceraEntrada.comienzoImagen, SEEK_SET);
+    fseek(imgEntrada, cabeceraEntrada.comienzoImagen, SEEK_SET);
+
+    for(int i=0; i<cabeceraEntrada.alto; i++)
+    {
+        for(int j=0; j<cabeceraEntrada.ancho; j++)
+        {
+            for(int k=0; k<3; k++)
+            {
+                unsigned char nuevo_valor = ((matrizEntrada[i][j].px[k] - min) * nuevo_contraste) / contraste_actual + min;
+                matrizSalida[i][j].px[k] = (unsigned char)MAX(0, MIN(255, nuevo_valor));
+            }
+        }
+    }
+
+    escribirImagen(imgSalida, matrizSalida, cabeceraEntrada.alto, cabeceraEntrada.ancho);
+
+    destruirMatriz((void**)matrizEntrada, cabeceraEntrada.alto);
+
+    fclose(imgEntrada);
+    fclose(imgSalida);
+
+    return OK;
+}
+
+void calcularMinMax(Pixel** matrizImagen, unsigned char* min, unsigned char* max, int filas, int columnas)
+{
+    unsigned char mn = 255, mx = 0;
+
+    for(int i=0; i<filas; i++)
+    {
+        for(int j=0; j<columnas; j++)
+        {
+            for (int k = 0; k < 3; k++)
+                {
+                    if (matrizImagen[i][j].px[k] < mn)
+                        mn = MIN(matrizImagen[i][j].px[k], mn);
+                    if (matrizImagen[i][j].px[k] > mx)
+                        mx = MAX(matrizImagen[i][j].px[k], mx);
+                }
+        }
+    }
+    *min = mn, *max = mx;
+}
+
 void rotarImagenIzquierda(char* nombreImgEntrada, char* nombreImgSalida)
 {
     FILE* imgEntrada = fopen(nombreImgEntrada, "rb");

@@ -59,5 +59,7 @@ int main()
         printf("\n");
     }
 
+    modificarContraste("unlam.bmp", "contraste.bmp");
+
     return 0;
 }
