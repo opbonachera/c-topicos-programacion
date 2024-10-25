@@ -1,73 +1,5 @@
 #include "archivos.h"
 
-int archivoTxtABin(const char* nomArchTxt, const char* nomArchBin, size_t tamReg, TxtABin txtABin)
-{
-    FILE* archivoTxt = fopen(nomArchTxt, "rb");
-    if(!archivoTxt)
-    {
-        return ERROR_APERTURA_ARCHIVO;
-    }
-
-    FILE* archivoBin = fopen(nomArchBin, "wb");
-    if(!archivoBin)
-    {
-        return ERROR_APERTURA_ARCHIVO;
-    }
-
-    void* reg = malloc(tamReg);
-    char linea[TAM_LINEA];
-    int ret = OK;
-
-    fgets(linea, TAM_LINEA, archivoTxt);
-    while(!feof(archivoTxt) && !esErrorFatal(ret))
-    {
-        ret = txtABin(linea, reg);
-
-        if(ret == OK)
-        {
-            fwrite(reg, tamReg, 1, archivoBin);
-        }
-        fgets(linea, TAM_LINEA, archivoTxt);
-    }
-
-    free(reg);
-
-    fclose(archivoTxt);
-    fclose(archivoBin);
-
-    return OK;
-}
-
-int archivoBinATxt(const char* nomArchBin, const char* nomArchTxt, size_t tamReg, BinATxt BinATxt)
-{
-    FILE* archivoBin = fopen(nomArchBin, "rb");
-    if(!archivoBin)
-    {
-        return ERROR_APERTURA_ARCHIVO;
-    }
-
-    FILE* archivoTxt = fopen(nomArchTxt, "wb");
-    if(!archivoTxt)
-    {
-        fclose(archivoBin);
-        return ERROR_APERTURA_ARCHIVO;
-    }
-
-    void* reg = malloc(tamReg);
-
-    fread(reg, tamReg, 1, archivoBin);
-    while(!feof(archivoBin))
-    {
-        BinATxt(reg, archivoTxt);
-        fread(reg, tamReg, 1, archivoBin);
-    }
-
-    free(reg);
-    fclose(archivoBin);
-    fclose(archivoTxt);
-
-    return OK;
-}
 
 bool generarArchivoEmpleadosBin(const char* nomArch)
 {
@@ -114,89 +46,154 @@ void mostrarArchivoEmpleadosBin(const char* nomArch)
     fclose(archEmps);
 }
 
-
-int empleadoTxtFijoABin(char* linea, void* reg)
+bool esErrorFatal(int ret)
 {
-    Empleado* e = reg;
-    char* act = strchr(linea, '\n');
+    return (ret == ERROR_LINEA_LARGA) ? true : false;
+}
 
-    if(!act)
+int archivoBinATxt(const char* nomArchBin, const char* nomArchTxt, size_t tamReg, BinATxt binATxt)
+{
+    FILE* archivoBin = fopen(nomArchBin, "rb");
+
+    if(!archivoBin)
     {
-        return ERROR_LINEA_LARGA;
+        return ERROR_APERTURA_ARCHIVO;
     }
 
-    *act = '\0';
-    act-=9;
-    sscanf(act, "%f", &e->sueldo);
+    FILE* archivoTxt = fopen(nomArchTxt, "wb");
+    if(!archivoTxt)
+    {
+        fclose(archivoBin);
+        return ERROR_APERTURA_ARCHIVO;
+    }
 
-    *act = '\0';
-    act-=8;
-    sscanf(act, "%2d%2d%4d", &e->fIngr.dia, &e->fIngr.mes, &e->fIngr.anio);
+    void* reg = malloc(tamReg);
 
-    *act = '\0';
-    act--;
-    sscanf(act, "%c", &e->sexo);
+    fread(reg, tamReg, 1, archivoBin);
+    while(!feof(archivoBin))
+    {
+        binATxt(reg, archivoTxt);
+        fread(reg, tamReg, 1, archivoBin);
+    }
 
-    *act = '\0';
-    act -= TAM_APYN;
-    strcpy(e->apyn, act);
-
-    *act = '\0';
-    sscanf(linea, "%d", &e->dni);
+    fclose(archivoBin);
+    fclose(archivoTxt);
 
     return OK;
 }
 
-int empleadoTxtVarABin(char* linea, void* reg)
+int archivoTxtABin(const char* nomArchTxt, const char* nomArchBin, size_t tamReg, TxtABin txtABin)
 {
-    Empleado* empl = reg;
-
-    char* act = strchr(linea, '\n');
-
-    if(!act)
+    FILE* archivoBin = fopen(nomArchBin, "rb");
+    if(!archivoBin)
     {
-        return ERROR_LINEA_LARGA;
+        return ERROR_APERTURA_ARCHIVO;
     }
 
-    *act = '\0';
-    act = strrchr(linea, '|');
-    sscanf(act + 1, "%f", &empl->sueldo);
+    FILE* archivoTxt = fopen(nomArchTxt, "wb");
+    if(!archivoTxt)
+    {
+        fclose(archivoBin);
+        return ERROR_APERTURA_ARCHIVO;
+    }
 
-    *act = '\0';
-    act = strrchr(linea, '|');
-    sscanf(act + 1, "%d/%d/%d", &empl->fIngr.dia, &empl->fIngr.mes, &empl->fIngr.anio);
+    void* reg = malloc(tamReg);
+    int ret = OK;
+    char linea[TAM_LINEA];
 
-    *act = '\0';
-    act = strrchr(linea, '|');
-    empl->sexo = *(act + 1);
+    fgets(linea, TAM_LINEA, archivoTxt);
+    while(!feof(archivoTxt) && !esErrorFatal(ret))
+    {
+        ret = txtABin(linea, reg);
 
-    *act = '\0';
-    act = strrchr(linea, '|');
-    strcpy(empl->apyn, act + 1);
+        if(ret == OK)
+        {
+            fwrite(reg, tamReg, 1, archivoBin);
+        }
 
-    *act = '\0';
-    sscanf(linea, "%d", &empl->dni);
+        fgets(linea, TAM_LINEA, archivoTxt);
+    }
+
+    free(reg);
+
+    fclose(archivoTxt);
+    fclose(archivoBin);
 
     return OK;
 }
 
 void empleadoBinATxtVar(const void* reg, FILE* archTxt)
 {
-    const Empleado* empl = reg;
-    fprintf(archTxt, "%d|%s|%c|%d/%d/%d|%.2f\n", empl->dni, empl->apyn, empl->sexo, empl->fIngr.dia, empl->fIngr.mes, empl->fIngr.anio, empl->sueldo);
+    Empleado* empleado = reg;
+    fprintf(archTxt, "%d%2d%2d%4d%s%f", empleado->dni, empleado->fIngr.dia, empleado->fIngr.mes, empleado->fIngr.anio, empleado->apyn, empleado->sueldo);
 }
 
 void empleadoBinATxtFijo(const void* reg, FILE* archTxt)
 {
-     const Empleado* empl = reg;
-    fprintf(archTxt, "%08d%-*s%c%02d%02d%4d%09.2f\n", empl->dni, TAM_APYN, empl->apyn, empl->sexo, empl->fIngr.dia, empl->fIngr.mes, empl->fIngr.anio, empl->sueldo);
+    Empleado* empleado = reg;
+    fprintf(archTxt, "%d|%2d%2d%4d|%s|%f", empleado->dni, empleado->fIngr.dia, empleado->fIngr.mes, empleado->fIngr.anio, empleado->apyn, empleado->sueldo);
 }
 
-bool esErrorFatal(int ret)
+int empleadoTxtVarABin(char* linea, void* reg)
 {
-    if(ret == ERROR_LINEA_LARGA)
+    char* act = strchr(linea, '\n');
+    Empleado* empleado = reg;
+
+    if(!act)
     {
-        return true;
+        return ERROR_LINEA_LARGA;
     }
-    return false;
+
+    *act = '\0';
+    act = strrchr(linea, '|');
+    sscanf(act + 1, "%f", empleado->sueldo);
+
+    *act = '\0';
+    act = strrchr(linea, '|');
+    sscanf(act + 1, "%2d%2d%4d", empleado->fIngr.dia, empleado->fIngr.mes, empleado->fIngr.anio);
+
+    *act = '\0';
+    act = strrchr(linea, '|');
+    strcpy(empleado->sexo, act+1);
+
+    *act = '\0';
+    act =  strrchr(linea, '|');
+    strcpy(empleado->apyn, act+1);
+
+    *act = '\0';
+    act = strrchr(linea, '|');
+    sscanf(act + 1, "%d", empleado->dni);
+
+    return OK;
 }
+
+int empleadoTxtFijoABin(char* linea, void* reg)
+{
+    char* act = strchr(linea, '\n');
+    Empleado* empleado = reg;
+
+    if(!act)
+    {
+        return ERROR_LINEA_LARGA;
+    }
+
+    *act='\0';
+    act-=9;
+    sscanf(act, "%f", empleado->sueldo);
+
+    *act = '\0';
+    act-=8;
+    sscanf(act, "%2d%2d%4d", empleado->fIngr.dia, empleado->fIngr.mes, empleado->fIngr.anio);
+
+    *act = '\0';
+    act--;
+    empleado->sexo = *act;
+
+    *act = '\0';
+    act-=TAM_APYN;
+    strcpy(empleado->apyn, act);
+
+    sscanf(linea, "%d", empleado->dni);
+    return OK;
+}
+

@@ -12,17 +12,15 @@ int main()
     // }
 
     generarArchivoEmpleadosBin("Empleados.dat");
+    mostrarArchivoEmpleadosBin("Empleados.dat");
 
-    archivoBinATxt("Empleados.dat", "EmpleadosVar.txt", sizeof(Empleado), empleadoBinATxtVar);
     archivoBinATxt("Empleados.dat", "EmpleadosFijo.txt", sizeof(Empleado), empleadoBinATxtFijo);
+    archivoBinATxt("Empleados.dat", "EmpleadosVari.txt", sizeof(Empleado), empleadoBinATxtVar);
 
-    archivoTxtABin("EmpleadosVar.txt", "Empleados.dat", sizeof(Empleado), empleadoTxtVarABin);
-    puts("Bin desde Txt Var:");
-    mostrarArchivoEmpleadosBin("Empleados.dat");
+    archivoTxtABin("EmpleadosFijo.txt", "EmpleadosFijo.dat", sizeof(Empleado), empleadoTxtFijoABin);
+    archivoTxtABin("EmpleadosVari.txt", "EmpleadosVari.dat", sizeof(Empleado), empleadoTxtVarABin);
 
-    archivoTxtABin("EmpleadosFijo.txt", "Empleados.dat", sizeof(Empleado), empleadoTxtFijoABin);
-    puts("Bin desde Txt Fijo:");
-    mostrarArchivoEmpleadosBin("Empleados.dat");
+    mostrarArchivoEmpleadosBin("EmpleadosFijo.txt");
 
     return 0;
 }

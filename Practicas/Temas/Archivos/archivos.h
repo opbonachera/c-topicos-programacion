@@ -47,9 +47,6 @@ void empleadoBinATxtFijo(const void* reg, FILE* archTxt);
 int empleadoTxtVarABin(char* linea, void* reg);
 int empleadoTxtFijoABin(char* linea, void* reg);
 
-
-
-
 bool esErrorFatal(int ret);
 
 #endif

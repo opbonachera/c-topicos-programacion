@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1729793535 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\archivos\main.c
+1729871406 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\archivos\main.c
 	<stdlib.h>
 	<stdio.h>
 	"archivos.h"
 
-1729791703 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\archivos\archivos.h
+1729869171 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\archivos\archivos.h
 	<stdlib.h>
 	<stdio.h>
 	<stdbool.h>
 	<string.h>
 
-1729793592 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\archivos\archivos.c
+1729871464 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\archivos\archivos.c
 	"archivos.h"
 
