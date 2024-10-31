@@ -39,7 +39,13 @@
 		</Compiler>
 		<Unit filename="../Comun/Comun.h" />
 		<Unit filename="../Matriz/Matriz.h" />
+		<Unit filename="../SolucionMatrizDepositos/SoluciionMatrizDepositos.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../SolucionMatrizDepositos/SolucionMatrizDepositos.h" />
+		<Unit filename="../Vector/Vector.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../Vector/Vector.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
