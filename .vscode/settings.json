@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "matriz.h": "c",
+        "archivos.h": "c",
+        "vector.h": "c"
+    }
+}
