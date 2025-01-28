@@ -1,0 +1,95 @@
+Ejercicio 1.1
+Desarrollar una función que inserte un elemento en un arreglo de enteros, dada la posición de
+inserción.
+Ejercicio 1.2
+Desarrollar una función que inserte un elemento en un arreglo de enteros, ordenado en forma
+ascendente, de forma de no alterar el orden.
+Ejercicio 1.3
+Desarrollar una función que elimine el elemento que ocupa una determinada posición de un arreglo
+de enteros.
+Ejercicio 1.4
+Desarrollar una función que elimine la primera aparición de un elemento determinado de un arreglo
+de enteros.
+Ejercicio 1.5
+Desarrollar una función que elimine todas las apariciones de un determinado elemento de un arreglo
+de enteros.
+Ejercicio 1.6
+Desarrollar una función que determine si una cadena de caracteres es un palíndromo.
+Ejercicio 1.7
+Desarrollar una función que devuelva el valor numérico de una cadena de caracteres (asumiendo que
+los caracteres representan dígitos).
+Ejercicio 1.8
+Desarrollar una función que cuente el número de apariciones de una palabra dentro de una cadena
+de texto. Para ello la función recibe como parámetros dos punteros a char. El primero corresponde al
+texto, el segundo corresponde a la cadena buscada. La función debe retornar el número de
+ocurrencias. Contemple las condiciones de borde y haga un listado de éstas.
+Ejercicio 1.9
+Desarrollar una función que normalice la cadena de texto que se le pasa como argumento. En este
+caso, la cadena se encontrará normalizada cuando la primera letra de cada palabra sea mayúscula y
+las siguientes minúsculas. La cadena normalizada no deberá contener espacios o tabulaciones al
+inicio o al final. En el caso de que las palabras de la cadena se encuentren separadas por más de un
+espacio o tabulación, se deberán eliminar los excedentes. Se debe modificar la cadena pasada como
+argumento. No puede realizar una o más copias locales de la cadena original. Contemple las
+condiciones de borde y haga un listado de éstas.
+11
+Ejercicio 1.10
+La siguiente línea “Nj qemh v ljs kraenkqbres; lj oqe qemh es oqevorme sgn ellhs --Istqt Asdmgj” ha
+sido ofuscada para impedir su lectura desplazando desplazado hacia atrás dentro del grupo
+"abcdghijkoqtuv" tantos caracteres como posición tiene en la palabra.
+Ejemplo, si la palabra es “hola”
+● "h":un lugar atrás porque es la primera letra de la palabra, queda "g"
+● "o":dos lugares atrás, queda "j"
+● "l":No figura en grupo, no se modifica, queda "l"
+● "a":cuatro lugares hacia atrás, queda "q", antes de la “a” está la “v”.
+Quedando una vez ofuscada como “gjlq”.
+● No considere ningún carácter que no figura dentro del grupo
+● Una palabra es todo conjunto de uno o mas caracteres que responden a la función isalpha
+● La frase desofuscada esta en Español.
+Ejercicio 1.11
+Ingresar por teclado pares de cadenas de caracteres, finalizando el ingreso cuando ambas cadenas
+sean iguales (las que no deben procesarse). Para cada par, cargar en un array bidimensional, ambas
+cadenas, respetando cargar primero la más pequeña y luego la mayor, si las longitudes fueran
+iguales, el orden lo dará la comparación lexicográfica haciendo caso omiso de mayúsculas y
+minúsculas.
+Escriba una función que determine la comparación solicitada invocando a versiones propias de las
+funciones de biblioteca estándar strlen y strcmpi o strcasecmp (dado que esta no es una función
+estándar en algunos compiladores tiene otro nombre).
+Ejercicios con matrices (Arreglos bidimensionales)
+La definición adecuada de los parámetros de las siguientes funciones es parte de la ejercitación.
+Ejercicio 1.12
+Desarrollar una función para que, dada una matriz cuadrada de reales de orden N, obtenga la
+sumatoria de los elementos que están por encima de la diagonal principal (excluida ésta). Lo mismo
+para la diagonal secundaria. Lo mismo incluyendo la diagonal. Lo mismo, con los que están por
+debajo de la diagonal.
+Ejercicio 1.13
+Desarrollar una función para que, dada una matriz cuadrada de enteros de orden N, obtenga la traza
+de la misma (sumatoria de los elementos de la diagonal principal). Lo mismo, pero con la diagonal
+secundaria.
+Ejercicio 1.14
+Desarrollar una función que determine si una matriz cuadrada de enteros de orden N es matriz
+diagonal (ceros en todos sus elementos excepto en la diagonal principal).
+12
+Ejercicio 1.15
+Desarrollar una función que determine si una matriz cuadrada de enteros de orden N es matriz
+identidad (matriz diagonal, con unos en la diagonal principal y ceros en los restantes).
+Ejercicio 1.16
+Desarrollar una función que determine si una matriz cuadrada de enteros de orden N es simétrica.
+Ejercicio 1.17
+Desarrollar una función para trasponer, in situ, una matriz cuadrada.
+Ejercicio 1.18
+Desarrollar una función para obtener la traspuesta de una matriz dada.
+Ejercicio 1.19
+Desarrollar una función para obtener la matriz producto entre dos matrices de enteros.
+Ejercicio 1.20
+Se dispone de una matriz cuadrada de enteros de orden N, donde cada elemento [i][j] representa la
+cantidad de puntos que obtuvo el equipo i frente al equipo j al fin de un torneo de fútbol (partidos
+de ida y vuelta) en el que participaron N equipos. El sistema de puntuación es: 3 puntos para el
+ganador del partido y ninguno para el perdedor; 1 punto para cada equipo en caso de empate.
+Desarrollar una función que determine si la matriz está correctamente generada.
+Desarrollar una función que genere un arreglo de N elementos tal que cada elemento V[k] contenga
+la cantidad de puntos obtenidos por el equipo k.
+Ejercicios ampliados con vectores (Arreglos unidimensionales)
+Ejercicio 1.21
+Haga una reingeniería de los ejercicios 1.1 a 1.5 para que puedan operar con cualquier tipo de dato
+(recuerde que los ejercicios originales estaban diseñados para operar con números enteros). Haga
+uso de memoria estática.

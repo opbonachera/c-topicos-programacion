@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1727102314 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\main.c
+	<stdio.h>
+	<stdlib.h>
+	"VectorGenerico.h"
+	"Ordenamiento.h"
+
+1726857445 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\vectorgenerico.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1727097341 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\vectorgenerico.c
+	"VectorGenerico.h"
+
+1726841084 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\matrices.c
+	"Matrices.h"
+
+1726841066 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\matrices.h
+	<stdio.h>
+	<stdlib.h>
+
+1727100629 source:c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\ordenamiento.c
+	"VectorGenerico.h"
+
+1727101864 c:\users\obonachera\documents\universidad\topicos-programacion\otros\practicas\ordenamiento.h
+	<stdlib.h>
+	"VectorGenerico.h"
+

@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1729005850 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0710 archivos\archivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"archivos.h"
+
+1729016331 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0710 archivos\archivos\archivos.h
+	<stdbool.h>
+	<stdlib.h>
+	<stdio.h>
+
+1729006457 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes0710 archivos\archivos\archivos.c
+	"archivos.h"
+

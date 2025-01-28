@@ -1,0 +1,12 @@
+CONSIGNA DEL PROGRAMA
+
+- Archivos
+Se debe crear un archivo binario de productos y un archivo de movimientos binario.
+Se debe poder mostrar por consola el contenido de ambos archivos.
+Luego se debe hacer una fusión entre ambos archivos, actualizando el archivo de productos
+a partir del archivo de movimientos. 
+
+- Vector
+Se baja a un vector el indice de los productos.
+Nos posicionamos en el lugar que se encuentra en el producto.
+Nos movemos un lugar antes y actualizamos este producto.

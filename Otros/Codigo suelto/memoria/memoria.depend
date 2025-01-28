@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1716475100 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\memoria\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"memoria.h"
+
+1716474859 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\memoria\memoria.h
+
+1716475090 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\memoria\memoria.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"memoria.h"
+

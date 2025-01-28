@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1726577150 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1709 ordenamiento\ordenamiento\burbujeo.c
+
+1726576690 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1709 ordenamiento\ordenamiento\insercion.c
+
+1726576683 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1709 ordenamiento\ordenamiento\seleccion.c
+
+1726577455 source:c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1709 ordenamiento\ordenamiento\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ordenamiento.h"
+
+1726577445 c:\users\obonachera\documents\universidad\topicos-programacion\clases\2c lunes1709 ordenamiento\ordenamiento\ordenamiento.h
+

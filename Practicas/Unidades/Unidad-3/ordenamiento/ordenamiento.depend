@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1716472505 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-3\ordenamiento\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ordenamiento.h"
+
+1716472232 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-3\ordenamiento\ordenamiento.h
+
+1716472385 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-3\ordenamiento\ordenamiento.c
+	<stdio.h>
+	<string.h>
+	"ordenamiento.h"
+

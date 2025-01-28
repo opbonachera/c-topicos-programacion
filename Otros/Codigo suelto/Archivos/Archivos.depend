@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1717718039 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\archivos\main.c
+	<stdio.h>
+	"binario.h"
+
+1717718162 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\archivos\binario.h
+
+1717718830 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\archivos\binario.c
+	"binario.h"
+	<stdio.h>
+
+1717717610 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\unidad-2\archivos\merge.c
+

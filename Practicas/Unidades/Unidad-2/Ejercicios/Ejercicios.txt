@@ -1,0 +1,22 @@
+Ejercicio 2.1
+Desarrolle un programa que reserve memoria para almacenar 10 enteros. Luego asigne valores a
+dichos elementos. Asegúrese de devolver la memoria reservada.
+Ejercicio 2.2
+Modifique el programa del punto 2.1 para que la cantidad de elementos sea ingresada por teclado.
+Ejercicio 2.3
+Desarrolle un programa que reserve memoria para almacenar 5 elementos de un tipo de dato creado
+por Usted. Dicho tipo de dato debe contener al menos un array de char, un entero, un flotante y un
+char. Luego asigne valores a dichos elementos. Asegúrese de devolver la memoria reservada.
+Ejercicio 2.4
+Implemente utilizando memoria dinámica las siguientes funciones:
+○ Una función que retorna una copia de la cadena pasada como parámetro con exactamente la
+misma cantidad de caracteres de la cadena origen. Ej:
+○ Una función que genere una copia de un elemento pasado como parámetro, este puede ser
+un tipo primitivo (int,float,char) una estructura o incluso un vector. Ej:
+Estas funciones tienen un objetivo estrictamente didáctico, y como puede observar persiguen
+objetivos similares a las funciones de biblioteca de C pero su implementación es totalmente
+diferente. ¿Por qué no se recomienda este tipo de implementación en sistemas productivos?
+Ejercicio 2.5
+Implemente su propia versión de la función de biblioteca memmove, asegurando que los datos se
+mueven correctamente incluso si hay superposición entre ellos. Verifique que no tiene pérdidas de
+memoria (memory leaks) .

@@ -1,0 +1,8 @@
+1. Inicializar matriz
+2. Inicializar matriz con memoria dinamica
+3. Alocar memoria para cada elemento de la matriz 
+4. Sumar la diagonal principal
+5. Sumar la diagonal secundaria
+6. Sumar el triangulo superior
+7. Sumar el triangulo inferior
+8. Sumar la diagonal principal

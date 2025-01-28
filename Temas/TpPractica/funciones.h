@@ -1,0 +1,9 @@
+#ifndef FUNCIONES_H_INCLUDED
+#define FUNCIONES_H_INCLUDED
+
+#define ANCHO 360
+#define ALTO 240
+#define ALTOMATRIZ 4
+#define ANCHOMATRIZ 4
+
+#endif // FUNCIONES_H_INCLUDED

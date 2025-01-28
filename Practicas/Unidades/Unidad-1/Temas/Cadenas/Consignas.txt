@@ -1,0 +1,4 @@
+1. Funcion que compara dos strings
+2. Funcion que normaliza un string
+3. Funcion que muestra un string
+4. Funcion que determina si una frase o una palabra es un palíndromo

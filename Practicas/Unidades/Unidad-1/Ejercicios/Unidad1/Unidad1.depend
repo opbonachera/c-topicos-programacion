@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1727447442 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidad1\ejercicios-strings.c
+	"ejercicios-strings.h"
+
+1727445382 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidad1\ejercicios-strings.h
+	<string.h>
+	<stdbool.h>
+	<stdio.h>
+
+1727443787 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidad1\ejercicios-vector.c
+	"ejercicios-vector.h"
+
+1727443721 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidad1\ejercicios-vector.h
+	<stddef.h>
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
+1727443849 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\unidades\unidad-1\ejercicios\unidad1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ejercicios-strings.h"
+	"ejercicios-vector.h"
+

@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1729881365 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\merge\merge.c
+	"merge.h"
+
+1729881337 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\merge\merge.h
+	<stdbool.h>
+	<stdlib.h>
+	<stdio.h>
+
+1729872418 c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\merge\vector.h
+
+1729872462 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\merge\vector.c
+	"vector.h"
+
+1729881118 source:c:\users\obonachera\documents\universidad\topicos-programacion\practicas\temas\merge\main.c
+	<stdio.h>
+	<stdlib.h>
+	"merge.h"
+
