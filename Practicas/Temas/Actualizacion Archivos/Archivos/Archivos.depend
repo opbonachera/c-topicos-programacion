@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1730077993 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\main.c
+	"archivos.h"
+	"indice.h"
+	"vector.h"
+	"retorno.h"
+
+1730060297 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\archivos.h
+	"retorno.h"
+
+1730040854 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\indice.h
+	"retorno.h"
+
+1730062683 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\retorno.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+
+1730065027 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\vector.h
+	"retorno.h"
+
+1730077920 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\archivos.c
+	"archivos.h"
+	"retorno.h"
+	"vector.h"
+	"indice.h"
+
+1730063840 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\indice.c
+	"indice.h"
+	"archivos.h"
+	"retorno.h"
+	"vector.h"
+
+1730078758 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\practicas\temas\actualizacion archivos\archivos\vector.c
+	"vector.h"
+

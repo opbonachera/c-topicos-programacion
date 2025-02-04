@@ -191,7 +191,8 @@ bool generarArchivoMovimientos(const char* nomArch)
 bool generarIndice(const char* nomArch, const char* nomIdx)
 {
     Vector vIndice;
-    vectorCrear(&vIndice, sizeof(IndProducto));
+    vectorCrear(&
+    , sizeof(IndProducto));
 
     FILE* archProds = fopen(nomArch, "rb");
 

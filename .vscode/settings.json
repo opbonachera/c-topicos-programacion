@@ -3,6 +3,7 @@
         "*.embeddedhtml": "html",
         "matriz.h": "c",
         "archivos.h": "c",
-        "vector.h": "c"
+        "vector.h": "c",
+        "retorno.h": "c"
     }
 }

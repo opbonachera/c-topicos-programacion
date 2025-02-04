@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1730667056 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\modelos\practicas ornella\parciallibros\vector.c
+	"vector.h"
+	"estructuras.h"
+	"archivos.h"
+
+1730668221 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\modelos\practicas ornella\parciallibros\main.c
+	<stdio.h>
+	<stdlib.h>
+	"archivos.h"
+	"estructuras.h"
+	"vector.h"
+
+1730668277 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\modelos\practicas ornella\parciallibros\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+
+1730668435 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\modelos\practicas ornella\parciallibros\archivos.c
+	"archivos.h"
+	"estructuras.h"
+
+1730564472 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\modelos\practicas ornella\parciallibros\estructuras.h
+
+1730668277 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\topicos-programacion\modelos\practicas ornella\parciallibros\vector.h
+	<stdlib.h>
+	<stdio.h>
+

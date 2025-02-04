@@ -9,7 +9,7 @@ int ordenarVectorEnterosInsercion(VectorGenerico* vector)
         elementoAInsertar = vector->vec[i];
         j=i-1;
 
-        while(j>=0 &&elementoAInsertar<=vector->vec[j])
+        while(j>=0 && elementoAInsertar<=vector->vec[j])
         {
             vector->vec[j+1] = vector->vec[j];
             j--;
