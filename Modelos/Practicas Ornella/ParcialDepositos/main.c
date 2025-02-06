@@ -29,8 +29,8 @@ int compararCaracteres(void* elemento1, void* elemento2);
 int vectorInicializar(Vector* v, int ce, int tamElem);
 int vectorDestruir(Vector* v);
 int vectorImprimir(Vector* v, Imp imprimir);
-int vectorBusquedaBin(Vector* v);
 int vectorCargar(Vector* v);
+void* buscarVectorOrdenadoBin(Vector* v, void* elemento, void* inicio, void* fin, Cmp cmp);
 
 // ---- MATRIZ ----
 void** matrizInicializar(void** mat, int cF, int cC);
@@ -47,9 +47,11 @@ int main()
 
     char target = 'C';
 
-    int index = buscarVectorOrdenadoBin(&vecCodDepositos, &target, 0, vecCodDepositos.ce - 1, compararCaracteres);
+    // buscarVectorOrdenadoBin(&vecCodDepositos, &target, 0, vecCodDepositos.ce - 1, compararCaracteres);
 
-    vectorDestruir(&vecCodDepositos);
+    char a = 'A', b = 'b';
+    printf("[%d]\n", compararCaracteres(&a, &b));
+
     vectorDestruir(&vecCodDepositos);
 
     return 0;
@@ -102,8 +104,6 @@ int vectorImprimir(Vector* v, Imp imprimir)
     return OK;
 }
 
-int vectorBusquedaBin(Vector* v);
-
 int vectorCargar(Vector* v)
 {
     char* arr = (char*) v->vec;
@@ -137,31 +137,22 @@ void imprimirEntero(void* elemento)
     printf("[%d] - \n", *e);
 }
 
-int buscarVectorOrdenadoBin(Vector* v, void* elemento, size_t inicio, size_t fin, Cmp cmp)
+void* buscarVectorOrdenadoBin(Vector* v, void* elemento, void* inicio, void* fin, Cmp cmp)
 {
-    if (v->ce == 0 || !v->vec) // Empty vector check
-        return -1;
-
-    while (inicio <= fin)
+    /*
+    if(inicio >= fin)
     {
-        size_t mitad_idx = inicio + (fin - inicio) / 2;
-        void* mitad = (char*)v->vec + mitad_idx * v->tamElem;  // Correct: Get pointer to element
+        void* mitad = inicio + (inicio - fin) /  2;
 
-        int comparison = cmp(elemento, mitad);  // Corrected: Pass pointer, not index
+        if(cmp(mitad, elemento) == 0)
+            return mitad;
 
-        if (comparison == 0)
-            return mitad_idx;
-        else if (comparison < 0)
-        {
-            if (mitad_idx == 0) // Prevent underflow
-                return -1;
-            fin = mitad_idx - 1;
-        }
-        else
-        {
-            inicio = mitad_idx + 1;
-        }
-    }
+        if(cmp(mitad, elemento) > 0)
+            return buscarVectorOrdenadoBin(v, elemento, inicio, mitad - v->tamElem, cmp);
 
-    return -1;
+        if(cmp(mitad, elemento) < 0)
+            return buscarVectorOrdenadoBin(v, elemento, mitad + v->tamElem, fin, cmp);
+
+        return NULL;
+    } */
 }

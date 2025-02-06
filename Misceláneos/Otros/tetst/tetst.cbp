@@ -2,27 +2,21 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="ParcialMatrizDepositos" />
+		<Option title="tetst" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/ParcialMatrizDepositos" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/tetst" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="Stocks.dat Movimientos.txt" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add library="lib/libSolucionMatrizDepositos.a" />
-					<Add library="lib/libMatriz.a" />
-					<Add library="lib/libVector.a" />
-				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/ParcialMatrizDepositos" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/tetst" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -37,16 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../Comun/Comun.h" />
-		<Unit filename="../Matriz/Matriz.h" />
-		<Unit filename="../SolucionMatrizDepositos/SoluciionMatrizDepositos.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../SolucionMatrizDepositos/SolucionMatrizDepositos.h" />
-		<Unit filename="../Vector/Vector.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Vector/Vector.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

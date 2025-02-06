@@ -1,0 +1,4 @@
+#ifndef PALABRA_H_INCLUDED
+#define PALABRA_H_INCLUDED
+
+#endif // PALABRA_H_INCLUDED
