@@ -1,0 +1,9 @@
+#ifndef CONSTANTES_H_INCLUDED
+#define CONSTANTES_H_INCLUDED
+
+#define CAP_INICIAL 15
+
+#define OK 0
+#define ERROR_MEMORIA_INSUFICIENTE 1
+
+#endif
