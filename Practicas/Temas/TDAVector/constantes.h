@@ -3,6 +3,10 @@
 
 #define CAP_INICIAL 15
 
+#define INSERCION 0
+#define SELECCION 1
+#define BURBUJEO 2
+
 #define OK 0
 #define ERROR_MEMORIA_INSUFICIENTE 1
 

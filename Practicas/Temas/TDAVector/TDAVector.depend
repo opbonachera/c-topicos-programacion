@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1742303578 source:c:\users\leafnoise\documents\universidad\tópicos de programación\topicos-programacion\practicas\temas\tdavector\main.c
+	<stdio.h>
+	<stdlib.h>
+	"vector.h"
+	"constantes.h"
+
+1742303368 c:\users\leafnoise\documents\universidad\tópicos de programación\topicos-programacion\practicas\temas\tdavector\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
+1742304164 source:c:\users\leafnoise\documents\universidad\tópicos de programación\topicos-programacion\practicas\temas\tdavector\vector.c
+	"vector.h"
+	"constantes.h"
+
+1742242967 c:\users\leafnoise\documents\universidad\tópicos de programación\topicos-programacion\practicas\temas\tdavector\constantes.h
+
