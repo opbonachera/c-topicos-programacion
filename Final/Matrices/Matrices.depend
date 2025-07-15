@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1752594777 source:c:\users\leafnoise\documents\ornella\tópicos de programación\c-topicos-programacion\final\matrices\main.c
+	<stdio.h>
+	<stdlib.h>
+	"matrices.h"
+
+1752594791 c:\users\leafnoise\documents\ornella\tópicos de programación\c-topicos-programacion\final\matrices\matrices.h
+	"stddef.h"
+	"stdlib.h"
+	"time.h"
+	"stdio.h"
+
+1752594300 source:c:\users\leafnoise\documents\ornella\tópicos de programación\c-topicos-programacion\final\matrices\matrices.c
+	"matrices.h"
+
