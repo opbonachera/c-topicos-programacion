@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1752668601 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"matriz.h"
+	"vector.h"
+	"utils.h"
+
+1752668735 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\matriz.c
+	"matriz.h"
+
+1752630925 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\matriz.h
+	<stddef.h>
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"vector.h"
+	"utils.h"
+
+1752668557 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\vector.c
+	"vector.h"
+
+1752626095 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\vector.h
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+
+1752668450 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\utils.c
+	"utils.h"
+
+1752668484 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\depositos\utils.h
+	"vector.h"
+	"stdio.h"
+
