@@ -25,9 +25,12 @@ typedef struct
 }
 CodigoDeposito;
 
-int cmpCodDepositos(const void* c1, const void* c2);
+int cmpCodDepositos(void* c1, void* c2);
 void  imprimirChar(void* dato, void* params);
 void imprimirCodDeposito(void* dato, void* params);
 int   cargarVectorCodDepositos(const char* nombreArch, tVector* v);
+int   actualizarStocksDepositos(const char* nombreArchStocks, int** matrizMovimientos, tVector* vectorCodDepostios);
+void generarArchivoStocks(const char* nombreArchStocks);
+void mostrarArchivoStocks(const char* nombreArchStock);
 
 #endif // UTILS_H_INCLUDED

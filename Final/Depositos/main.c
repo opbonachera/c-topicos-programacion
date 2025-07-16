@@ -7,21 +7,28 @@
 
 int main()
 {
+
+    generarArchivoStocks("Stocks.dat");
+
+    printf("Depositos antes de la actualizacion: \n");
+    mostrarArchivoStocks("Stocks.dat");
+
     tVector vectorCodDepositos;
 
     inicializarVector(&vectorCodDepositos, sizeof(char[11]));
-
     cargarVectorCodDepositos("Stocks.dat",&vectorCodDepositos);
-    recorrerVector(&vectorCodDepositos, NULL, imprimirCodDeposito);
 
 
+    int** matriz = (int**)crearMatriz(vectorCodDepositos.ce,vectorCodDepositos.ce,sizeof(int));
+    cargarMatrizDesdeArchivo("Movimientos.txt", matriz, &vectorCodDepositos);
 
-    Stock stock;
-    printf("\n\n\nIndice destino: [%d]\n", obtenerIndiceElemVector(&vectorCodDepositos,&stock, cmpCodDepositos));
+    actualizarStocksDepositos("Stocks.dat", matriz, &vectorCodDepositos);
 
-    int** matriz = (int**)crearMatriz(4,4,sizeof(int));
-    cargarMatrizDesdeArchivo("Movimientos.txt",matriz,&vectorCodDepositos);
-
+    eliminarMatriz((void**)matriz, vectorCodDepositos.ce);
     destruirVector(&vectorCodDepositos);
+
+    printf("Depositos luego de la actualizacion: \n");
+    mostrarArchivoStocks("Stocks.dat");
+
     return 0;
 }

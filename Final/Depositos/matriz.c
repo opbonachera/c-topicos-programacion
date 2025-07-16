@@ -1,5 +1,6 @@
 #include "matriz.h"
 
+
 void** crearMatriz(size_t filas, size_t columnas, size_t tamElem)
 {
     void** matriz = malloc(filas * sizeof(void*));
@@ -48,22 +49,17 @@ int    cargarMatrizDesdeArchivo(const char* nombreArch, int** matriz, tVector* v
     int cant;
     char codDepOrigen[11], codDepDestino[11];
 
-    inicializarMatrizEnCero(matriz, 4, 4);
+    inicializarMatrizEnCero(matriz, vectorCodDepositos->ce, vectorCodDepositos->ce);
 
     while (fscanf(arch, " %s %s %d", codDepOrigen, codDepDestino, &cant) == 3)
     {
+
         int indiceDestino = obtenerIndiceElemVector(vectorCodDepositos, codDepDestino, cmpCodDepositos);
         int indiceOrigen  = obtenerIndiceElemVector(vectorCodDepositos, codDepOrigen, cmpCodDepositos);
 
-        printf("Destino: [%d](%s) Origen [%d](%s)\n", indiceDestino, codDepDestino, indiceOrigen, codDepOrigen);
+        matriz[indiceOrigen][indiceDestino]+=cant;
 
-        if(indiceDestino != -1 && indiceOrigen != -1)
-        {
-            matriz[indiceDestino][indiceOrigen]+=cant;
-        }
     }
-
-
 
     return 0;
 }

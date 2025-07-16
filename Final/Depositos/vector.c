@@ -35,7 +35,7 @@ int  insertarElemOrdenadoVector(tVector* v, void* elem, Cmp cmp)
     memcpy(posIns, elem, v->tamElem);
     v->ce++;
 
-    printf("Inserte (%s)", (char*)posIns);
+
     return 1;
 }
 

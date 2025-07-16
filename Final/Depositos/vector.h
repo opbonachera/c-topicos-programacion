@@ -15,7 +15,7 @@ typedef struct
     size_t cap;
 }tVector;
 
-typedef int (*Cmp)(const void*, const void*);
+typedef int (*Cmp)(void*, void*);
 typedef void (*Accion)(void*, void*);
 
 void inicializarVector(tVector* v, size_t tamElem);
