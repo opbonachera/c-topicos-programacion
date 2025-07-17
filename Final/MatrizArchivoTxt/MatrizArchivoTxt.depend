@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1752716115 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\matrizarchivotxt\main.c
+	<stdio.h>
+	<stdlib.h>
+	"matriz.h"
+
+1752714181 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\matrizarchivotxt\matriz.h
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+
+1752716265 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\matrizarchivotxt\matriz.c
+	"matriz.h"
+
