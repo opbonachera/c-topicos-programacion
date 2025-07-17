@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1752765753 source:c:\users\leafnoise\documents\ornella\tópicos de programación\c-topicos-programacion\final\tda_palabra\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Palabra.h"
+
+1752766051 c:\users\leafnoise\documents\ornella\tópicos de programación\c-topicos-programacion\final\tda_palabra\palabra.h
+
+1752765927 source:c:\users\leafnoise\documents\ornella\tópicos de programación\c-topicos-programacion\final\tda_palabra\palabra.c
+	"Palabra.h"
+
