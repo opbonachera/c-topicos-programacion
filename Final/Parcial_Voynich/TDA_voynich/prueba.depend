@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1751921353 source:c:\users\usuario\desktop\prueba voynich\main.c
+	<stdio.h>
+	<stdlib.h>
+	"prueba.h"
+	"macros.h"
+
+1751934410 c:\users\usuario\desktop\prueba voynich\prueba.h
+	"macros.h"
+	"TDA.h"
+
+1751934409 source:c:\users\usuario\desktop\prueba voynich\prueba.c
+	"prueba.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"TDA.h"
+
+1751934545 c:\users\usuario\desktop\prueba voynich\macros.h
+
+1751934459 c:\users\usuario\desktop\prueba voynich\tda.h
+	"macros.h"
+	"prueba.h"
+
+1751934481 source:c:\users\usuario\desktop\prueba voynich\tda.c
+	"TDA.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

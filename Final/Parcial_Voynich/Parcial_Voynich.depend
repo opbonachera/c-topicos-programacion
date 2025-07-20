@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1752805823 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\parcial_voynich\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"vector.h"
+
+1752805746 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\parcial_voynich\vector.h
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+
+1752805754 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\parcial_voynich\vector.c
+	"Vector.h"
+

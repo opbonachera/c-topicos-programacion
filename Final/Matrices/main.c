@@ -52,13 +52,39 @@ void imprimirInt(void* d, void* param)
 {
     printf("%d | ", *(int*)d);
 }
+
 int main()
 {
-    int** matriz = (int**)crearMatriz(3, 3, sizeof(int));
+    /*int** mat1 = (int**)crearMatriz(2, 3, sizeof(int));
+    int** mat2 = (int**)crearMatriz(3, 2, sizeof(int));
 
-    cargarMatrizEnteros(3, matriz);
-    recorrerMatriz(3, (void**)matriz, sizeof(int), NULL, imprimirInt);
-    printf("Suma de la diagonal principal: [%d]\n", sumaMatrizDP(3, matriz));
-    eliminarMatriz((void**)matriz, 3);
+    int val = 1;
+
+    // Inicializar mat1 (2x3)
+    for(int i = 0; i < 2; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            mat1[i][j] = val++;
+        }
+    }
+
+    val = 1;
+
+    // Inicializar mat2 (3x2)
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 2; j++)
+        {
+            mat2[i][j] = val++;
+        }
+    }
+
+    productoMatrices(mat1, mat2, 2, 3, 2);  // filasM1, columnasM1, columnasM2
+
+    eliminarMatriz((void**)mat1, 2);
+    eliminarMatriz((void**)mat2, 3);*/
+
+    cargarMatrizArchivoTxtFijo("matriz.txt");
     return 0;
 }
