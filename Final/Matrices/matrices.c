@@ -142,23 +142,34 @@ void cargarMatrizArchivoTxtFijo(const char* nombreArch)
     if(act) *act='\0';
 
     int n=atoi(linea);
-
     int** matriz=(int**)crearMatriz(n, n, sizeof(int));
 
-    while(fgets(linea, 100, arch))
-    {
-        char* act = strrchr(linea, '\n');
-        if(act) *act='\0';
-        printf("(%s)\n", linea);
 
-        for(int i=0; i<n; i++)
+    for(int i=0; i<n; i++)
+    {
+        fgets(linea, 100, arch);
+
+        char* act = strchr(linea, '\n');
+        if(act) *act='\0';
+
+        for(int j=n-1; j>0; j--)
         {
             char* sep = strrchr(linea, '|');
-
-            for(int j=0; j<n; j++)
+            if(sep)
             {
-                matriz[i][j]=atoi(sep+1);
+                matriz[i][j]=atoi(sep + 1);
+                *sep='\0';
             }
         }
+        matriz[i][0] = atoi(linea);
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+        {
+            printf("[%d]", matriz[i][j]);
+        }
+        printf("\n");
     }
 }
