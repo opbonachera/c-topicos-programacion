@@ -1,0 +1,6 @@
+Cantidad de apariciones de la palabra de longitud maxima: 5
+(amam)
+(bebe)
+(chau)
+(hola)
+(lola)

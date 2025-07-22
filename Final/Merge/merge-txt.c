@@ -116,11 +116,11 @@ int  actualizarArchivoProductosTxt(const char* nombreArchProds,
                                    void(*movTxtABin)(char* linea, void* reg),
                                    void(*prodTxtABin)(char* linea, void* reg))
 {
-    FILE* archProds=fopen(nombreArchProds,"rb");
+    FILE* archProds=fopen(nombreArchProds,"r");
     if(!archProds)
         return ERROR_ARCHIVO;
 
-    FILE* archMovs=fopen(nombreArchMovs,"rb");
+    FILE* archMovs=fopen(nombreArchMovs,"r");
     if(!archMovs)
     {
         fclose(archProds);
@@ -149,7 +149,10 @@ int  actualizarArchivoProductosTxt(const char* nombreArchProds,
     char lineaMov[TAM_LINEA];
     char lineaProd[TAM_LINEA];
     int cmp;
-    while(fgets(lineaMov, TAM_LINEA, archMovs) && fgets(lineaProd, TAM_LINEA, archProds) )
+
+    fgets(lineaMov, TAM_LINEA, archMovs);
+    fgets(lineaProd, TAM_LINEA, archProds);
+    while(!feof(archMovs) && !feof(archProds))
     {
         movTxtABin (lineaMov, regMov);
         prodTxtABin(lineaProd, regProd);
@@ -157,7 +160,10 @@ int  actualizarArchivoProductosTxt(const char* nombreArchProds,
         Movimiento* movimiento = regMov;
         Producto* producto = regProd;
 
+
+
         cmp = producto->codigo - movimiento->codigo;
+
 
         if(cmp==0)
         {
@@ -179,12 +185,12 @@ int  actualizarArchivoProductosTxt(const char* nombreArchProds,
         }
     }
 
-    while(fgets(lineaMov, TAM_LINEA, archMovs))
+    while(!feof(archMovs))
     {
-        procesarNuevoProductoTxt(regMov, archMovs, archProdTmp);
+        //procesarNuevoProductoTxt(regMov, archMovs, archProdTmp);
     }
 
-    while(fgets(lineaProd, TAM_LINEA, archProds))
+    while(!feof(archProds))
     {
         prodTxtABin(lineaProd, regProd);
         Producto* producto = regProd;
@@ -195,7 +201,7 @@ int  actualizarArchivoProductosTxt(const char* nombreArchProds,
     fclose(archMovs);
     fclose(archProds);
 
-    remove("productos.tmp");
+    remove(nombreArchProds);
     rename("productos.tmp", nombreArchProds);
 
     return OK;
@@ -206,39 +212,41 @@ void movTxtABin(char* linea, void* regMov)
     Movimiento* mov = regMov;
 
     char* act = strrchr(linea, '\n');
-    //  if not act return linea larga
-    *act='\0';
+    if (act) *act = '\0';
 
     act = strrchr(linea, '|');
-    mov->cant=atoi(act+1);
-    *act='\0';
+    if (!act) return;
+    mov->cant = atoi(act + 1);
+    *act = '\0';
 
-    mov->codigo=atoi(linea);
-    *act='\0';
+    mov->codigo = atoi(linea);
 }
 
 void prodTxtABin(char* linea, void* regProd)
 {
     Producto* prod = regProd;
+
     char* act = strrchr(linea, '\n');
-    // if not act return llinea larga
+    if (act) *act = '\0';
+
+    act = strrchr(linea, '|');
+    if (!act) return;
+    prod->stock = atoi(act + 1);
     *act = '\0';
 
     act = strrchr(linea, '|');
-    prod->stock=atoi(act+1);
-    *act='\0';
+    if (!act) return;
+    prod->preUni = atof(act + 1);
+    *act = '\0';
 
     act = strrchr(linea, '|');
-    prod->preUni=atoi(act+1);
-    *act='\0';
-
-    act = strrchr(linea, '|');
+    if (!act) return;
     strcpy(prod->descripcion, act + 1);
-    *act='\0';
+    *act = '\0';
 
-    prod->codigo=atoi(linea);
-
+    prod->codigo = atoi(linea);
 }
+
 
 void procesarNuevoProductoTxt(void* reg, FILE* archMov, FILE* archProdTmp)
 {

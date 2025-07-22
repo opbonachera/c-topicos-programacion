@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1753135041 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalpalabras\palabra.c
+	"palabra.h"
+
+1753135485 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalpalabras\palabra.h
+	<stdio.h>
+	<string.h>
+
+1753138367 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalpalabras\main.c
+	<stdio.h>
+	<stdlib.h>
+	"palabra.h"
+	"vector.h"
+
+1753137041 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalpalabras\vector.c
+	"vector.h"
+
+1753137079 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalpalabras\vector.h
+	<stddef.h>
+	<string.h>
+	<stdlib.h>
+
