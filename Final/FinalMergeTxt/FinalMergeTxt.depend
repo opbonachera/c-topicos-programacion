@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1753228300 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalmergetxt\main.c
+	<stdio.h>
+	<stdlib.h>
+	"merge.h"
+
+1753229005 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalmergetxt\merge.h
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	<string.h>
+
+1753235802 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\finalmergetxt\merge.c
+	"merge.h"
+
