@@ -67,6 +67,7 @@ int  consolidarArchivoCargos(const char* nombreArchCargosOld,
     fgets(lineaOld, tamLineaArchOld, archCargosOld);
     while(!feof(archCargosNew) && !feof(archCargosOld))
     {
+        printf("Leyendo (%s) y (%s)\n", lineaNew, liNEA);
         lineaCargoAEst(lineaNew, cargoNew);
         lineaCargoAEst(lineaOld, cargoOld);
 
@@ -76,7 +77,7 @@ int  consolidarArchivoCargos(const char* nombreArchCargosOld,
         int cmp = cOld->legajo - cNew->legajo;
 
         printf("Comparando '%s' vs '%s'  %d\n", cNew->codCargo, cOld->codCargo, cmpCodCargo(&cNew->codCargo, &cOld->codCargo));
-
+        printf("Comparando [%d] con [%d] res: [%d]\n", cOld->legajo, cNew->legajo, cOld->legajo - cNew->legajo);
 
         if(cmp==0)
         {

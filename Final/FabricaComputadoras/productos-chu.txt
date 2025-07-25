@@ -1,0 +1,4 @@
+CHU003|Fuente 600W|9600.50|20
+CHU004|Microprocesador Ryzen|45200.00|12
+CHU002|Gabinete gamer ATX|18700.90|5
+CHU003|Fuente 600W|9600.50|20

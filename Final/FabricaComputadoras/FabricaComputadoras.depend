@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1753399725 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\fabricacomputadoras\main.c
+	<stdio.h>
+	<stdlib.h>
+	"vector.h"
+	"archivos.h"
+
+1753399571 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\fabricacomputadoras\vector.c
+	"vector.h"
+
+1753396834 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\fabricacomputadoras\vector.h
+	"stdio.h"
+	"stddef.h"
+	"string.h"
+	"stdlib.h"
+
+1753398546 source:c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\fabricacomputadoras\archivo.c
+	"archivos.h"
+
+1753397513 c:\users\orneb\onedrive\documentos\universidad\materias\topicos de programacion\c-topicos-programacion\final\fabricacomputadoras\archivos.h
+	"stdio.h"
+	"stddef.h"
+	"string.h"
+	"vector.h"
+

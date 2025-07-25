@@ -49,7 +49,31 @@ int vectorRecorrer(tVector* v, void* params, Accion accion)
     return OK;
 }
 
-int vectorInsElemOrdenado(tVector* v, void* elem, Cmp cmp);
+int vectorInsElemOrdenado(tVector* v, void* elem, Cmp cmp)
+{
+    if(v->ce == v->cap)
+        vectorRedimensionar(v, CAP_INI * 2);
+
+    void* ult = v->vec + (v->ce - 1) * v->tamElem;
+    void* posIns = v->vec;
+
+    while(posIns<=ult && cmp(elem, posIns)>0)
+        posIns+=v->tamElem;
+
+    if(posIns<=ult && cmp(elem,posIns)==0)
+        return ERROR_ELEMENTO_DUPLICADO;
+
+    for(void* i=ult; i>=posIns; i-=v->tamElem)
+    {
+        memcpy(i+v->tamElem, i, v->tamElem);
+    }
+
+    memcpy(posIns, elem, v->tamElem);
+
+    v->ce++;
+
+    return OK;
+}
 
 int vectorInsAlFinal(tVector* v, void* elem)
 {
@@ -74,26 +98,30 @@ int vectorEliminarDuplicados(tVector* v, Cmp cmp)
     if(v->ce == 0)
         return ERROR;
 
-    void* ult = v->vec + (v->ce - 1) * v->tamElem;
     void* posElim = v->vec;
+    void* ult = v->vec + (v->ce - 1) * v->tamElem;
 
     while(posElim < ult)
     {
-        void* elemSig = posElim+=v->tamElem;
+        void* elemSig = posElim + v->tamElem;
 
         if(cmp(posElim, elemSig) == 0)
         {
-            memmove(posElim, elemSig, ult - (elemSig + v->tamElem));
-            ult-=v->tamElem;
+            size_t bytes_restantes = (v->vec + v->ce * v->tamElem) - elemSig - v->tamElem;
+            memmove(elemSig, elemSig + v->tamElem, bytes_restantes);
             v->ce--;
-        }else
-        {
-            posElim+=v->tamElem;
         }
+        else
+        {
+            posElim += v->tamElem;
+        }
+
+        ult = v->vec + (v->ce - 1) * v->tamElem;
     }
 
     return OK;
 }
+
 
 int vectorBuscar(tVector* v, Cmp cmp, void* elem)
 {
@@ -102,16 +130,20 @@ int vectorBuscar(tVector* v, Cmp cmp, void* elem)
     while(limInf<=limSup)
     {
         indActual = (limInf + limSup) / 2;
-        void* elemActual = v->vec + (indActual) * v->tamElem;
+        void* elemActual = v->vec + (v->tamElem * indActual);
 
-        if(cmp(elem, elemActual) == 0)
+        if(cmp(elem, elemActual)==0)
+        {
+            memcpy(elem, elemActual, v->tamElem);
             return indActual;
+        }
 
-        else if(cmp(elem, elemActual) < 0)
+        if(cmp(elem, elemActual)>0)
+            limInf = indActual + 1;
+
+        if(cmp(elem, elemActual)<0)
             limSup = indActual - 1;
 
-        else if( cmp(elem, elemActual) > 0 )
-            limInf = indActual + 1;
     }
 
     return -1;
@@ -125,15 +157,13 @@ int vectorEliminarElemOrdenado(tVector* v, void* elem, Cmp cmp)
     void* ult = v->vec + (v->ce - 1) * v->tamElem;
     void* posElim = v->vec;
 
-    while( posElim<= ult && cmp(elem, posElim)<0 )
+    while(posElim<=ult && cmp(elem, posElim)>0)
         posElim+=v->tamElem;
 
-    if(posElim>ult || cmp(elem, posElim) != 0)
+    if(posElim>ult || cmp(posElim, elem)!=0)
         return ERROR;
 
-    memcpy(elem, posElim, v->tamElem);
-
-    for(void* i=posElim; i<ult; i+=v->tamElem)
+    for(void* i=posElim; i<=ult; i+=v->tamElem)
     {
         memcpy(i, i+v->tamElem, v->tamElem);
     }
@@ -141,4 +171,90 @@ int vectorEliminarElemOrdenado(tVector* v, void* elem, Cmp cmp)
     v->ce--;
 
     return OK;
+}
+
+void vectorOrdenar(tVector* v, Cmp cmp, int metodo)
+{
+    switch(metodo)
+    {
+        case BURBUJEO:
+            vectorOrdenarBurbujeo(v, cmp);
+            break;
+        case INSERCION:
+            vectorOrdenarInsercion(v, cmp);
+            break;
+        case QSORT:
+            vectorOrdenarQsort(v, 0, v->ce, cmp);
+            break;
+    }
+}
+
+void vectorOrdenarQsort(tVector* v, int inicio, int fin, Cmp cmp)
+{
+    // CASO BASE
+    if(inicio>=fin)
+        return;
+
+    void* pivote = v->vec + (fin * v->tamElem);
+    int i = inicio - 1;
+
+    for(int j=inicio; j<fin; j++)
+    {
+        void* elemActual = v->vec + (v->tamElem * j);
+        if(cmp(elemActual, pivote) <= 0)
+        {
+            i++;
+            intercambiar(v->vec + (i * v->tamElem), elemActual, v->tamElem);
+        }
+    }
+
+    void* posFinalPivote = v->vec + (i + 1) * v->tamElem;
+    intercambiar(posFinalPivote, pivote, v->tamElem);
+
+    vectorOrdenarQsort(v, inicio, i, cmp);
+    vectorOrdenarQsort(v, i + 2, fin, cmp);
+}
+
+void intercambiar(void* e1, void* e2, size_t tamElem)
+{
+    void* temp = malloc(tamElem);
+    if(!temp)
+        return;
+
+    memcpy(temp, e1, tamElem);
+    memcpy(e1, e2, tamElem);
+    memcpy(e2, temp, tamElem);
+
+    free(temp);
+}
+void vectorOrdenarBurbujeo(tVector* v, Cmp cmp)
+{
+
+}
+void vectorOrdenarInsercion(tVector* v, Cmp cmp)
+                           {
+
+                           }
+
+void vectorDeArchivoBin(tVector* v, size_t tamElem, const char* nombreArchBin)
+{
+    FILE* f = fopen(nombreArchBin, "rb");
+    if(!f)
+        return;
+
+    fseek(f, 0, SEEK_END);
+    int cantElem = ftell(f) / tamElem;
+
+    v->ce = cantElem;
+    v->cap = cantElem;
+    v->vec = malloc(cantElem * tamElem);
+
+    if(!v->vec)
+        return;
+
+    rewind(f);
+
+    fread(v->vec, tamElem, cantElem, f);
+
+    fclose(f);
 }
